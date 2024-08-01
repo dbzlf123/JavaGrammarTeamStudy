@@ -4,9 +4,7 @@ import camp.model.Score;
 import camp.model.Student;
 import camp.model.Subject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Notification
@@ -20,7 +18,7 @@ public class CampManagementApplication {
     // 데이터 저장소
     private static List<Student> studentStore;
     private static List<Subject> subjectStore;
-    private static List<Score> ScoreStore;
+    private static List<Score> scoreStore;
 
     // 과목 타입
     private static String SUBJECT_TYPE_MANDATORY = "MANDATORY";
@@ -50,53 +48,53 @@ public class CampManagementApplication {
     private static void setInitData() {
         studentStore = new ArrayList<>();
         subjectStore = List.of(
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Java",
-                        SUBJECT_TYPE_MANDATORY
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "객체지향",
-                        SUBJECT_TYPE_MANDATORY
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Spring",
-                        SUBJECT_TYPE_MANDATORY
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "JPA",
-                        SUBJECT_TYPE_MANDATORY
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "MySQL",
-                        SUBJECT_TYPE_MANDATORY
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "디자인 패턴",
-                        SUBJECT_TYPE_CHOICE
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Spring Security",
-                        SUBJECT_TYPE_CHOICE
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Redis",
-                        SUBJECT_TYPE_CHOICE
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "MongoDB",
-                        SUBJECT_TYPE_CHOICE
-                )
+            new Subject(
+                sequence(INDEX_TYPE_SUBJECT),
+                "Java",
+                SUBJECT_TYPE_MANDATORY
+            ),
+            new Subject(
+                sequence(INDEX_TYPE_SUBJECT),
+                "객체지향",
+                SUBJECT_TYPE_MANDATORY
+            ),
+            new Subject(
+                sequence(INDEX_TYPE_SUBJECT),
+                "Spring",
+                SUBJECT_TYPE_MANDATORY
+            ),
+            new Subject(
+                sequence(INDEX_TYPE_SUBJECT),
+                "JPA",
+                SUBJECT_TYPE_MANDATORY
+            ),
+            new Subject(
+                sequence(INDEX_TYPE_SUBJECT),
+                "MySQL",
+                SUBJECT_TYPE_MANDATORY
+            ),
+            new Subject(
+                sequence(INDEX_TYPE_SUBJECT),
+                "디자인 패턴",
+                SUBJECT_TYPE_CHOICE
+            ),
+            new Subject(
+                sequence(INDEX_TYPE_SUBJECT),
+                "Spring Security",
+                SUBJECT_TYPE_CHOICE
+            ),
+            new Subject(
+                sequence(INDEX_TYPE_SUBJECT),
+                "Redis",
+                SUBJECT_TYPE_CHOICE
+            ),
+            new Subject(
+                sequence(INDEX_TYPE_SUBJECT),
+                "MongoDB",
+                SUBJECT_TYPE_CHOICE
+            )
         );
-        ScoreStore = new ArrayList<>();
+        scoreStore = new ArrayList<>();
     }
 
     // index 자동 증가
@@ -212,6 +210,10 @@ public class CampManagementApplication {
         System.out.print("\n관리할 수강생의 번호를 입력하시오...");
         return sc.next();
     }
+    private static String getSubjectId() {
+        System.out.print("\n관리할 과목의 번호를 입력하시오...");
+        return sc.next();
+    }
 
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() {
@@ -232,11 +234,29 @@ public class CampManagementApplication {
 
     // 수강생의 특정 과목 회차별 등급 조회
     private static void inquireRoundGradeBySubject() {
+        // 조회할 특정 수강생 입력
         String studentId = getStudentId(); // 관리할 수강생 고유 번호
-        // 기능 구현 (조회할 특정 과목)
-        System.out.println("회차별 등급을 조회합니다...");
+        // 조회할 특정 과목 입력
+        String subjectId = getSubjectId(); // 관리할 과목 고유 번호
         // 기능 구현
-        System.out.println("\n등급 조회 성공!");
+        System.out.println("회차별 등급을 조회합니다...");
+        Optional<Score> selectScore = scoreStore.stream()
+            .filter((Score score)->score.getStudentId().equals(studentId))
+            .filter((Score score)->score.getSubjectId().equals(subjectId))
+            .findFirst();
+        if(selectScore.isPresent()) {
+            Score score = selectScore.get();
+            ArrayList<Integer> roundList = score.getRound();
+            ArrayList<Character> gradeList = score.getGrade();
+            //가로로 출력
+            for(int round : roundList) System.out.print(round+"\t");
+            System.out.println();
+            for(char grade : gradeList) System.out.print(grade+"\t");
+
+            System.out.println("\n등급 조회 성공!");
+        }else {
+            System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
+        }
     }
 
 }
