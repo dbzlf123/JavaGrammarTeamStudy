@@ -221,7 +221,7 @@ public class CampManagementApplication {
         System.out.println("\n점수 등록 성공!");
     }
 
-    // 수강생의 과목별 회차 점수 수정
+    // 수강생의 과목별 회차 점수 수정 //checku 작성 gitignore 테스트
     private static void updateRoundScoreBySubject() {
         String studentId = getStudentId(); // 관리할 수강생 고유 번호
         // 기능 구현 (수정할 과목 및 회차, 점수)
