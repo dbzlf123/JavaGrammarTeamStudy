@@ -25,4 +25,5 @@ public class Student {
     public List<Subject> getSubjectStore() {
         return subjectStore;
     }
+
 }
