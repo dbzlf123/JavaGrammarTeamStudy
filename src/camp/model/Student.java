@@ -1,5 +1,5 @@
 package camp.model;
-
+//깃 테스트
 public class Student {
     private String studentId;
     private String studentName;
