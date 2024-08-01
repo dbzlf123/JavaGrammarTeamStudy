@@ -46,7 +46,22 @@ public class CampManagementApplication {
 
     // 초기 데이터 생성
     private static void setInitData() {
-        studentStore = new ArrayList<>();
+        //studentStore = new ArrayList<>();
+        //조회를 위해 학생리스트를 임의로 생성
+        studentStore = List.of(
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "HongGilDong"
+            ),
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "YuHari"
+            ),
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "HongGilDong"
+            )
+        );
         subjectStore = List.of(
             new Subject(
                 sequence(INDEX_TYPE_SUBJECT),
@@ -94,7 +109,43 @@ public class CampManagementApplication {
                 SUBJECT_TYPE_CHOICE
             )
         );
-        scoreStore = new ArrayList<>();
+//        scoreStore = new ArrayList<>();
+        //조회를 위해 점수리스트를 임의로 생성
+        scoreStore = List.of(
+            new Score(
+                sequence(INDEX_TYPE_SCORE),
+                "ST1",
+                "SU1",
+                new ArrayList<Integer>(List.of(1,2,3)),
+                new ArrayList<Integer>(List.of(96,86,92)),
+                new ArrayList<Character>(List.of('A','C','B'))
+            ),
+            new Score(
+                sequence(INDEX_TYPE_SCORE),
+                "ST1",
+                "SU2",
+                new ArrayList<Integer>(List.of(1,2,3)),
+                new ArrayList<Integer>(List.of(78,59,67)),
+                new ArrayList<Character>(List.of('D','N','F'))
+            ),
+            new Score(
+                sequence(INDEX_TYPE_SCORE),
+                "ST2",
+                "SU1",
+                new ArrayList<Integer>(List.of(1,2,3)),
+                new ArrayList<Integer>(List.of(78,59,67)),
+                new ArrayList<Character>(List.of('D','N','F'))
+            ),
+            new Score(
+                sequence(INDEX_TYPE_SCORE),
+                "ST2",
+                "SU2",
+                new ArrayList<Integer>(List.of(1,2,3)),
+                new ArrayList<Integer>(List.of(78,59,67)),
+                new ArrayList<Character>(List.of('D','N','F'))
+            )
+        );
+
     }
 
     // index 자동 증가
@@ -235,9 +286,11 @@ public class CampManagementApplication {
     // 수강생의 특정 과목 회차별 등급 조회
     private static void inquireRoundGradeBySubject() {
         // 조회할 특정 수강생 입력
-        String studentId = getStudentId(); // 관리할 수강생 고유 번호
+//        String studentId = getStudentId(); // 관리할 수강생 고유 번호
+        String studentId = getStudentIdByName();  //이름으로 수강생 고유번호 입력
         // 조회할 특정 과목 입력
-        String subjectId = getSubjectId(); // 관리할 과목 고유 번호
+//        String subjectId = getSubjectId(); // 관리할 과목 고유 번호
+        String subjectId = getSubjectIdByName();  //이름으로 과목 고유번호 입력
         // 기능 구현
         System.out.println("회차별 등급을 조회합니다...");
         Optional<Score> selectScore = scoreStore.stream()
@@ -258,5 +311,34 @@ public class CampManagementApplication {
             System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
         }
     }
-
+    //수강생 이름으로 아이디 찾기
+    //이름이 같을 경우도 고려해야함
+    private static String getStudentIdByName(){
+        System.out.print("\n관리할 수강생의 이름을 입력하시오...");
+        String studentName = sc.next();
+        String subjectId = "";
+        List<Student> selectStudent = studentStore.stream()
+            .filter((Student student)->student.getStudentName().equals(studentName))
+            .toList();
+        if(selectStudent.size()>1) {
+            for(Student eachStudent: selectStudent) {
+                System.out.println("이름 : "+eachStudent.getStudentName()+"\t 아이디:"+eachStudent.getStudentId());
+            }
+            System.out.println("조회할 수강생의 아이디 입력");
+            return sc.next();
+        }
+        else if(selectStudent.size()==1) return selectStudent.getFirst().getStudentId();
+        else return "NoName";
+    }
+    //과목 이름으로 아이디 찾기
+    private static String getSubjectIdByName(){
+        System.out.print("\n관리할 과목의 이름을 입력하시오...");
+        String subjectName = sc.next();
+        Optional<Subject> selectSubject = subjectStore.stream()
+            .filter((Subject subject)->subject.getSubjectName().equals(subjectName))
+            .findFirst();
+        if(selectSubject.isPresent()) return selectSubject.get().getSubjectId();
+        else return "NoName";
+    }
 }
+
