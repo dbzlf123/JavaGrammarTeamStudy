@@ -232,12 +232,14 @@ public class CampManagementApplication {
     // 수강생 목록 조회
     private static void inquireStudent() {
         System.out.println("\n수강생 목록을 조회합니다...");
+
         // studentStore 리스트에서 학생 정보 받아서 목록 출력 + 순서대로 번호 부여
         for(int i = 0; i < studentStore.size(); i++) {
-
+            System.out.println((i+1) +". 고유번호: "+ studentStore.get(i).getStudentId() + ", 이름: " +studentStore.get(i).getStudentName());
         }
         System.out.println("\n수강생 목록 조회 성공!");
     }
+
 
     private static void displayScoreView() {
         boolean flag = true;

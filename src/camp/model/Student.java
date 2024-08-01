@@ -1,21 +1,29 @@
 package camp.model;
 
-public class Student {
-    private static String studentId;
-    private static String studentName;
+import java.util.List;
 
-    public Student(String seq, String studentName) {
-        this.studentId = seq;
+public class Student {
+    private String studentId;
+    private String studentName;
+    private List<Subject> subjectStore;
+
+    public Student(String studentId, String studentName, List<Subject> subjectStore) {
+        this.studentId = studentId;
         this.studentName = studentName;
+        this.subjectStore = subjectStore;
     }
 
     // Getter
-    public static String getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public static String getStudentName() {
+    public String getStudentName() {
         return studentName;
+    }
+
+    public List<Subject> getSubjectStore() {
+        return subjectStore;
     }
 
 }
