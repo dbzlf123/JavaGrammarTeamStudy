@@ -277,8 +277,12 @@ public class CampManagementApplication {
     // 수강생의 과목별 회차 점수 수정 //checku 작성 gitignore 테스트
     private static void updateRoundScoreBySubject() {
         String studentId = getStudentId(); // 관리할 수강생 고유 번호
+        //1. 해당학생 조회하고 없는 번호면 오류 텍스트 출력하기
         // 기능 구현 (수정할 과목 및 회차, 점수)
+        //2. 해당학생의 수정할 과목 입력하고 조회 후 없으면 오류 텍스트 출력하기
+        //3. 수정할 회차 입력하고 조회 후 없으면 오류 텍스트 출력하기
         System.out.println("시험 점수를 수정합니다...");
+        //4. 점수 수정하는 기능 구현  점수가 없으면 바로 추가해주는것도 넣기
         // 기능 구현
         System.out.println("\n점수 수정 성공!");
     }
