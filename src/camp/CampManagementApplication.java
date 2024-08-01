@@ -240,7 +240,8 @@ public class CampManagementApplication {
             System.out.println("1. 수강생의 과목별 시험 회차 및 점수 등록");
             System.out.println("2. 수강생의 과목별 회차 점수 수정");
             System.out.println("3. 수강생의 특정 과목 회차별 등급 조회");
-            System.out.println("4. 메인 화면 이동");
+            System.out.println("4. 수강생의 특정 과목 평균등급 조회");
+            System.out.println("5. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
             int input = sc.nextInt();
 
@@ -248,7 +249,8 @@ public class CampManagementApplication {
                 case 1 -> createScore(); // 수강생의 과목별 시험 회차 및 점수 등록
                 case 2 -> updateRoundScoreBySubject(); // 수강생의 과목별 회차 점수 수정
                 case 3 -> inquireRoundGradeBySubject(); // 수강생의 특정 과목 회차별 등급 조회
-                case 4 -> flag = false; // 메인 화면 이동
+                case 4 -> inquireAverageGrade(); // 수강생의 특정 과목 평균등급 조회
+                case 5 -> flag = false; // 메인 화면 이동
                 default -> {
                     System.out.println("잘못된 입력입니다.\n메인 화면 이동...");
                     flag = false;
@@ -293,17 +295,21 @@ public class CampManagementApplication {
         String subjectId = getSubjectIdByName();  //이름으로 과목 고유번호 입력
         // 기능 구현
         System.out.println("회차별 등급을 조회합니다...");
+        //해당 학생아이디와 과목아이디를 가진 점수를 찾아라
         Optional<Score> selectScore = scoreStore.stream()
             .filter((Score score)->score.getStudentId().equals(studentId))
             .filter((Score score)->score.getSubjectId().equals(subjectId))
             .findFirst();
+        //만약 있다면
         if(selectScore.isPresent()) {
             Score score = selectScore.get();
             ArrayList<Integer> roundList = score.getRound();
             ArrayList<Character> gradeList = score.getGrade();
             //가로로 출력
+            //회차 출력
             for(int round : roundList) System.out.print(round+"\t");
             System.out.println();
+            //각 회차당 등급 출력
             for(char grade : gradeList) System.out.print(grade+"\t");
 
             System.out.println("\n등급 조회 성공!");
@@ -317,28 +323,88 @@ public class CampManagementApplication {
         System.out.print("\n관리할 수강생의 이름을 입력하시오...");
         String studentName = sc.next();
         String subjectId = "";
+        //해당 이름을 가진 수강생 데이터 리스트
         List<Student> selectStudent = studentStore.stream()
             .filter((Student student)->student.getStudentName().equals(studentName))
             .toList();
+        //만약 동명이인 있다면
         if(selectStudent.size()>1) {
+            //목록을 보여줄테니
             for(Student eachStudent: selectStudent) {
                 System.out.println("이름 : "+eachStudent.getStudentName()+"\t 아이디:"+eachStudent.getStudentId());
             }
+            //이중에 누구인지 골라라
             System.out.println("조회할 수강생의 아이디 입력");
             return sc.next();
         }
+        //이름이 같은 사람이 없다면 해당 수강생의 아이디 출력
         else if(selectStudent.size()==1) return selectStudent.getFirst().getStudentId();
+        //해당 이름을 가진 수강생이 없다면 NoName 출력
         else return "NoName";
     }
     //과목 이름으로 아이디 찾기
     private static String getSubjectIdByName(){
         System.out.print("\n관리할 과목의 이름을 입력하시오...");
         String subjectName = sc.next();
+        //입력값에 해당하는 subject 데이터 찾기
         Optional<Subject> selectSubject = subjectStore.stream()
             .filter((Subject subject)->subject.getSubjectName().equals(subjectName))
             .findFirst();
+        //있으면 해당 과목의 아이디 출력
         if(selectSubject.isPresent()) return selectSubject.get().getSubjectId();
+        //없으면 NoName 출력
         else return "NoName";
     }
-}
 
+    //한 과목의 평균 점수/등급 조회
+    private static void inquireAverageGrade() {
+        // 조회할 특정 수강생 입력
+        String studentId = getStudentIdByName(); //이름으로 수강생 고유번호 입력
+        // 조회할 특정 과목 입력
+        String subjectId = getSubjectIdByName();  //이름으로 과목 고유번호 입력
+        //기능 규현
+        System.out.println("평균 등급을 조회합니다...");
+        //해당 학생과 과목이 일치하는 점수 얻기
+        Optional<Score> selectScore = scoreStore.stream()
+            .filter((Score score)->score.getStudentId().equals(studentId))
+            .filter((Score score)->score.getSubjectId().equals(subjectId))
+            .findFirst();
+        if(selectScore.isPresent()) {
+            Score score = selectScore.get();
+            //해당하는 과목의 subjectType 구하기("필수 or 선택)
+            String subjectType = subjectStore.stream()
+                .filter((Subject subject) -> subject.getSubjectId().equals(subjectId))
+                .findFirst().get().getSubjectType();
+            //점수의 평균값 얻기
+            ArrayList<Integer> scoreList = score.getScore();
+            int sum = 0;
+            for(int eachScore:scoreList) sum+=eachScore;
+            double avgScore= sum/scoreList.size();
+            // 평균 점수를 등급으로 바꿔줌
+            System.out.println("이 과목의 평균등급은 "+changeGrade(subjectType,avgScore)+"입니다.");
+
+            System.out.println("\n등급 조회 성공!");
+        }else {
+            System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
+        }
+    }
+
+    private static char changeGrade(String type, double avgScore) {
+        if(type.equals("MANDATORY")) {
+            if(avgScore>=95) return 'A';
+            else if(avgScore>=90) return 'B';
+            else if(avgScore>=80) return 'C';
+            else if(avgScore>=70) return 'D';
+            else if(avgScore>=60) return 'F';
+            else return 'N';
+        }
+        else {
+            if(avgScore>=90) return 'A';
+            else if(avgScore>=80) return 'B';
+            else if(avgScore>=70) return 'C';
+            else if(avgScore>=60) return 'D';
+            else if(avgScore>=50) return 'F';
+            else return 'N';
+        }
+    }
+}
