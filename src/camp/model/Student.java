@@ -1,8 +1,8 @@
 package camp.model;
-//깃 테스트
+
 public class Student {
-    private String studentId;
-    private String studentName;
+    private static String studentId;
+    private static String studentName;
 
     public Student(String seq, String studentName) {
         this.studentId = seq;
@@ -10,11 +10,11 @@ public class Student {
     }
 
     // Getter
-    public String getStudentId() {
+    public static String getStudentId() {
         return studentId;
     }
 
-    public String getStudentName() {
+    public static String getStudentName() {
         return studentName;
     }
 
