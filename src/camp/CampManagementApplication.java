@@ -360,7 +360,6 @@ public class CampManagementApplication {
                             if (subjectScore >= 0 && subjectScore < 101) {
                                 // 수강생번호, 수강과목 조회
                                 // 수강점수 저장 및 수강점수등급 판별 후 저장
-
                             }
                         } else { // 에러 문구는 추후 수정예정.
                             System.out.println("잘못된 입력값입니다.(1~10까지의 회차만 입력가능");
