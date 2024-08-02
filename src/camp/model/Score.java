@@ -6,7 +6,6 @@ public class Score {
     public Score(String seq) {
         this.scoreId = seq;
     }
-
     // Getter
     public String getScoreId() {
         return scoreId;

@@ -274,17 +274,55 @@ public class CampManagementApplication {
         System.out.println("\n점수 등록 성공!");
     }
 
-    // 수강생의 과목별 회차 점수 수정 //checku 작성 gitignore 테스트
-    private static void updateRoundScoreBySubject() {
+    // 수강생의 과목별 회차 점수 수정
+    private static void updateRoundScoreBySubject()  {
         String studentId = getStudentId(); // 관리할 수강생 고유 번호
+        System.out.println("점수 수정을 원하는 학생의 id를 입력하세요.");
+        studentId = String.valueOf(sc.nextInt()); //id 입력
         //1. 해당학생 조회하고 없는 번호면 오류 텍스트 출력하기
-        // 기능 구현 (수정할 과목 및 회차, 점수)
         //2. 해당학생의 수정할 과목 입력하고 조회 후 없으면 오류 텍스트 출력하기
         //3. 수정할 회차 입력하고 조회 후 없으면 오류 텍스트 출력하기
-        System.out.println("시험 점수를 수정합니다...");
         //4. 점수 수정하는 기능 구현  점수가 없으면 바로 추가해주는것도 넣기
-        // 기능 구현
+        for(Student s: studentStore) { //studentStore 배열의 id 와 입력할 아이디가 같은지 대조
+            if (s.getStudentId().equals(studentId)) {
+               Student student = s; // 맞으면 진행
+                break;
+            }
+        }
+        if(studentId == null){
+            System.out.println("해당 학생을 찾을 수 없습니다."); //id 값이 배열에 없으면 오류문 나타냄
+            return;
+        }
+
+        System.out.println("수정할 과목 이름을 입력하세요.");
+        String subjectName = sc.next(); //해당 과목 입력
+
+        for(Subject s : subjectStore){
+            if (s.getSubjectName().equals(subjectName)) { //적은 과목과 불러온 과목 이름 같은지 대조
+               Subject subject = s;
+               break;
+            }
+        }
+        if(subjectName == null){
+            System.out.println("해당 과목을 찾을 수 없습니다."); //id 값이 배열에 없으면 오류문 나타냄
+            return;
+        }
+        System.out.println("수정할 회차를 입력해 주세요 "); //회차입력 - 범위벗어나는 숫자입력시 오류문자 내는 기능 넣기
+        int round = sc.nextInt();
+
+        System.out.println("새로운 점수를 입력해 주세요 "); // 점수입력 - 범위벗어나는 숫자 입력시 오류 문자 내는 기능 넣기
+        int updatedScore = sc.nextInt();
+
+        for(Score score : scoreStore){
+             // 조건해서 맞으면 해당 위치에 점수 넣기
+        }
+        //점수 없으면 그냥 그대로 점수 추가하기 기능 넣기
+        System.out.println("시험 점수를 수정합니다...");
         System.out.println("\n점수 수정 성공!");
+        // 기능 구현 (수정할 과목 및 회차, 점수)
+
+        // 기능 구현
+
     }
 
     // 수강생의 특정 과목 회차별 등급 조회
