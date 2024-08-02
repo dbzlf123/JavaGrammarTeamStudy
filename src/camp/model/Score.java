@@ -11,8 +11,14 @@ public class Score {
     private ArrayList<Character> grade;
 
 
-    public Score(String seq) {
+    public Score(String seq, String studentId, String subjectId)
+    {
         this.scoreId = seq;
+        this.studentId = studentId;
+        this.subjectId = subjectId;
+        this.round = new ArrayList<>();
+        this.score = new ArrayList<>();
+        this.grade = new ArrayList<>();
     }
     public Score(String seq, String studentId, String subjectId, ArrayList<Integer> round,ArrayList<Integer> score,ArrayList<Character> grade){
         this.scoreId = seq;

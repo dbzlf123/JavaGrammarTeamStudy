@@ -1,6 +1,7 @@
 package camp;
 
 import camp.model.Score;
+import camp.model.Status;
 import camp.model.Student;
 import camp.model.Subject;
 
@@ -19,7 +20,6 @@ public class CampManagementApplication {
     private static List<Student> studentStore;
     private static List<Subject> subjectStore;
     private static List<Score> scoreStore;
-
 
     // 과목 타입
     private static String SUBJECT_TYPE_MANDATORY = "MANDATORY";
@@ -47,22 +47,6 @@ public class CampManagementApplication {
 
     // 초기 데이터 생성
     private static void setInitData() {
-        //studentStore = new ArrayList<>();
-        //조회를 위해 학생리스트를 임의로 생성
-        studentStore = List.of(
-            new Student(
-                sequence(INDEX_TYPE_STUDENT),
-                "HongGilDong"
-            ),
-            new Student(
-                sequence(INDEX_TYPE_STUDENT),
-                "YuHari"
-            ),
-            new Student(
-                sequence(INDEX_TYPE_STUDENT),
-                "HongGilDong"
-            )
-        );
         subjectStore = List.of(
             new Subject(
                 sequence(INDEX_TYPE_SUBJECT),
@@ -110,9 +94,43 @@ public class CampManagementApplication {
                 SUBJECT_TYPE_CHOICE
             )
         );
+//        studentStore = new ArrayList<>();
+        //조회를 위해 학생리스트를 임의로 생성
+        studentStore = new ArrayList<>(Arrays.asList(
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "HongGilDong",
+                Status.valueOf("Green"),
+                List.of(getSubjectByName("Java"),
+                    getSubjectByName("객체지향"),
+                    getSubjectByName("Spring"),
+                    getSubjectByName("MongoDB"),
+                    getSubjectByName("Spring Security"))
+            ),
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "YuHari",
+                Status.valueOf("Red"),
+                List.of(getSubjectByName("Java"),
+                    getSubjectByName("객체지향"),
+                    getSubjectByName("Spring"),
+                    getSubjectByName("Redis"),
+                    getSubjectByName("Spring Security"))
+            ),
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "HongGilDong",
+                Status.valueOf("Red"),
+                List.of(getSubjectByName("Java"),
+                    getSubjectByName("MySQL"),
+                    getSubjectByName("JPA"),
+                    getSubjectByName("디자인 패턴"),
+                    getSubjectByName("Spring Security"))
+            ))
+        );
 //        scoreStore = new ArrayList<>();
         //조회를 위해 점수리스트를 임의로 생성
-        scoreStore = List.of(
+        scoreStore = new ArrayList<>(Arrays.asList(
             new Score(
                 sequence(INDEX_TYPE_SCORE),
                 "ST1",
@@ -144,7 +162,7 @@ public class CampManagementApplication {
                 new ArrayList<Integer>(List.of(1,2,3)),
                 new ArrayList<Integer>(List.of(78,59,67)),
                 new ArrayList<Character>(List.of('D','N','F'))
-            )
+            ))
         );
 
     }
@@ -272,7 +290,7 @@ public class CampManagementApplication {
             }
         }
 
-        Student student = new Student(sequence(INDEX_TYPE_STUDENT), studentName, tempSubjectStore);
+        Student student = new Student(sequence(INDEX_TYPE_STUDENT), studentName, Status.valueOf("Green"),tempSubjectStore);
         studentStore.add(student);
 
         System.out.println("수강생 등록 성공!\n");
@@ -288,7 +306,6 @@ public class CampManagementApplication {
         }
         System.out.println("\n수강생 목록 조회 성공!");
     }
-
 
     private static void displayScoreView() {
         boolean flag = true;
@@ -464,5 +481,17 @@ public class CampManagementApplication {
             else if(avgScore>=50) return 'F';
             else return 'N';
         }
+    }
+
+    //초기값 생성에서 수강생의 과목 리스트를 쉽게 만들기 위한 함수 -> 나중에 지울 예정이라 신경안써도 됨
+    public static  Subject getSubjectByName(String subjectName){
+      Optional<Subject> selectSubject = subjectStore.stream()
+            .filter((Subject subejct)->subejct.getSubjectName().equals(subjectName))
+            .findFirst();
+      if(selectSubject.isPresent()){
+          Subject subject = selectSubject.get();
+          return subject;
+      }
+      else return new Subject("SU0","NoSubject","MANDATORY");
     }
 }
