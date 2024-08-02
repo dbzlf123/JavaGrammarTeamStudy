@@ -220,19 +220,75 @@ public class CampManagementApplication {
     // 수강생 등록
     private static void createStudent() {
         System.out.println("\n수강생을 등록합니다...");
-        System.out.print("수강생 이름 입력: ");
+        System.out.println("수강생 이름 입력: ");
         String studentName = sc.next();
-        // 기능 구현 (필수 과목, 선택 과목)
+        sc.nextLine();
 
-//        Student student = new Student(sequence(INDEX_TYPE_STUDENT), studentName); // 수강생 인스턴스 생성 예시 코드
-        // 기능 구현
+        int mandatoryNums = 0; //필수과목 선택 횟수
+        int choiceNums = 0; //선택과목 선택 횟수
+        List<Subject> tempSubjectStore = new ArrayList<>();
+
+        //과목 목록 출력, 과목 이름과 과목 타입(필수인지 선택인지)
+        for (int i = 0; i < subjectStore.size(); i++) {
+            System.out.println(subjectStore.get(i).getSubjectName() + " " + subjectStore.get(i).getSubjectType());
+        }
+
+        //필수 과목 3개 이상, 선택 과목 2개 이상 선택할때까지
+        SelectSubjectLoop: // 이미 선택했다면 흐름제어를 통해 돌아오려고 만든 라벨
+        while (true) {
+            System.out.print("필수 과목 3개 이상, 선택 과목 2개 이상을 선택해주세요. 과목 이름으로 적어주세요.");
+            String subjectName = sc.nextLine();
+            boolean bFindSubject = false; // 엉뚱한 입력했을 수도 있으니 Try Catch 로 바꿀 필요성
+
+            for (int i = 0; i < subjectStore.size(); i++) {
+                if (subjectStore.get(i).getSubjectName().equals(subjectName)) {
+                    //고른 필수 과목, 선택 과목 수 늘려주기
+                    if (subjectStore.get(i).getSubjectType().equals(SUBJECT_TYPE_MANDATORY)) mandatoryNums++;
+                    else choiceNums++;
+
+                    for(int j = 0; j < tempSubjectStore.size(); j++){
+                        if(tempSubjectStore.get(j).getSubjectName().equals(subjectName)){
+                            System.out.println("이미 등록한 과목 입니다. 다시 선택해 주세요.");
+                            continue SelectSubjectLoop;
+                        }
+                    }
+
+                    //데이터 넣어주기.
+                    Subject subject = new Subject(subjectStore.get(i).getSubjectId(),
+                            subjectStore.get(i).getSubjectName(),
+                            subjectStore.get(i).getSubjectType());
+                    tempSubjectStore.add(subject);
+
+                    bFindSubject = true;
+                    System.out.print("선택 완료\n");
+                    break;
+                }
+            }
+
+            if (!bFindSubject) { //존재하지 않는 이름
+                System.out.print("\n존재하지 않는 과목 입니다. 다시 입력해주세요\n");
+            }
+            if (mandatoryNums >= 3 && choiceNums >= 2) { //최소 선택 수 만족
+                System.out.print("충분히 선택하셨습니다. 더 선택하시겠습니까? Yes or No\n");
+                String choice = sc.nextLine();
+                if (choice.equals("No")) break;
+            }
+        }
+
+        Student student = new Student(sequence(INDEX_TYPE_STUDENT), studentName, tempSubjectStore);
+        studentStore.add(student);
+
         System.out.println("수강생 등록 성공!\n");
     }
 
     // 수강생 목록 조회
     private static void inquireStudent() {
         System.out.println("\n수강생 목록을 조회합니다...");
-        // 기능 구현
+
+        // studentStore 리스트에서 학생 정보 받아서 목록 출력 + 순서대로 번호 부여
+        for(int i = 0; i < studentStore.size(); i++) {
+            System.out.println((i+1) +". 고유번호: "+ studentStore.get(i).getStudentId() + ", 이름: " +studentStore.get(i).getStudentName());
+        }
         System.out.println("\n수강생 목록 조회 성공!");
     }
 
