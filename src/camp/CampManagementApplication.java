@@ -343,7 +343,6 @@ public class CampManagementApplication {
         while (true) {
             System.out.print("필수/선택 과목인지 선택하세요.(필수 : 1, 선택 : 2을 입력하세요)\n입력 : "); // 필수/선택 과목타입 선택
             int subType = sc.nextInt();
-
             // 필수 과목 조건문
             if (subType == 1) {
                 for (int i = 0; i < subjectStore.size(); i++) {
@@ -358,43 +357,46 @@ public class CampManagementApplication {
                 for (int i = 0; i < subjectStore.size(); i++) {
                     //과목이 필드에 있는 값인지 확인
                     if (subjectStore.get(i).getSubjectName().equals(subjectName)) {
-                        System.out.println("과목시험회차를 입력하세요");
+                        String subjectId = getSubjectIdByName();
+
                         // 회차 입력
-                        int round = sc.nextInt();
+                       ArrayList<Integer> round = new ArrayList<>();
+                       for (int i = 0; i < round.size(); i++) {
+                           System.out.println("과목시험회차를 입력하세요");
+                           int subjectround = sc.nextInt();
+                           round.add(subjectround);
+                           if (subjectround > 0 && subjectround < 11) {
+                               System.out.println("과목점수를 입력하세요.");
+                               // 과목 점수 입력
+                               ArrayList<Integer> subjectScore = new ArrayList<>();
+                               int subjectScoresc = sc.nextInt();
+                               if (subjectScoresc >= 0 && subjectScoresc < 101) {
+                                   // 점수 등급 판별(필수과목)
+                                   ArrayList<Character> grade = new ArrayList<>();
 
-                        if (round > 0 && round < 11) {
-                            System.out.println("과목점수를 입력하세요.");
-                            // 과목 점수 입력
-                            int subjectScore = sc.nextInt();
+                                   if (subjectScoresc < 101 && subjectScoresc > 94) {
+                                       grade = 'A';
+                                   } else if (subjectScoresc > 89) {
+                                       grade = 'B';
+                                   } else if (subjectScoresc > 79) {
+                                       grade = 'C';
+                                   } else if (subjectScoresc > 69) {
+                                       grade = 'D';
+                                   } else if (subjectScoresc > 59) {
+                                       grade = 'F';
+                                   } else {
+                                       grade = 'N';
+                                   }
+                                   // 점수 저장
+                                   for (int j = 0; j < scoreStore.size(); j++) {
+                                       scoreStore.add(j, studentId, subjectId, round, subjectScore, grade);
+                                   }
 
-                            if (subjectScore >= 0 && subjectScore < 101) {
-                                // 수강생번호, 수강과목 조회
-                                // 수강점수 저장 및 수강점수등급 판별 후 저장
-
-                                // 점수 등급 판별(필수과목)
-                                char grade;
-                                if (subjectScore < 101 || subjectScore > 94) {
-                                    grade = 'A';
-                                } else if (subjectScore < 95 || subjectScore > 89) {
-                                    grade = 'B';
-                                } else if (subjectScore < 90 || subjectScore > 79) {
-                                    grade = 'C';
-                                } else if (subjectScore < 80 || subjectScore > 69) {
-                                    grade = 'D';
-                                } else if (subjectScore < 75 || subjectScore > 59) {
-                                    grade = 'F';
-                                } else if (subjectScore < 60 || subjectScore >= 0){
-                                    grade = 'N';
-                                }
-
-                                for (int j = 0; j < scoreStore.size(); j++) {
-                                    Score score = scoreStore.add(j, studentId, subjectId, round, subjectScore, grade);
-                                }
-
-                            }
-                        } else { // 에러 문구는 추후 수정예정.
-                            System.out.println("잘못된 입력값입니다.(1~10까지의 회차만 입력가능");
-                        }
+                               }
+                           } else { // 에러 문구는 추후 수정예정.
+                               System.out.println("잘못된 입력값입니다.(1~10까지의 회차만 입력가능");
+                           }
+                       }
 
                     } else { // 에러 문구는 추후 수정예정.
                         System.out.println("과목명을 잘못 입력하였습니다.");
