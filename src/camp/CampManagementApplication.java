@@ -3,6 +3,7 @@ package camp;
 import camp.model.Score;
 import camp.model.Student;
 import camp.model.Subject;
+import jdk.jshell.Snippet;
 
 import java.util.*;
 
@@ -48,20 +49,20 @@ public class CampManagementApplication {
     private static void setInitData() {
         //studentStore = new ArrayList<>();
         //조회를 위해 학생리스트를 임의로 생성
-//        studentStore = List.of(
-//            new Student(
-//                sequence(INDEX_TYPE_STUDENT),
-//                "HongGilDong"
-//            ),
-//            new Student(
-//                sequence(INDEX_TYPE_STUDENT),
-//                "YuHari"
-//            ),
-//            new Student(
-//                sequence(INDEX_TYPE_STUDENT),
-//                "HongGilDong"
-//            )
-//        );
+        studentStore = List.of(
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "HongGilDong"
+            ),
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "YuHari"
+            ),
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "HongGilDong"
+            )
+        );
         subjectStore = List.of(
             new Subject(
                 sequence(INDEX_TYPE_SUBJECT),
@@ -270,9 +271,72 @@ public class CampManagementApplication {
 
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() {
-        String studentId = getStudentId(); // 관리할 수강생 고유 번호
+        String studentId = getStudentIdByName(); // 관리할 수강생 고유 번호 이름으로 입력
         System.out.println("시험 점수를 등록합니다...");
         // 기능 구현
+
+        while (true) {
+            System.out.print("필수/선택 과목인지 선택하세요.(필수 : 1, 선택 : 2을 입력하세요)\n입력 : "); // 필수/선택 과목타입 선택
+            int subType = sc.nextInt();
+
+            // 필수 과목 조건문
+            if (subType == 1) {
+                for (int i = 0; i < subjectStore.size(); i++) {
+                    // 과목필드에서 필수타입선언된 과목만 불러오기
+                    if (subjectStore.get(i).getSubjectType().equals(SUBJECT_TYPE_MANDATORY)) {
+                        System.out.println(subjectStore.get(i).getSubjectName());
+                    }
+                }
+                // 과목 입력칸
+                String subjectName = sc.next();
+
+                for (int i = 0; i < subjectStore.size(); i++) {
+                    //과목이 필드에 있는 값인지 확인
+                    if (subjectStore.get(i).getSubjectName().equals(subjectName)) {
+                        //해당 과목의 아이디값 가져오기 -> 해당 Score객체를 찾아낼때 필요
+                        String subjectId = subjectStore.get(i).getSubjectId();
+                        System.out.println("과목시험회차를 입력하세요");
+                        // 회차 입력
+                        int subRound = sc.nextInt();
+
+                        if (subRound > 0 && subRound < 11) {
+                            System.out.println("과목점수를 입력하세요.");
+                            // 과목 점수 입력
+                            int subjectScore = sc.nextInt();
+                            if (subjectScore >= 0 && subjectScore < 101) {
+                                for(Score score:scoreStore) {
+                                    if(score.getStudentId().equals(studentId)&&score.getSubjectId().equals(subjectId)) {
+                                        score.addScore(subRound, subjectScore, subType);
+                                    }
+                                }
+                                // 수강생번호, 수강과목 조회
+                                // 수강점수 저장 및 수강점수등급 판별 후 저장
+                            }
+                        } else { // 에러 문구는 추후 수정예정.
+                            System.out.println("잘못된 입력값입니다.(1~10까지의 회차만 입력가능");
+                        }
+
+                    } else { // 에러 문구는 추후 수정예정.
+                        System.out.println("과목명을 잘못 입력하였습니다.");
+                    }
+                }
+            }
+            // 선택과목 조건문
+            else if (subType == 2) {
+                for (int i = 0; i < subjectStore.size(); i++) {
+                    // 과목필드에서 필수타입선언된 과목만 불러오기
+                    if (subjectStore.get(i).getSubjectType().equals(SUBJECT_TYPE_CHOICE)) {
+                        System.out.println(subjectStore.get(i).getSubjectName());
+                    }
+                }
+                String subjectName = sc.next();
+            }
+            break;
+        }
+
+
+        System.out.println("점수를 등록할 시험의 회차를 선택하세요...(1~10 입력)");
+
         System.out.println("\n점수 등록 성공!");
     }
 
@@ -381,7 +445,7 @@ public class CampManagementApplication {
             for(int eachScore:scoreList) sum+=eachScore;
             double avgScore= sum/scoreList.size();
             // 평균 점수를 등급으로 바꿔줌
-            System.out.println("이 과목의 평균등급은 "+changeGrade(subjectType,avgScore)+"입니다.");
+            System.out.println("이 과목의 평균등급은 "+Score.changeGrade(subjectType,avgScore)+"입니다.");
 
             System.out.println("\n등급 조회 성공!");
         }else {
@@ -389,22 +453,5 @@ public class CampManagementApplication {
         }
     }
 
-    private static char changeGrade(String type, double avgScore) {
-        if(type.equals("MANDATORY")) {
-            if(avgScore>=95) return 'A';
-            else if(avgScore>=90) return 'B';
-            else if(avgScore>=80) return 'C';
-            else if(avgScore>=70) return 'D';
-            else if(avgScore>=60) return 'F';
-            else return 'N';
-        }
-        else {
-            if(avgScore>=90) return 'A';
-            else if(avgScore>=80) return 'B';
-            else if(avgScore>=70) return 'C';
-            else if(avgScore>=60) return 'D';
-            else if(avgScore>=50) return 'F';
-            else return 'N';
-        }
-    }
+
 }
