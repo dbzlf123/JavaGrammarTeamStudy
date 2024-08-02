@@ -1,9 +1,6 @@
 package camp;
 
-import camp.model.Score;
-import camp.model.Status;
-import camp.model.Student;
-import camp.model.Subject;
+import camp.model.*;
 
 import java.util.*;
 
@@ -101,31 +98,31 @@ public class CampManagementApplication {
                 sequence(INDEX_TYPE_STUDENT),
                 "HongGilDong",
                 Status.valueOf("Green"),
-                List.of(getSubjectByName("Java"),
+                new ArrayList<>(Arrays.asList(getSubjectByName("Java"),
                     getSubjectByName("객체지향"),
                     getSubjectByName("Spring"),
                     getSubjectByName("MongoDB"),
-                    getSubjectByName("Spring Security"))
+                    getSubjectByName("Spring Security")))
             ),
             new Student(
                 sequence(INDEX_TYPE_STUDENT),
                 "YuHari",
                 Status.valueOf("Red"),
-                List.of(getSubjectByName("Java"),
+                new ArrayList<>(Arrays.asList(getSubjectByName("Java"),
                     getSubjectByName("객체지향"),
                     getSubjectByName("Spring"),
                     getSubjectByName("Redis"),
-                    getSubjectByName("Spring Security"))
+                    getSubjectByName("Spring Security")))
             ),
             new Student(
                 sequence(INDEX_TYPE_STUDENT),
                 "HongGilDong",
                 Status.valueOf("Red"),
-                List.of(getSubjectByName("Java"),
+                new ArrayList<>(Arrays.asList(getSubjectByName("Java"),
                     getSubjectByName("MySQL"),
                     getSubjectByName("JPA"),
                     getSubjectByName("디자인 패턴"),
-                    getSubjectByName("Spring Security"))
+                    getSubjectByName("Spring Security")))
             ))
         );
 //        scoreStore = new ArrayList<>();
@@ -135,33 +132,41 @@ public class CampManagementApplication {
                 sequence(INDEX_TYPE_SCORE),
                 "ST1",
                 "SU1",
-                new ArrayList<Integer>(List.of(1,2,3)),
-                new ArrayList<Integer>(List.of(96,86,92)),
-                new ArrayList<Character>(List.of('A','C','B'))
+                new ArrayList<ScoreDatail>(Arrays.asList(
+                    new ScoreDatail(1,78, getSubjectTypeByName("Java")),
+                    new ScoreDatail(2,98, getSubjectTypeByName("Java")),
+                    new ScoreDatail(3,86, getSubjectTypeByName("Java"))
+                ))
             ),
             new Score(
                 sequence(INDEX_TYPE_SCORE),
                 "ST1",
                 "SU2",
-                new ArrayList<Integer>(List.of(1,2,3)),
-                new ArrayList<Integer>(List.of(78,59,67)),
-                new ArrayList<Character>(List.of('D','N','F'))
+                new ArrayList<ScoreDatail>(Arrays.asList(
+                    new ScoreDatail(1,96, getSubjectTypeByName("객체지향")),
+                    new ScoreDatail(2,98, getSubjectTypeByName("객체지향")),
+                    new ScoreDatail(3,92, getSubjectTypeByName("객체지향"))
+                ))
             ),
             new Score(
                 sequence(INDEX_TYPE_SCORE),
                 "ST2",
                 "SU1",
-                new ArrayList<Integer>(List.of(1,2,3)),
-                new ArrayList<Integer>(List.of(78,59,67)),
-                new ArrayList<Character>(List.of('D','N','F'))
+                new ArrayList<ScoreDatail>(Arrays.asList(
+                    new ScoreDatail(1,78, getSubjectTypeByName("Java")),
+                    new ScoreDatail(2,68, getSubjectTypeByName("Java")),
+                    new ScoreDatail(3,86, getSubjectTypeByName("Java"))
+                ))
             ),
             new Score(
                 sequence(INDEX_TYPE_SCORE),
                 "ST2",
                 "SU2",
-                new ArrayList<Integer>(List.of(1,2,3)),
-                new ArrayList<Integer>(List.of(78,59,67)),
-                new ArrayList<Character>(List.of('D','N','F'))
+                new ArrayList<ScoreDatail>(Arrays.asList(
+                    new ScoreDatail(1,78, getSubjectTypeByName("객체지향")),
+                    new ScoreDatail(2,98, getSubjectTypeByName("객체지향")),
+                    new ScoreDatail(3,86, getSubjectTypeByName("객체지향"))
+                ))
             ))
         );
 
@@ -273,7 +278,7 @@ public class CampManagementApplication {
                             subjectStore.get(i).getSubjectName(),
                             subjectStore.get(i).getSubjectType());
                     tempSubjectStore.add(subject);
-
+//scoreStore.add(new Score(sequence(),학생아이디, 과목 아이디))
                     bFindSubject = true;
                     System.out.print("선택 완료\n");
                     break;
@@ -348,6 +353,7 @@ public class CampManagementApplication {
         String studentId = getStudentId(); // 관리할 수강생 고유 번호
         System.out.println("시험 점수를 등록합니다...");
         // 기능 구현
+        //score.add(new ScoreDetail())
         System.out.println("\n점수 등록 성공!");
     }
 
@@ -377,16 +383,8 @@ public class CampManagementApplication {
             .findFirst();
         //만약 있다면
         if(selectScore.isPresent()) {
-            Score score = selectScore.get();
-            ArrayList<Integer> roundList = score.getRound();
-            ArrayList<Character> gradeList = score.getGrade();
-            //가로로 출력
-            //회차 출력
-            for(int round : roundList) System.out.print(round+"\t");
-            System.out.println();
-            //각 회차당 등급 출력
-            for(char grade : gradeList) System.out.print(grade+"\t");
-
+            List<ScoreDatail> scoreList = selectScore.get().getScoreList();
+            for (ScoreDatail score : scoreList) System.out.println(score.getRound()+"회차 : "+score.getGrade());
             System.out.println("\n등급 조회 성공!");
         }else {
             System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
@@ -451,35 +449,18 @@ public class CampManagementApplication {
                 .filter((Subject subject) -> subject.getSubjectId().equals(subjectId))
                 .findFirst().get().getSubjectType();
             //점수의 평균값 얻기
-            ArrayList<Integer> scoreList = score.getScore();
+            List<ScoreDatail> scoreList = score.getScoreList();
             int sum = 0;
-            for(int eachScore:scoreList) sum+=eachScore;
+            for(ScoreDatail scoreDetail:scoreList) {
+                sum+=scoreDetail.getScore();
+            }
             double avgScore= sum/scoreList.size();
             // 평균 점수를 등급으로 바꿔줌
-            System.out.println("이 과목의 평균등급은 "+changeGrade(subjectType,avgScore)+"입니다.");
+            System.out.println("이 과목의 평균등급은 "+ ScoreDatail.changeGrade(subjectType,avgScore)+"입니다.");
 
             System.out.println("\n등급 조회 성공!");
         }else {
             System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
-        }
-    }
-
-    private static char changeGrade(String type, double avgScore) {
-        if(type.equals("MANDATORY")) {
-            if(avgScore>=95) return 'A';
-            else if(avgScore>=90) return 'B';
-            else if(avgScore>=80) return 'C';
-            else if(avgScore>=70) return 'D';
-            else if(avgScore>=60) return 'F';
-            else return 'N';
-        }
-        else {
-            if(avgScore>=90) return 'A';
-            else if(avgScore>=80) return 'B';
-            else if(avgScore>=70) return 'C';
-            else if(avgScore>=60) return 'D';
-            else if(avgScore>=50) return 'F';
-            else return 'N';
         }
     }
 
@@ -493,5 +474,13 @@ public class CampManagementApplication {
           return subject;
       }
       else return new Subject("SU0","NoSubject","MANDATORY");
+    }
+    //초기값 생성에서 과목 이름으로 과목타입을 구하는 함수
+    public static String getSubjectTypeByName(String subjectName) {
+        Optional<Subject> selectSubject = subjectStore.stream()
+            .filter((Subject subejct)->subejct.getSubjectName().equals(subjectName))
+            .findFirst();
+        if(selectSubject.isPresent()) return selectSubject.get().getSubjectType();
+        else return "NoSubject";
     }
 }

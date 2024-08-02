@@ -1,45 +1,46 @@
 package camp.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Score {
     private String scoreId;
     private String studentId;
     private String subjectId;
-    private ArrayList<Integer> round;
-    private ArrayList<Integer> score;
-    private ArrayList<Character> grade;
+    private List<ScoreDatail> scoreList;
 
 
-    public Score(String seq, String studentId, String subjectId)
-    {
+    public Score(String seq, String studentId, String subjectId) {
         this.scoreId = seq;
         this.studentId = studentId;
         this.subjectId = subjectId;
-        this.round = new ArrayList<>();
-        this.score = new ArrayList<>();
-        this.grade = new ArrayList<>();
+        this.scoreList = new ArrayList<>();
     }
-    public Score(String seq, String studentId, String subjectId, ArrayList<Integer> round,ArrayList<Integer> score,ArrayList<Character> grade){
+    public Score(String seq, String studentId, String subjectId, List<ScoreDatail> scoreList) {
         this.scoreId = seq;
         this.studentId = studentId;
         this.subjectId = subjectId;
-        this.round = round;
-        this.score = score;
-        this.grade = grade;
+        this.scoreList = scoreList;
     }
 
     // Getter
-    public String getScoreId() {return scoreId;}
+    public String getScoreId() {
+        return scoreId;
+    }
 
-    public String getStudentId() {return studentId;}
+    public String getStudentId() {
+        return studentId;
+    }
 
-    public String getSubjectId() {return subjectId;}
+    public String getSubjectId() {
+        return subjectId;
+    }
 
-    public ArrayList<Integer> getRound() {return round;}
+    public void addScore(ScoreDatail score) {
+        this.scoreList.add(score);
+    }
 
-    public ArrayList<Integer> getScore() {return score;}
-
-    public ArrayList<Character> getGrade() {return grade;}
+    public List<ScoreDatail> getScoreList() {
+        return scoreList;
+    }
 }
-
