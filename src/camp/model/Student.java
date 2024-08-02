@@ -1,6 +1,5 @@
 package camp.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
@@ -9,7 +8,6 @@ public class Student {
     private Status status;
 
     private List<Subject> subjectStore;
-    private List<Score> scoreStore = new ArrayList<>();
 
     public Student(String studentId, String studentName, Status status, List<Subject> subjectStore) {
         this.studentId = studentId;
