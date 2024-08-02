@@ -349,6 +349,7 @@ public class CampManagementApplication {
                     // 과목필드에서 필수타입선언된 과목만 불러오기
                     if (subjectStore.get(i).getSubjectType().equals(SUBJECT_TYPE_MANDATORY)) {
                         System.out.println(subjectStore.get(i).getSubjectName());
+                        subjectStore.get(i).getSubjectType();
                     }
                 }
                 // 과목 입력칸
@@ -357,7 +358,6 @@ public class CampManagementApplication {
                 for (int i = 0; i < subjectStore.size(); i++) {
                     //과목이 필드에 있는 값인지 확인
                     if (subjectStore.get(i).getSubjectName().equals(subjectName)) {
-                        String subjectId = getSubjectIdByName();
 
                         // 회차 입력
                        ArrayList<Integer> round = new ArrayList<>();
@@ -389,7 +389,7 @@ public class CampManagementApplication {
                                    }
                                    // 점수 저장
                                    for (int j = 0; j < scoreStore.size(); j++) {
-                                       scoreStore.add(j, studentId, subjectId, round, subjectScore, grade);
+                                       scoreStore.add(get);
                                    }
 
                                }
