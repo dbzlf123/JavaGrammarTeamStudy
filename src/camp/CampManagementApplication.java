@@ -48,20 +48,20 @@ public class CampManagementApplication {
     private static void setInitData() {
         //studentStore = new ArrayList<>();
         //조회를 위해 학생리스트를 임의로 생성
-        studentStore = List.of(
-            new Student(
-                sequence(INDEX_TYPE_STUDENT),
-                "HongGilDong"
-            ),
-            new Student(
-                sequence(INDEX_TYPE_STUDENT),
-                "YuHari"
-            ),
-            new Student(
-                sequence(INDEX_TYPE_STUDENT),
-                "HongGilDong"
-            )
-        );
+//        studentStore = List.of(
+//            new Student(
+//                sequence(INDEX_TYPE_STUDENT),
+//                "HongGilDong"
+//            ),
+//            new Student(
+//                sequence(INDEX_TYPE_STUDENT),
+//                "YuHari"
+//            ),
+//            new Student(
+//                sequence(INDEX_TYPE_STUDENT),
+//                "HongGilDong"
+//            )
+//        );
         subjectStore = List.of(
             new Subject(
                 sequence(INDEX_TYPE_SUBJECT),
@@ -220,7 +220,7 @@ public class CampManagementApplication {
         String studentName = sc.next();
         // 기능 구현 (필수 과목, 선택 과목)
 
-        Student student = new Student(sequence(INDEX_TYPE_STUDENT), studentName); // 수강생 인스턴스 생성 예시 코드
+//        Student student = new Student(sequence(INDEX_TYPE_STUDENT), studentName); // 수강생 인스턴스 생성 예시 코드
         // 기능 구현
         System.out.println("수강생 등록 성공!\n");
     }
