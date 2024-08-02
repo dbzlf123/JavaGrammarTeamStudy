@@ -94,9 +94,9 @@ public class CampManagementApplication {
                 SUBJECT_TYPE_CHOICE
             )
         );
-        //studentStore = new ArrayList<>();
+//        studentStore = new ArrayList<>();
         //조회를 위해 학생리스트를 임의로 생성
-        studentStore = List.of(
+        studentStore = new ArrayList<>(Arrays.asList(
             new Student(
                 sequence(INDEX_TYPE_STUDENT),
                 "HongGilDong",
@@ -126,11 +126,11 @@ public class CampManagementApplication {
                     getSubjectByName("JPA"),
                     getSubjectByName("디자인 패턴"),
                     getSubjectByName("Spring Security"))
-            )
+            ))
         );
 //        scoreStore = new ArrayList<>();
         //조회를 위해 점수리스트를 임의로 생성
-        scoreStore = List.of(
+        scoreStore = new ArrayList<>(Arrays.asList(
             new Score(
                 sequence(INDEX_TYPE_SCORE),
                 "ST1",
@@ -162,7 +162,7 @@ public class CampManagementApplication {
                 new ArrayList<Integer>(List.of(1,2,3)),
                 new ArrayList<Integer>(List.of(78,59,67)),
                 new ArrayList<Character>(List.of('D','N','F'))
-            )
+            ))
         );
 
     }
