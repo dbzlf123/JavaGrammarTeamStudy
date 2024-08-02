@@ -1,6 +1,7 @@
 package camp;
 
 import camp.model.Score;
+import camp.model.Status;
 import camp.model.Student;
 import camp.model.Subject;
 
@@ -48,20 +49,23 @@ public class CampManagementApplication {
     private static void setInitData() {
         //studentStore = new ArrayList<>();
         //조회를 위해 학생리스트를 임의로 생성
-//        studentStore = List.of(
-//            new Student(
-//                sequence(INDEX_TYPE_STUDENT),
-//                "HongGilDong"
-//            ),
-//            new Student(
-//                sequence(INDEX_TYPE_STUDENT),
-//                "YuHari"
-//            ),
-//            new Student(
-//                sequence(INDEX_TYPE_STUDENT),
-//                "HongGilDong"
-//            )
-//        );
+        studentStore = List.of(
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "HongGilDong",
+                Status.valueOf("Green")
+            ),
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "YuHari",
+                Status.valueOf("Red")
+            ),
+            new Student(
+                sequence(INDEX_TYPE_STUDENT),
+                "HongGilDong",
+                Status.valueOf("Red")
+            )
+        );
         subjectStore = List.of(
             new Subject(
                 sequence(INDEX_TYPE_SUBJECT),
