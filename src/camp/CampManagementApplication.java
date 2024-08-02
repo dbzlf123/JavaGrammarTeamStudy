@@ -330,7 +330,64 @@ public class CampManagementApplication {
     private static void createScore() {
         String studentId = getStudentId(); // 관리할 수강생 고유 번호
         System.out.println("시험 점수를 등록합니다...");
-        // 기능 구현
+
+        while (true) {
+            System.out.print("필수/선택 과목인지 선택하세요.(필수 : 1, 선택 : 2을 입력하세요)\n입력 : "); // 필수/선택 과목타입 선택
+            int subType = sc.nextInt();
+
+            // 필수 과목 조건문
+            if (subType == 1) {
+                for (int i = 0; i < subjectStore.size(); i++) {
+                    // 과목필드에서 필수타입선언된 과목만 불러오기
+                    if (subjectStore.get(i).getSubjectType().equals(SUBJECT_TYPE_MANDATORY)) {
+                        System.out.println(subjectStore.get(i).getSubjectName());
+                    }
+                }
+                // 과목 입력칸
+                String subjectName = sc.next();
+
+                for (int i = 0; i < subjectStore.size(); i++) {
+                    //과목이 필드에 있는 값인지 확인
+                    if (subjectStore.get(i).getSubjectName().equals(subjectName)) {
+                        System.out.println("과목시험회차를 입력하세요");
+                        // 회차 입력
+                        int subRound = sc.nextInt();
+
+                        if (subRound > 0 && subRound < 11) {
+                            System.out.println("과목점수를 입력하세요.");
+                            // 과목 점수 입력
+                            int subjectScore = sc.nextInt();
+                            if (subjectScore >= 0 && subjectScore < 101) {
+                                // 수강생번호, 수강과목 조회
+                                // 수강점수 저장 및 수강점수등급 판별 후 저장
+                                
+
+                            }
+                        } else { // 에러 문구는 추후 수정예정.
+                            System.out.println("잘못된 입력값입니다.(1~10까지의 회차만 입력가능");
+                        }
+
+                    } else { // 에러 문구는 추후 수정예정.
+                        System.out.println("과목명을 잘못 입력하였습니다.");
+                    }
+                }
+            }
+            // 선택과목 조건문
+            else if (subType == 2) {
+                for (int i = 0; i < subjectStore.size(); i++) {
+                    // 과목필드에서 필수타입선언된 과목만 불러오기
+                    if (subjectStore.get(i).getSubjectType().equals(SUBJECT_TYPE_CHOICE)) {
+                        System.out.println(subjectStore.get(i).getSubjectName());
+                    }
+                }
+                String subjectName = sc.next();
+            }
+            break;
+        }
+
+
+        System.out.println("점수를 등록할 시험의 회차를 선택하세요...(1~10 입력)");
+
         System.out.println("\n점수 등록 성공!");
     }
 
