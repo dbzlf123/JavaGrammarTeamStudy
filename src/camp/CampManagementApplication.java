@@ -360,14 +360,6 @@ public class CampManagementApplication {
                         studentStore.get(i).setStudentName(updateName);
                     }
                 }
-                //잘 변경되나 확인 프린트
-                for (int i = 0; i < studentStore.size(); i++) {
-                    if (updateName.equals(studentStore.get(i).getStudentName())) {
-                        System.out.println("고유번호: " + studentStore.get(i).getStudentId() + ", 이름: " + studentStore.get(i).getStudentName()
-                                + ", 상태: " + studentStore.get(i).getStatus());
-                    }
-                }
-
                 System.out.println("\n수강생 정보 수정 성공!");
                 break;
 
@@ -380,7 +372,6 @@ public class CampManagementApplication {
                         studentStore.get(i).setStatus(Status.valueOf(updateStatus));
                     }
                 }
-
                 System.out.println("\n수강생 정보 수정 성공!");
                 break;
 
