@@ -411,7 +411,7 @@ public class CampManagementApplication {
             return sc.next();
         }
         //이름이 같은 사람이 없다면 해당 수강생의 아이디 출력
-        else if(selectStudent.size()==1) return selectStudent.getFirst().getStudentId();
+        else if(selectStudent.size()==1) return selectStudent.get(0).getStudentId();
         //해당 이름을 가진 수강생이 없다면 NoName 출력
         else return "NoName";
     }
