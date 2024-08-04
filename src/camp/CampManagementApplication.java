@@ -47,22 +47,22 @@ public class CampManagementApplication {
 
     // 초기 데이터 생성
     private static void setInitData() {
-        //studentStore = new ArrayList<>();
+        studentStore = new ArrayList<>();
         //조회를 위해 학생리스트를 임의로 생성
-        studentStore = List.of(
-            new Student(
-                sequence(INDEX_TYPE_STUDENT),
-                "HongGilDong"
-            ),
-            new Student(
-                sequence(INDEX_TYPE_STUDENT),
-                "YuHari"
-            ),
-            new Student(
-                sequence(INDEX_TYPE_STUDENT),
-                "HongGilDong"
-            )
-        );
+//        studentStore = List.of(
+//            new Student(
+//                sequence(INDEX_TYPE_STUDENT),
+//                "HongGilDong"
+//            ),
+//            new Student(
+//                sequence(INDEX_TYPE_STUDENT),
+//                "YuHari"
+//            ),
+//            new Student(
+//                sequence(INDEX_TYPE_STUDENT),
+//                "HongGilDong"
+//            )
+//        );
         subjectStore = List.of(
             new Subject(
                 sequence(INDEX_TYPE_SUBJECT),
@@ -110,42 +110,42 @@ public class CampManagementApplication {
                 SUBJECT_TYPE_CHOICE
             )
         );
-//        scoreStore = new ArrayList<>();
+        scoreStore = new ArrayList<>();
         //조회를 위해 점수리스트를 임의로 생성
-        scoreStore = List.of(
-            new Score(
-                sequence(INDEX_TYPE_SCORE),
-                "ST1",
-                "SU1",
-                new ArrayList<Integer>(List.of(1,2,3)),
-                new ArrayList<Integer>(List.of(96,86,92)),
-                new ArrayList<Character>(List.of('A','C','B'))
-            ),
-            new Score(
-                sequence(INDEX_TYPE_SCORE),
-                "ST1",
-                "SU2",
-                new ArrayList<Integer>(List.of(1,2,3)),
-                new ArrayList<Integer>(List.of(78,59,67)),
-                new ArrayList<Character>(List.of('D','N','F'))
-            ),
-            new Score(
-                sequence(INDEX_TYPE_SCORE),
-                "ST2",
-                "SU1",
-                new ArrayList<Integer>(List.of(1,2,3)),
-                new ArrayList<Integer>(List.of(78,59,67)),
-                new ArrayList<Character>(List.of('D','N','F'))
-            ),
-            new Score(
-                sequence(INDEX_TYPE_SCORE),
-                "ST2",
-                "SU2",
-                new ArrayList<Integer>(List.of(1,2,3)),
-                new ArrayList<Integer>(List.of(78,59,67)),
-                new ArrayList<Character>(List.of('D','N','F'))
-            )
-        );
+//        scoreStore = List.of(
+//            new Score(
+//                sequence(INDEX_TYPE_SCORE),
+//                "ST1",
+//                "SU1",
+//                new ArrayList<Integer>(List.of(1,2,3)),
+//                new ArrayList<Integer>(List.of(96,86,92)),
+//                new ArrayList<Character>(List.of('A','C','B'))
+//            ),
+//            new Score(
+//                sequence(INDEX_TYPE_SCORE),
+//                "ST1",
+//                "SU2",
+//                new ArrayList<Integer>(List.of(1,2,3)),
+//                new ArrayList<Integer>(List.of(78,59,67)),
+//                new ArrayList<Character>(List.of('D','N','F'))
+//            ),
+//            new Score(
+//                sequence(INDEX_TYPE_SCORE),
+//                "ST2",
+//                "SU1",
+//                new ArrayList<Integer>(List.of(1,2,3)),
+//                new ArrayList<Integer>(List.of(78,59,67)),
+//                new ArrayList<Character>(List.of('D','N','F'))
+//            ),
+//            new Score(
+//                sequence(INDEX_TYPE_SCORE),
+//                "ST2",
+//                "SU2",
+//                new ArrayList<Integer>(List.of(1,2,3)),
+//                new ArrayList<Integer>(List.of(78,59,67)),
+//                new ArrayList<Character>(List.of('D','N','F'))
+//            )
+//        );
 
     }
 
@@ -438,7 +438,7 @@ public class CampManagementApplication {
             return sc.next();
         }
         //이름이 같은 사람이 없다면 해당 수강생의 아이디 출력
-        else if(selectStudent.size()==1) return selectStudent.getFirst().getStudentId();
+        else if(selectStudent.size()==1) return selectStudent.get(0).getStudentId();
         //해당 이름을 가진 수강생이 없다면 NoName 출력
         else return "NoName";
     }
