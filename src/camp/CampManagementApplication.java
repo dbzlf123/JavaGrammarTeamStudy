@@ -604,11 +604,10 @@ public class CampManagementApplication {
         }
         System.out.println("수정할 회차를 입력해 주세요 ");//회차입력 - 범위벗어나는 숫자입력시 오류문자 내는 기능 넣기
         int round;
-        ScoreDatail scoreDatail = new ScoreDatail();
+
         while (true) {
             round = sc.nextInt();
             if (round > 0 && round < 11) {
-
                 //입력된 라운드 값을 넣어주고 나중에 스코어에 값넣을때 기준값으로 설정
                 break;
             } else {
@@ -617,11 +616,11 @@ public class CampManagementApplication {
         }
         //클래스에있는거 어떤건 불러와지고 어떤건 안되는지 모르겠음
         System.out.println("새로운 점수를 입력해 주세요 "); // 점수입력 - 범위벗어나는 숫자 입력시 오류 문자 내는 기능 넣기
-
         int updatedScore = sc.nextInt();
+        ScoreDatail scoreDatail = new ScoreDatail();
         if (scoreStore.size() == 0) { //해당 점수가 빈칸이 아니면 이라는뜻
             //점수가 저장되는곳이 어딘지 정확히 몰라서 대충 적어놓은코드
-            scoreDatail.add(round,updatedScore,subjectId);
+            scoreDatail.add(round,updatedScore,subjectName);
             //스코어에 넣기 어떻게 연결해야하는지 모르겠음
         } else {
             scoreDatail.remove(round);// 리스트에 해당위치 값 지우고 넣는거 하면 될거같음
