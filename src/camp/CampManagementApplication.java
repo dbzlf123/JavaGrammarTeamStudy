@@ -580,7 +580,7 @@ public class CampManagementApplication {
         String studentId = getStudentId(); // 관리할 수강생 고유 번호
         Student SI = null;
        for(int i = 0; i< studentStore.size(); i++) {
-           if (studentId.equals(studentStore.get(i))) { //학생 아이디값 같으면 진행
+           if (studentId.equals(studentStore.get(i).getStudentId())) { //학생 아이디값 같으면 진행
                SI = studentStore.get(i); //나중에 scoreDetail에 넣을 si 값을 찾은 id값을 대입
                break;
            }
@@ -594,7 +594,7 @@ public class CampManagementApplication {
         String inputSubjectId = sc.next(); //해당 과목 입력
         Subject SJ = null;
         for (int i = 0; i < subjectStore.size(); i++) {
-            if (inputSubjectId.equals(subjectStore.get(i))) {
+            if (inputSubjectId.equals(subjectStore.get(i).getSubjectId())) {
                 //입력된 과목과 불러온 과목 이름 같은지 대조
                 SJ = subjectStore.get(i);
                 //맞으면 해당 과목의 값을 넣고 다음으로 넘어감
@@ -608,20 +608,24 @@ public class CampManagementApplication {
 
         System.out.println("수정할 회차를 입력해 주세요 ");
         int round = sc.nextInt();
-        if(round>0 && round> 10){
-            System.out.println("선택한 회차 : " + round + "입니다");
-        }else{
-            System.out.println("잘못된 회차 입니다. (1 ~ 10)회차 까지 있습니다.");
+        while(true) {
+            if (round > 0 && round > 10) {
+                System.out.println("선택한 회차 : " + round + "입니다");
+                break;
+            } else {
+                System.out.println("잘못된 회차 입니다. (1 ~ 10)회차 까지 있습니다.");
+            }
         }
-
         System.out.println("새로운 점수를 입력해 주세요 "); // 점수입력 - 범위벗어나는 숫자 입력시 오류 문자 내는 기능 넣기
         int updatedScore = sc.nextInt();
-        ScoreDatail scoreDetail = null;
-        if(SI.getStudentId().equals(studentId) && SJ.getSubjectId().equals(inputSubjectId)){
-            scoreDetail.setScore(inputSubjectId,updatedScore);// 위 학생아이디와 과목아이디가 동일하면 진행
-        }
+        ScoreDatail scoreDetail;
         if(scoreDetail == null) {
             scoreDetail = new ScoreDatail(round,updatedScore,inputSubjectId);
+        }else{
+            //있는값을 없애고 추가하는방법
+            //그냥 대체하는방법?
+            scoreStore.get()
+            scoreDetail.setScore(inputSubjectId,updatedScore);
         }
 //            score.getScoreList().set(get(scoreIndex,scoreDetail))
         System.out.println("시험 점수를 수정합니다...");
