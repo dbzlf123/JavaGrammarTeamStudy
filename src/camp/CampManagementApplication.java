@@ -389,16 +389,14 @@ public class CampManagementApplication {
                 break;
             }
         }
-
         if (!studentFound) {
             System.out.println("등록되지 않은 학생입니다.");
             return;
         }
-
         System.out.println("시험 점수를 등록합니다...");
 
+        // 필수/선택 과목타입 선택
         while (true) {
-            // 필수/선택 과목타입 선택
             System.out.print("필수/선택 과목인지 선택하세요.(필수 : 1, 선택 : 2을 입력하세요)\n입력 : ");
             int subType = sc.nextInt();
             sc.nextLine(); // 값 넘어가는 부분 수정
