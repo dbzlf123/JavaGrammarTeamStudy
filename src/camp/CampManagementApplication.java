@@ -606,14 +606,20 @@ public class CampManagementApplication {
             return; //오류
         }
 
-        System.out.println("수정할 회차를 입력해 주세요 ");
-        int round = sc.nextInt();
+
         while(true) {
-            if (round > 0 && round > 10) {
-                System.out.println("선택한 회차 : " + round + "입니다");
+            System.out.println("수정할 회차를 입력해 주세요 ");
+            int inputRound = sc.nextInt();
+            if(sc.hasNextInt()) { // 사용자가 정수를 입력했는지 확인
+                inputRound = sc.nextInt();
+            if (inputRound > 0 && inputRound > 10) {
+                System.out.println("선택한 회차 : " + inputRound + "입니다");
                 break;
             } else {
                 System.out.println("잘못된 회차 입니다. (1 ~ 10)회차 까지 있습니다.");
+            }
+            }else {
+                    System.out.println("잘못된 입력입니다. 숫자를 입력해 주세요.");
             }
         }
         System.out.println("새로운 점수를 입력해 주세요 "); // 점수입력 - 범위벗어나는 숫자 입력시 오류 문자 내는 기능 넣기
