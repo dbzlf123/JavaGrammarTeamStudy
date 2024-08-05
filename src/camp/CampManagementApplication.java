@@ -618,8 +618,10 @@ public class CampManagementApplication {
         int updatedScore = sc.nextInt();
         ScoreDatail scoreDetail = null;
         if(SI.getStudentId().equals(studentId) && SJ.getSubjectId().equals(inputSubjectId)){
-            scoreDetail.setScore(round,updatedScore,subjectIndex);// 위 학생아이디와 과목아이디가 동일하면 진행
-            setScore(si,updatedScore);
+            scoreDetail.setScore(inputSubjectId,updatedScore);// 위 학생아이디와 과목아이디가 동일하면 진행
+        }
+        if(scoreDetail == null) {
+            scoreDetail = new ScoreDatail(round,updatedScore,inputSubjectId);
         }
 //            score.getScoreList().set(get(scoreIndex,scoreDetail))
         System.out.println("시험 점수를 수정합니다...");
