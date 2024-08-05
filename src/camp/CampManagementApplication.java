@@ -221,7 +221,7 @@ public class CampManagementApplication {
             System.out.println("수강생 관리 실행 중...");
             System.out.println("1. 수강생 등록");
             System.out.println("2. 수강생 목록 조회");
-            System.out.println("3. 수강생 정보 수정");
+            System.out.println("5. 수강생 정보 수정");
             System.out.println("7. 수강생 삭제");
             System.out.println("8. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
@@ -230,7 +230,7 @@ public class CampManagementApplication {
             switch (input) {
                 case 1 -> createStudent(); // 수강생 등록
                 case 2 -> inquireStudent(); // 수강생 목록 조회
-                case 3 -> updateStudent(); // 수강생 정보 수정
+                case 5 -> updateStudent(); // 수강생 정보 수정
                 case 7 -> removeStudent(); // 수강생 삭제
                 case 8 -> flag = false; // 메인 화면 이동
                 default -> {
@@ -338,6 +338,7 @@ public class CampManagementApplication {
                 if (insertNumber.equals(studentStore.get(i).getStudentId())) {
                     System.out.println("고유번호: " + studentStore.get(i).getStudentId() + ", 이름: " + studentStore.get(i).getStudentName()
                             + ", 상태: " + studentStore.get(i).getStatus());
+                    System.out.println();
                     bFindName = true;
                     break;
                 }
@@ -350,31 +351,53 @@ public class CampManagementApplication {
             System.out.print("번호를 입력해주세요 1.이름 2.상태 : ");
             int updateNumber = sc.nextInt();
 
-            if (updateNumber == 1) { //이름 변경
+            // 1. 이름 변경 선택
+            if (updateNumber == 1) {
                 System.out.print("무엇으로 이름을 변경하시겠습니까? : ");
                 String updateName = sc.next();
 
-                //studentStore 에서 입력한 이름값이랑 같은 것을 updateName 이름으로 바꿔줘!
+                //입력한 고유번호(insertNumber)의 수강생의 이름을 setStudentName 메서드 이용해 updateName 으로 바꿔줘!
                 for (int i = 0; i < studentStore.size(); i++) {
                     if (insertNumber.equals(studentStore.get(i).getStudentId())) {
+                        //입력한 이름이 기존 이름과 같을 때
+                        if(updateName.equals(studentStore.get(i).getStudentName())) {
+                            System.out.println("기존의 이름과 동일합니다. \n되돌아갑니다!");
+                            break;
+                        }
                         studentStore.get(i).setStudentName(updateName);
+
+                        //변경된 수강생 내역 출력
+                        System.out.println("고유번호: " + studentStore.get(i).getStudentId() + ", 이름: " + studentStore.get(i).getStudentName()
+                                + ", 상태: " + studentStore.get(i).getStatus());
+                        System.out.println("\n수강생 정보 수정 성공!");
                     }
                 }
-                System.out.println("\n수강생 정보 수정 성공!");
                 break;
 
-            } else if (updateNumber == 2) { //상태 변경
-                System.out.print("무엇으로 상태를 변경하시겠습니까? : ");
+            // 2. 상태 변경 선택
+            } else if (updateNumber == 2) {
+                System.out.print("무엇으로 상태를 변경하시겠습니까? (Green/Yellow/Red) : ");
                 String updateStatus = sc.next();
 
+                //입력한 고유번호(insertNumber)의 수강생의 상태를 setStatus 메서드 이용해 updateStatus 으로 바꿔줘!
                 for (int i = 0; i < studentStore.size(); i++) {
                     if (insertNumber.equals(studentStore.get(i).getStudentId())) {
+                        //입력한 상태가 기존 상태와 같을 때
+                        if(updateStatus.equals(studentStore.get(i).getStatus().name())) {
+                            System.out.println("기존의 상태와 동일합니다. \n되돌아갑니다!");
+                            break;
+                        }
                         studentStore.get(i).setStatus(Status.valueOf(updateStatus));
+
+                        //변경한 수강생 내역 출력
+                        System.out.println("고유번호: " + studentStore.get(i).getStudentId() + ", 이름: " + studentStore.get(i).getStudentName()
+                                + ", 상태: " + studentStore.get(i).getStatus());
+                        System.out.println("\n수강생 정보 수정 성공!");
                     }
                 }
-                System.out.println("\n수강생 정보 수정 성공!");
                 break;
 
+            // 1 이름, 2 상태 이외 선택 시
             } else {
                 System.out.println("잘못된 입력입니다.\n되돌아갑니다!");
                 break;
