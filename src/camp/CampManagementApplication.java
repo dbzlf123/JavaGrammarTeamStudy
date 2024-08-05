@@ -206,8 +206,13 @@ public class CampManagementApplication {
             System.out.println("2. 점수 관리");
             System.out.println("3. 프로그램 종료");
             System.out.print("관리 항목을 선택하세요...");
-            int input = sc.nextInt();
-
+            int input = 0;
+            try{
+                input = sc.nextInt();
+            }catch (Exception e) {
+                System.out.println("숫자로 입력해주세요");
+                sc.nextLine();
+            }
             switch (input) {
                 case 1 -> displayStudentView(); // 수강생 관리
                 case 2 -> displayScoreView(); // 점수 관리
@@ -217,6 +222,7 @@ public class CampManagementApplication {
                     Thread.sleep(2000);
                 }
             }
+
         }
         System.out.println("프로그램을 종료합니다.");
     }
@@ -232,7 +238,13 @@ public class CampManagementApplication {
             System.out.println("7. 수강생 삭제");
             System.out.println("8. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
-            int input = sc.nextInt();
+            int input = 0;
+            try{
+                input = sc.nextInt();
+            }catch (Exception e) {
+                System.out.println("숫자로 입력해주세요");
+                sc.nextLine();
+            }
 
             switch (input) {
                 case 1 -> createStudent(); // 수강생 등록
@@ -430,7 +442,13 @@ public class CampManagementApplication {
             System.out.println("7. 특정 상태 수강생들의 필수 과목 평균 등급 조회");
             System.out.println("8. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
-            int input = sc.nextInt();
+            int input = 0;
+            try{
+                input = sc.nextInt();
+            }catch (Exception e) {
+                System.out.println("숫자로 입력해주세요");
+                sc.nextLine();
+            }
 
             switch (input) {
                 case 1 -> createScore(); // 수강생의 과목별 시험 회차 및 점수 등록
