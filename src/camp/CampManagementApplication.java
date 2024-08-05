@@ -572,60 +572,56 @@ public class CampManagementApplication {
     }
 
 
-    // 수강생의 과목별 회차 점수 수정
+    // 수강생의 과목별 회차 점수 수정//1. 해당학생 조회하고 없는 번호면 오류 텍스트 출력하기
+    //        //2. 해당학생의 수정할 과목 입력하고 조회 후 없으면 오류 텍스트 출력하기
+    //        //3. 수정할 회차 입력하고 조회 후 없으면 오류 텍스트 출력하기
+    //        //4. 점수 수정하는 기능 구현 점수가 없으면 바로 추가해주는것도 넣기
     private static void updateRoundScoreBySubject()  {
         String studentId = getStudentId(); // 관리할 수강생 고유 번호
-        System.out.println("점수 수정을 원하는 학생의 id를 입력하세요.");
-        String studentId2 = String.valueOf(sc.nextInt()); //id 입력
-        //1. 해당학생 조회하고 없는 번호면 오류 텍스트 출력하기
-        //2. 해당학생의 수정할 과목 입력하고 조회 후 없으면 오류 텍스트 출력하기
-        //3. 수정할 회차 입력하고 조회 후 없으면 오류 텍스트 출력하기
-        //4. 점수 수정하는 기능 구현  점수가 없으면 바로 추가해주는것도 넣기
-        while (true) { //studentStore 배열의 id 와 입력할 아이디가 같은지 대조
-            if (studentId2.equals(studentId)) {
-                studentId2 = studentId; // 맞으면 진행
-                break;
-            } else {
-                System.out.println("해당 학생을 찾을 수 없습니다."); //id 값이 배열에 없으면 오류문 나타냄
-            }
-        }
+        Student SI = null;
+       for(int i = 0; i< studentStore.size(); i++) {
+           if (studentId.equals(studentStore.get(i))) { //학생 아이디값 같으면 진행
+               SI = studentStore.get(i); //나중에 scoreDetail에 넣을 si 값을 찾은 id값을 대입
+               break;
+           }
+       }
+       if(SI == null){
+           System.out.println("해당 학생을 찾을 수 없습니다.");
+           return; //오류시 끝내기
+       }
 
         System.out.println("수정할 과목 이름을 입력하세요.");
-        String subjectName = sc.next(); //해당 과목 입력
-        for (int i = 0; i < subjectStore.toArray().length; i++) {
-            if (subjectName.equals(subjectStore.get(i))) {
+        String inputSubjectId = sc.next(); //해당 과목 입력
+        Subject SJ = null;
+        for (int i = 0; i < subjectStore.size(); i++) {
+            if (inputSubjectId.equals(subjectStore.get(i))) {
                 //입력된 과목과 불러온 과목 이름 같은지 대조
-                subjectName = subjectStore.get(i);
+                SJ = subjectStore.get(i);
                 //맞으면 해당 과목의 값을 넣고 다음으로 넘어감
                 break;
-            } else {
-                System.out.println("해당 과목을 찾을 수 없습니다.");
             }
         }
-        System.out.println("수정할 회차를 입력해 주세요 ");//회차입력 - 범위벗어나는 숫자입력시 오류문자 내는 기능 넣기
-        int round;
+        if(SJ == null) {
+            System.out.println("해당 과목을 찾을 수 없습니다.");
+            return; //오류
+        }
 
-        while (true) {
-            round = sc.nextInt();
-            if (round > 0 && round < 11) {
-                //입력된 라운드 값을 넣어주고 나중에 스코어에 값넣을때 기준값으로 설정
-                break;
-            } else {
-                System.out.println("해당 회차을 찾을 수 없습니다.");
-            }
+        System.out.println("수정할 회차를 입력해 주세요 ");
+        int round = sc.nextInt();
+        if(round>0 && round> 10){
+            System.out.println("선택한 회차 : " + round + "입니다");
+        }else{
+            System.out.println("잘못된 회차 입니다. (1 ~ 10)회차 까지 있습니다.");
         }
-        //클래스에있는거 어떤건 불러와지고 어떤건 안되는지 모르겠음
+
         System.out.println("새로운 점수를 입력해 주세요 "); // 점수입력 - 범위벗어나는 숫자 입력시 오류 문자 내는 기능 넣기
         int updatedScore = sc.nextInt();
-        ScoreDatail scoreDatail = new ScoreDatail();
-        if (scoreStore.size() == 0) { //해당 점수가 빈칸이 아니면 이라는뜻
-            //점수가 저장되는곳이 어딘지 정확히 몰라서 대충 적어놓은코드
-            scoreDatail.add(round,updatedScore,subjectName);
-            //스코어에 넣기 어떻게 연결해야하는지 모르겠음
-        } else {
-            scoreDatail.remove(round);// 리스트에 해당위치 값 지우고 넣는거 하면 될거같음
-            scoreDatail.add(updatedScore);
+        ScoreDatail scoreDetail = null;
+        if(SI.getStudentId().equals(studentId) && SJ.getSubjectId().equals(inputSubjectId)){
+            scoreDetail.setScore(round,updatedScore,subjectIndex);// 위 학생아이디와 과목아이디가 동일하면 진행
+            setScore(si,updatedScore);
         }
+//            score.getScoreList().set(get(scoreIndex,scoreDetail))
         System.out.println("시험 점수를 수정합니다...");
         System.out.println("\n점수 수정 성공!");
     }
