@@ -396,8 +396,15 @@ public class CampManagementApplication {
         //만약 있다면
         if(selectScore.isPresent()) {
             List<ScoreDatail> scoreList = selectScore.get().getScoreList();
-            for (ScoreDatail score : scoreList) System.out.println(score.getRound()+"회차 : "+score.getGrade());
-            System.out.println("\n등급 조회 성공!");
+            //점수가 등록된 경우 점수 출력
+            if(!scoreList.isEmpty()){
+                for (ScoreDatail score : scoreList) System.out.println(score.getRound()+"회차 : "+score.getGrade());
+                System.out.println("\n등급 조회 성공!");
+            }
+            //점수가 등록되지 않는 경우
+            else {
+                System.out.println("\n 해당과목에 등록된 점수가 없습니다");
+            }
         }else {
             System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
         }
@@ -456,21 +463,28 @@ public class CampManagementApplication {
             .findFirst();
         if(selectScore.isPresent()) {
             Score score = selectScore.get();
-            //해당하는 과목의 subjectType 구하기("필수 or 선택)
-            String subjectType = subjectStore.stream()
-                .filter((Subject subject) -> subject.getSubjectId().equals(subjectId))
-                .findFirst().get().getSubjectType();
-            //점수의 평균값 얻기
-            List<ScoreDatail> scoreList = score.getScoreList();
-            int sum = 0;
-            for(ScoreDatail scoreDetail:scoreList) {
-                sum+=scoreDetail.getScore();
-            }
-            double avgScore= sum/scoreList.size();
-            // 평균 점수를 등급으로 바꿔줌
-            System.out.println("이 과목의 평균등급은 "+ ScoreDatail.changeGrade(subjectType,avgScore)+"입니다.");
+            //점수가 등록된 경우
+            if(!score.getScoreList().isEmpty()) {
+                //해당하는 과목의 subjectType 구하기("필수 or 선택)
+                String subjectType = subjectStore.stream()
+                    .filter((Subject subject) -> subject.getSubjectId().equals(subjectId))
+                    .findFirst().get().getSubjectType();
+                //점수의 평균값 얻기
+                List<ScoreDatail> scoreList = score.getScoreList();
+                int sum = 0;
+                for (ScoreDatail scoreDetail : scoreList) {
+                    sum += scoreDetail.getScore();
+                }
+                double avgScore = sum / scoreList.size();
+                // 평균 점수를 등급으로 바꿔줌
+                System.out.println("이 과목의 평균등급은 " + ScoreDatail.changeGrade(subjectType, avgScore) + "입니다.");
 
-            System.out.println("\n등급 조회 성공!");
+                System.out.println("\n등급 조회 성공!");
+                //점수가 등록되지 않은 경우
+            }else {
+                System.out.println("\n 해당과목에 등록된 점수가 없습니다");
+            }
+            //아얘 score값이 없는 경우
         }else {
             System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
         }
