@@ -26,4 +26,10 @@ public class Student {
 
     public void setStatus(Status status) { this.status = status; }
 
+    // Setter
+    public void setStudentName(String updateName) {
+        studentName = updateName;
+    }
+
 }
+
