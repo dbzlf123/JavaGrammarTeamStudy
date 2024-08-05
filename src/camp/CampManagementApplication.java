@@ -207,7 +207,7 @@ public class CampManagementApplication {
             System.out.println("3. 프로그램 종료");
             System.out.print("관리 항목을 선택하세요...");
             int input = 0;
-            try{
+            try{    //nextInt에 문자열이 입력됬을때를 대비
                 input = sc.nextInt();
             }catch (Exception e) {
                 System.out.println("숫자로 입력해주세요");
@@ -239,7 +239,7 @@ public class CampManagementApplication {
             System.out.println("8. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
             int input = 0;
-            try{
+            try{   //nextInt에 문자열이 입력됬을때를 대비
                 input = sc.nextInt();
             }catch (Exception e) {
                 System.out.println("숫자로 입력해주세요");
@@ -443,7 +443,7 @@ public class CampManagementApplication {
             System.out.println("8. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
             int input = 0;
-            try{
+            try{    //nextInt에 문자열이 입력됬을때를 대비
                 input = sc.nextInt();
             }catch (Exception e) {
                 System.out.println("숫자로 입력해주세요");
