@@ -7,13 +7,10 @@ public class Student {
     private String studentName;
     private Status status;
 
-    private List<Subject> subjectStore;
-
-    public Student(String studentId, String studentName, Status status, List<Subject> subjectStore) {
+    public Student(String studentId, String studentName, Status status) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.status = status;
-        this.subjectStore = subjectStore;
     }
 
     // Getter
@@ -28,8 +25,5 @@ public class Student {
     public Status getStatus() { return status; }
 
     public void setStatus(Status status) { this.status = status; }
-    public List<Subject> getSubjectStore() {
-        return subjectStore;
-    }
 
 }
