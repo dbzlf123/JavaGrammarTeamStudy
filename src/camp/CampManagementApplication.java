@@ -401,7 +401,7 @@ public class CampManagementApplication {
             // 필수/선택 과목타입 선택
             System.out.print("필수/선택 과목인지 선택하세요.(필수 : 1, 선택 : 2을 입력하세요)\n입력 : ");
             int subType = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // 값 넘어가는 부분 수정
             // 필수 과목 조건문
             if (subType == 1) {
                 System.out.println("필수과목 List");
@@ -412,7 +412,7 @@ public class CampManagementApplication {
                     }
                 }
                 System.out.print("과목 이름을 입력하세요: ");
-                String subjectName = sc.next();
+                String subjectName = sc.nextLine();
                 boolean subjectFound = false; // 과목 확인용 선언.
                 for (int i = 0; i < subjectStore.size(); i++) {
                     Subject subject = subjectStore.get(i);
@@ -421,10 +421,11 @@ public class CampManagementApplication {
                         subjectFound = true;
                         System.out.println("점수를 등록할 시험의 회차를 선택하세요...(1~10 입력)");
                         int round = sc.nextInt();
+                        sc.nextLine(); // 값 넘어가는 부분 수정
                         if (round > 0 && round < 11) {
                             System.out.println("과목점수를 입력하세요.");
                             int scoreInput = sc.nextInt();
-                            sc.nextLine();
+                            sc.nextLine(); // 값 넘어가는 부분 수정
                             // char grade = ScoreDatail.changeGrade(SUBJECT_TYPE_MANDATORY, scoreInput);
                             scoreList.add(new ScoreDatail(round, scoreInput, SUBJECT_TYPE_MANDATORY));
                             Score score = new Score(sequence(INDEX_TYPE_SCORE), studentId, subjectId, scoreList);
@@ -449,7 +450,7 @@ public class CampManagementApplication {
                     }
                 }
                 System.out.print("과목 이름을 입력하세요: ");
-                String subjectName = sc.next();
+                String subjectName = sc.nextLine();
                 boolean subjectFound = false;
                 for (int i = 0; i < subjectStore.size(); i++) {
                     Subject subject = subjectStore.get(i);
@@ -458,10 +459,11 @@ public class CampManagementApplication {
                         subjectFound = true;
                         System.out.println("점수를 등록할 시험의 회차를 선택하세요...(1~10 입력)");
                         int round = sc.nextInt();
+                        sc.nextLine(); // 값 넘어가는 부분 수정
                         if (round > 0 && round < 11) {
                             System.out.println("과목점수를 입력하세요.");
                             int scoreInput = sc.nextInt();
-                            sc.nextLine();
+                            sc.nextLine(); // 값 넘어가는 부분 수정
                             // char grade = ScoreDatail.changeGrade(SUBJECT_TYPE_CHOICE, scoreInput);
                             scoreList.add(new ScoreDatail(round, scoreInput, SUBJECT_TYPE_CHOICE));
                             Score score = new Score(sequence(INDEX_TYPE_SCORE), studentId, subjectId, scoreList);
@@ -480,7 +482,7 @@ public class CampManagementApplication {
             }
 
             System.out.print("계속 점수를 등록하시겠습니까? Yes or No\n입력 : ");
-            String choice = sc.next();
+            String choice = sc.nextLine();
             if (choice.equalsIgnoreCase("No")) break;
         }
         System.out.println("\n점수 등록 성공!");
