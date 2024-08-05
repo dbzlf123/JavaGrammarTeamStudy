@@ -340,8 +340,8 @@ public class CampManagementApplication {
         System.out.println("\n수강생 목록을 조회합니다...");
 
         // studentStore 리스트에서 학생 정보 받아서 목록 출력 + 순서대로 번호 부여
-        for(int i = 0; i < studentStore.size(); i++) {
-            System.out.println((i+1) +". 고유번호: "+ studentStore.get(i).getStudentId() + ", 이름: " +studentStore.get(i).getStudentName()
+        for (int i = 0; i < studentStore.size(); i++) {
+            System.out.println((i + 1) + ". 고유번호: " + studentStore.get(i).getStudentId() + ", 이름: " + studentStore.get(i).getStudentName()
                     + ", 상태: " + studentStore.get(i).getStatus());
         }
         System.out.println("\n수강생 목록 조회 성공!");
@@ -352,7 +352,7 @@ public class CampManagementApplication {
     private static void updateStudent() {
         System.out.println("\n수강생 정보를 수정합니다...");
         // 수강생의 고유번호를 받아 이름, 상태를 수정
-        while(true) {
+        while (true) {
             System.out.print("수강생의 고유번호 입력 : ");
             String insertNumber = sc.next();
             boolean bFindName = false;
@@ -372,8 +372,13 @@ public class CampManagementApplication {
             }
             System.out.println("무엇을 변경하시겠습니까?");
             System.out.print("번호를 입력해주세요 1.이름 2.상태 : ");
-            int updateNumber = sc.nextInt();
-
+            int updateNumber = 0;
+            try {
+                updateNumber = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("숫자로 입력해주세요");
+                sc.nextLine();
+            }
             // 1. 이름 변경 선택
             if (updateNumber == 1) {
                 System.out.print("무엇으로 이름을 변경하시겠습니까? : ");
@@ -383,7 +388,7 @@ public class CampManagementApplication {
                 for (int i = 0; i < studentStore.size(); i++) {
                     if (insertNumber.equals(studentStore.get(i).getStudentId())) {
                         //입력한 이름이 기존 이름과 같을 때
-                        if(updateName.equals(studentStore.get(i).getStudentName())) {
+                        if (updateName.equals(studentStore.get(i).getStudentName())) {
                             System.out.println("기존의 이름과 동일합니다. \n되돌아갑니다!");
                             break;
                         }
@@ -401,12 +406,16 @@ public class CampManagementApplication {
             } else if (updateNumber == 2) {
                 System.out.print("무엇으로 상태를 변경하시겠습니까? (Green/Yellow/Red) : ");
                 String updateStatus = sc.next();
-
+                //updateStatus 이 Green/Yellow/Red 이외의 것을 입력했을 때
+                if (! (updateStatus.equals("Green")|| updateStatus.equals("Yellow") || updateStatus.equals("Red"))) {
+                    System.out.println("입력하신 상태값은 없습니다. \n되돌아갑니다!");
+                    break;
+                }
                 //입력한 고유번호(insertNumber)의 수강생의 상태를 setStatus 메서드 이용해 updateStatus 으로 바꿔줘!
                 for (int i = 0; i < studentStore.size(); i++) {
                     if (insertNumber.equals(studentStore.get(i).getStudentId())) {
                         //입력한 상태가 기존 상태와 같을 때
-                        if(updateStatus.equals(studentStore.get(i).getStatus().name())) {
+                        if (updateStatus.equals(studentStore.get(i).getStatus().name())) {
                             System.out.println("기존의 상태와 동일합니다. \n되돌아갑니다!");
                             break;
                         }
@@ -420,7 +429,7 @@ public class CampManagementApplication {
                 }
                 break;
 
-            // 1 이름, 2 상태 이외 선택 시
+                // 1 이름, 2 상태 이외 선택 시
             } else {
                 System.out.println("잘못된 입력입니다.\n되돌아갑니다!");
                 break;
