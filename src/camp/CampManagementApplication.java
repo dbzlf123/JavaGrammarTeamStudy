@@ -384,41 +384,44 @@ public class CampManagementApplication {
         String subjectId = sc.next(); //해당 과목 입력
 
         for (int i = 0; i < subjectStore.toArray().length; i++) {
-            if (subjectId.equals(subjectStore.get(i))) {//적은 과목과 불러온 과목 이름 같은지 대조
+            if (subjectId.equals(subjectStore.get(i))) {
+                //입력된 과목과 불러온 과목 이름 같은지 대조
                 subjectId = String.valueOf(subjectStore.get(i));
+                //맞으면 해당 과목의 값을 넣고 다음으로 넘어감
                 break;
             } else {
                 System.out.println("해당 과목을 찾을 수 없습니다.");
             }
         }
         System.out.println("수정할 회차를 입력해 주세요 ");//회차입력 - 범위벗어나는 숫자입력시 오류문자 내는 기능 넣기
+
+        int round;
         while (true) {
-            int sl = new Score roundStore(studentId, subjectId);
-            int round = sc.nextInt();
-            if (Objects.equals(round, sl)) {
-                sl = round;
+            round = sc.nextInt();
+            if (round > 0 && round < 11) {
+                seq = toString(round);
+                //입력된 라운드 값을 넣어주고 나중에 스코어에 값넣을때 기준값으로 설정
+                break;
             } else {
                 System.out.println("해당 회차을 찾을 수 없습니다.");
             }
-            System.out.println("새로운 점수를 입력해 주세요 "); // 점수입력 - 범위벗어나는 숫자 입력시 오류 문자 내는 기능 넣기
-            Score score = new Score(String seq, String studentId, String subjectId);
-            int updatedScore = sc.nextInt();
-            if (scoreStore != null) {
-                scoreList.remove(round);
-                scoreList.add(updatedScore);
-                // 조건해서 맞으면 해당 위치에 점수 넣기
-            } else {
-                score.add(updatedScore, studentId2, subjectId); //스코어에 넣기 어떻게 연결해야하는지 모르겠음
-            }
         }
-        //점수 없으면 그냥 그대로 점수 추가하기 기능 넣기
+        Score score = new Score(seq, studentId,subjectId);
+        //클래스에있는거 어떤건 불러와지고 어떤건 안되는지 모르겠음
+        System.out.println("새로운 점수를 입력해 주세요 "); // 점수입력 - 범위벗어나는 숫자 입력시 오류 문자 내는 기능 넣기
+
+        int updatedScore = sc.nextInt();
+        if (scoreStore() != null) { //해당 점수가 빈칸이 아니면 이라는뜻
+            //점수가 저장되는곳이 어딘지 정확히 몰라서 대충 적어놓은코드
+            ScoreDetail.remove(score);// 리스트에 해당위치 값 지우고 넣는거 하면 될거같음
+            scoreList.add(updatedScore);
+        } else {
+            score.add(updatedScore, studentId2, subjectId);
+            //스코어에 넣기 어떻게 연결해야하는지 모르겠음
+        }
 
         System.out.println("시험 점수를 수정합니다...");
         System.out.println("\n점수 수정 성공!");
-        // 기능 구현 (수정할 과목 및 회차, 점수)
-
-        // 기능 구현
-
     }
 
     // 수강생의 특정 과목 회차별 등급 조회
