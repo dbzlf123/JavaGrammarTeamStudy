@@ -376,8 +376,8 @@ public class CampManagementApplication {
 
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() {
+
         // scoredetail 리스트 선언.
-        List<ScoreDatail> scoreList = new ArrayList<>();
         String studentId = getStudentId();
         // 학생이름 출력
         boolean studentFound = false; // 미등록학생 확인용 선언.
@@ -411,6 +411,7 @@ public class CampManagementApplication {
                 }
                 System.out.print("과목 이름을 입력하세요: ");
                 String subjectName = sc.nextLine();
+
                 boolean subjectFound = false; // 과목 확인용 선언.
                 for (int i = 0; i < subjectStore.size(); i++) {
                     Subject subject = subjectStore.get(i);
@@ -421,24 +422,36 @@ public class CampManagementApplication {
                         int round = sc.nextInt();
                         sc.nextLine(); // 값 넘어가는 부분 수정
 
-                        // 이미 등록된 회차 확인
-                        boolean roundCheck = false;
-                        for (int j = 0; j < scoreList.size(); j++) {
-                            if (scoreList.get(i).getRound() == round) {
-                                roundCheck = true;
-                                break;
+                        boolean roundFound = false;
+                        for (int j = 0; j < scoreStore.size(); j++) {
+                            Score score = scoreStore.get(j);
+                            if (score.getStudentId().equals(studentId) && score.getSubjectId().equals(subjectId)) {
+                                for (ScoreDatail scoreDatail : score.getScoreList()) {
+                                    if (scoreDatail.getRound() == round) {
+                                        roundFound = true;
+                                        break;
+                                    }
+                                }
                             }
+                            if (roundFound) break;
                         }
-                        if (roundCheck) {
+                        if (roundFound) {
                             System.out.println("이미 등록된 회차입니다. 다른 회차를 선택해주세요.");
                         } else {
                             if (round > 0 && round < 11) {
                                 System.out.println("과목점수를 입력하세요.");
                                 int scoreInput = sc.nextInt();
                                 sc.nextLine(); // 값 넘어가는 부분 수정
-                                scoreList.add(new ScoreDatail(round, scoreInput, getSubjectTypeByName(subjectName)));
-                                Score score = new Score(sequence(INDEX_TYPE_SCORE), studentId, subjectId, scoreList);
-                                scoreStore.add(score);
+                                if (scoreInput >= 0 && scoreInput < 101) {
+                                    for (Score score : scoreStore) {
+                                        if (score.getStudentId().equals(studentId) && score.getSubjectId().equals(subjectId)) {
+                                            score.addScore(new ScoreDatail(round, scoreInput, getSubjectTypeByName(subjectName)));
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    System.out.println("잘못된 입력값입니다. (1~100까지의 점수만 입력가능)");
+                                }
                             } else {
                                 System.out.println("잘못된 입력값입니다.(1~10까지의 회차만 입력가능)");
                             }
@@ -461,7 +474,8 @@ public class CampManagementApplication {
                 }
                 System.out.print("과목 이름을 입력하세요: ");
                 String subjectName = sc.nextLine();
-                boolean subjectFound = false;
+
+                boolean subjectFound = false; // 과목 확인용 선언.
                 for (int i = 0; i < subjectStore.size(); i++) {
                     Subject subject = subjectStore.get(i);
                     if (subject.getSubjectName().equals(subjectName)) {
@@ -470,24 +484,37 @@ public class CampManagementApplication {
                         System.out.println("점수를 등록할 시험의 회차를 선택하세요...(1~10 입력)");
                         int round = sc.nextInt();
                         sc.nextLine(); // 값 넘어가는 부분 수정
-                        // 이미 등록된 회차 확인
-                        boolean roundCheck = false;
-                        for (int j = 0; j < scoreList.size(); j++) {
-                            if (scoreList.get(j).getRound() == round) {
-                                roundCheck = true;
-                                break;
+
+                        boolean roundFound = false;
+                        for (int j = 0; j < scoreStore.size(); j++) {
+                            Score score = scoreStore.get(j);
+                            if (score.getStudentId().equals(studentId) && score.getSubjectId().equals(subjectId)) {
+                                for (ScoreDatail scoreDatail : score.getScoreList()) {
+                                    if (scoreDatail.getRound() == round) {
+                                        roundFound = true;
+                                        break;
+                                    }
+                                }
                             }
+                            if (roundFound) break;
                         }
-                        if (roundCheck) {
+                        if (roundFound) {
                             System.out.println("이미 등록된 회차입니다. 다른 회차를 선택해주세요.");
                         } else {
                             if (round > 0 && round < 11) {
                                 System.out.println("과목점수를 입력하세요.");
                                 int scoreInput = sc.nextInt();
                                 sc.nextLine(); // 값 넘어가는 부분 수정
-                                scoreList.add(new ScoreDatail(round, scoreInput, getSubjectTypeByName(subjectName)));
-                                Score score = new Score(sequence(INDEX_TYPE_SCORE), studentId, subjectId, scoreList);
-                                scoreStore.add(score);
+                                if (scoreInput >= 0 && scoreInput < 101) {
+                                    for (Score score : scoreStore) {
+                                        if (score.getStudentId().equals(studentId) && score.getSubjectId().equals(subjectId)) {
+                                            score.addScore(new ScoreDatail(round, scoreInput, getSubjectTypeByName(subjectName)));
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    System.out.println("잘못된 입력값입니다. (1~100까지의 점수만 입력가능)");
+                                }
                             } else {
                                 System.out.println("잘못된 입력값입니다.(1~10까지의 회차만 입력가능)");
                             }
@@ -500,6 +527,7 @@ public class CampManagementApplication {
                 }
             } else {
                 System.out.println("잘못된 입력입니다. 1 또는 2를 입력해주세요.");
+                break;
             }
 
             System.out.print("계속 점수를 등록하시겠습니까? Yes or No\n입력 : ");
