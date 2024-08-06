@@ -632,9 +632,9 @@ public class CampManagementApplication {
                     ScoreDatail updatedRound = new ScoreDatail(inputRound, updatedScore, SJ.getSubjectType()); //새로운 다타일 생성
                     scoreStore.get(i).addScore(updatedRound);
                 } else { //r ==inputRound 가 됐으면 해당 스코어값을 수정하는 코드
-                    for(int k =0; k< Sl.size(); k++){ //Sl의 k위치의 라운드 값과 r의 입력된 라운드 값이 매치되는 위치를 찾고 그위치의 값을 setScore해준다.
-                        if(r == Sl.get(k).getRound()){
-                            Sl.get(k).setScore(SJ.getSubjectType(),updatedScore);
+                    for (int k = 0; k < Sl.size(); k++) { //Sl의 k위치의 라운드 값과 r의 입력된 라운드 값이 매치되는 위치를 찾고 그위치의 값을 setScore해준다.
+                        if (r == Sl.get(k).getRound()) {
+                            Sl.get(k).setScore(SJ.getSubjectType(), updatedScore);
                         }
                     }
                 }
