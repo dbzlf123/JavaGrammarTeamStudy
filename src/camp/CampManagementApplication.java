@@ -737,12 +737,11 @@ public class CampManagementApplication {
 //        String subjectId = getSubjectId(); // 관리할 과목 고유 번호
         String subjectId = getSubjectIdByName();  //이름으로 과목 고유번호 입력
         // 기능 구현
+        getSubjectNameListByStudentId(studentId);
         System.out.println("회차별 등급을 조회합니다...");
         //해당 학생아이디와 과목아이디를 가진 점수를 찾아라
-        Optional<Score> selectScore = scoreStore.stream()
-                .filter((Score score) -> score.getStudentId().equals(studentId))
-                .filter((Score score) -> score.getSubjectId().equals(subjectId))
-                .findFirst();
+        Optional<Score> selectScore=GetScoreByStudentIdAndSubjectId(studentId,subjectId);
+
         //만약 있다면
         if (selectScore.isPresent()) {
             List<ScoreDetail> scoreList = selectScore.get().getScoreList();
@@ -758,7 +757,6 @@ public class CampManagementApplication {
                 System.out.println("\n 해당과목에 등록된 점수가 없습니다");
             }
         }else {
-
             System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
         }
     }
@@ -816,6 +814,18 @@ public class CampManagementApplication {
         //존재하지 않는다면
         else return "NoName";
     }
+    private static String getSubjectNameById(String subjectId) {
+        //해당 id을 가진 수강생
+        Optional<Subject> selectSubject = subjectStore.stream()
+            .filter((Subject subject) -> subject.getSubjectId().equals(subjectId))
+            .findFirst();
+        //만약 해당 id를 가진 수강생이 존재한다면
+        if (selectSubject.isPresent()) {
+            return selectSubject.get().getSubjectName();
+        }
+        //존재하지 않는다면
+        else return "NoName";
+    }
 
     //한 과목의 평균 점수/등급 조회
     private static void inquireAverageGrade() {
@@ -826,10 +836,7 @@ public class CampManagementApplication {
         //기능 규현
         System.out.println("평균 등급을 조회합니다...");
         //해당 학생과 과목이 일치하는 점수 얻기
-        Optional<Score> selectScore = scoreStore.stream()
-                .filter((Score score) -> score.getStudentId().equals(studentId))
-                .filter((Score score) -> score.getSubjectId().equals(subjectId))
-                .findFirst();
+        Optional<Score> selectScore = GetScoreByStudentIdAndSubjectId(studentId, subjectId);
         if (selectScore.isPresent()) {
             Score score = selectScore.get();
 
@@ -1003,14 +1010,32 @@ public class CampManagementApplication {
             System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
         }
     }
-    //해당 수강생의 수업목록
-    public static void getSubjectListByStudentId(String studentId){
+    //해당 수강생의 수업과목 이름 목록  출력
+    public static void getSubjectNameListByStudentId(String studentId){
+        List<String> selectScore = scoreStore.stream()
+            .filter((Score score) -> score.getStudentId().equals(studentId))
+            .map(it -> it.getSubjectId()).toList();
+        if(selectScore.isEmpty()) {
+            System.out.println("해당 학생이 없습니다");
+        }else{
+            for(String subjectId: selectScore){
+                System.out.println(getSubjectNameById(subjectId));
+            }
+        }
+    }
+    //해당 수강생의 수업점수목록
+    public static List<Score> getSubjectListByStudentId(String studentId){
         List<Score> selectScore = scoreStore.stream()
             .filter((Score score) -> score.getStudentId().equals(studentId))
             .toList();
-        System.out.println(selectScore.toString());
+        return selectScore;
     }
-
-
-
+    //수강생아이디& 과목 아이디로 해당 score 찾기
+    public static Optional<Score> GetScoreByStudentIdAndSubjectId(String studentId, String subjectId){
+        Optional<Score> selectScore = scoreStore.stream()
+            .filter((Score score) -> score.getStudentId().equals(studentId))
+            .filter((Score score) -> score.getSubjectId().equals(subjectId))
+            .findFirst();
+        return selectScore;
+    }
 }
