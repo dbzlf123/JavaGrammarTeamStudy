@@ -232,4 +232,5 @@ public class Edit {
             System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
         }
     }
+
 }
