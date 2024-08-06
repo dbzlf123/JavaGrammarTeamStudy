@@ -826,7 +826,7 @@ public class CampManagementApplication {
                         }
                     }
                 }
-                if(found && totalScoreNums != 0) { //회차 돌았는데 0점 맞은 학생도 있을수있으니 나누기 연산 터지는거 대비해서 미리 0 체크
+                if(found && totalScoreNums != 0) { //회차 돌았는데 한번도 체크 못한 경우 예외처리
                     tempScore /= totalScoreNums;
                     System.out.println(student.getStudentName() + " 의 필수과목 평균 등급은 " + ScoreDatail.changeGrade("MANDATORY", tempScore)  + " 입니다.");
                 }
