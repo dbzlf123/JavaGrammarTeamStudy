@@ -267,7 +267,7 @@ public class CampManagementApplication {
                 case 3 -> Inquire.inquireStudentInfo(studentStore); //수강생 정보 조회
                 case 4 -> updateStudent(); // 수강생 정보 수정
                 case 5 -> Inquire.inquireStudentStatus(studentStore); // 상태별 수강생목록 조회
-                case 6 -> removeStudent(); // 수강생 삭제
+                case 6 -> Edit.removeStudent(); // 수강생 삭제
                 case 7 -> flag = false; // 메인 화면 이동
                 default -> {
                     System.out.println("잘못된 입력입니다.\n메인 화면 이동...");
