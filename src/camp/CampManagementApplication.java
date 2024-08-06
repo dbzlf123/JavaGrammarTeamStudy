@@ -1068,7 +1068,6 @@ public class CampManagementApplication {
                 System.out.println("해당하는 상태값은 없습니다.");
                 return;
         }
-
         boolean studentFound = false;
         for (Student student : studentStore) {
             if (student.getStatus() == status) {
