@@ -154,18 +154,6 @@ public class CampManagementApplication {
                                 new ScoreDetail(1, 78, Helper.getSubjectTypeByName("객체지향")),
                                 new ScoreDetail(2, 98, Helper.getSubjectTypeByName("객체지향")),
                                 new ScoreDetail(3, 86, Helper.getSubjectTypeByName("객체지향"))
-                        )
-
-                        )
-                ),
-                new Score(
-                        sequence(INDEX_TYPE_SCORE),
-                        "ST2",
-                        "SU2",
-                        new ArrayList<ScoreDetail>(Arrays.asList(
-                                new ScoreDetail(1, 78, Helper.getSubjectTypeByName("객체지향")),
-                                new ScoreDetail(2, 98, Helper.getSubjectTypeByName("객체지향")),
-                                new ScoreDetail(3, 86, Helper.getSubjectTypeByName("객체지향"))
                         ))
                 ),
                 new Score(
@@ -178,47 +166,6 @@ public class CampManagementApplication {
                                 new ScoreDetail(3, 86, Helper.getSubjectTypeByName("객체지향"))
                         ))
                 ),
-                new Score(
-                        sequence(INDEX_TYPE_SCORE),
-                        "ST1",
-                        "SU1",
-                        new ArrayList<ScoreDetail>(Arrays.asList(
-                                new ScoreDetail(1, 78, Helper.getSubjectTypeByName("Java")),
-                                new ScoreDetail(2, 98, Helper.getSubjectTypeByName("Java")),
-                                new ScoreDetail(3, 86, Helper.getSubjectTypeByName("Java"))
-                        ))
-                ),
-                new Score(
-                        sequence(INDEX_TYPE_SCORE),
-                        "ST1",
-                        "SU2",
-                        new ArrayList<ScoreDetail>(Arrays.asList(
-                                new ScoreDetail(1, 96, Helper.getSubjectTypeByName("객체지향")),
-                                new ScoreDetail(2, 98, Helper.getSubjectTypeByName("객체지향")),
-                                new ScoreDetail(3, 92, Helper.getSubjectTypeByName("객체지향"))
-                        ))
-                ),
-                new Score(
-                        sequence(INDEX_TYPE_SCORE),
-                        "ST2",
-                        "SU1",
-                        new ArrayList<ScoreDetail>(Arrays.asList(
-                                new ScoreDetail(1, 78, Helper.getSubjectTypeByName("Java")),
-                                new ScoreDetail(2, 68, Helper.getSubjectTypeByName("Java")),
-                                new ScoreDetail(3, 86, Helper.getSubjectTypeByName("Java"))
-                        ))
-
-                ),
-                new Score(
-                        sequence(INDEX_TYPE_SCORE),
-                        "ST2",
-                        "SU2",
-                        new ArrayList<ScoreDetail>(Arrays.asList(
-                                new ScoreDetail(1, 78, Helper.getSubjectTypeByName("객체지향")),
-                                new ScoreDetail(2, 98, Helper.getSubjectTypeByName("객체지향")),
-                                new ScoreDetail(3, 86, Helper.getSubjectTypeByName("객체지향"))
-                        )
-                        )),
                 new Score(
                         sequence(INDEX_TYPE_SCORE),
                         "ST3",
@@ -545,9 +492,6 @@ public class CampManagementApplication {
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() {
         String studentId = Helper.getStudentId();
-        // scoredetail 리스트 선언.
-        List<ScoreDetail> scoreList = new ArrayList<>();
-        String studentId = getStudentId();
 
         // 학생이름 출력
         boolean studentFound = false; // 미등록학생 확인용 선언.
@@ -987,7 +931,7 @@ public class CampManagementApplication {
             System.out.println("해당 학생이 없습니다");
         } else {
             for (String subjectId : selectScore) {
-                System.out.println(getSubjectNameById(subjectId));
+                System.out.println(Helper.getSubjectNameById(subjectId));
             }
         }
     }
@@ -1043,7 +987,7 @@ public class CampManagementApplication {
 
     public static void inquireStudentInfo() {
         System.out.println("\n수강생 목록을 조회합니다...");
-        String studentId = getStudentId(); // 학생 id 입력
+        String studentId = Helper.getStudentId(); // 학생 id 입력
         System.out.println();
         Student studentInfo = null;
         // studentStore 리스트에서 학생 정보 받아서 목록 출력 + 순서대로 번호 부여
