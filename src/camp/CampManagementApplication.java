@@ -1096,35 +1096,4 @@ public class CampManagementApplication {
 
 
     // 상태별 수강ㄹ생 목록 조회
-    public static void inquireStudentStatus() {
-        System.out.println("찾으실 수강생들의 상태를 입력하세요 (Green, Yellow, Red 중 입력)");
-        String inputStatus = sc.next();
-        Status status;
-
-        switch (inputStatus) {
-            case "Green":
-                status = Status.Green;
-                break;
-            case "Yellow":
-                status = Status.Yellow;
-                break;
-            case "Red":
-                status = Status.Red;
-                break;
-            default:
-                System.out.println("해당하는 상태값은 없습니다.");
-                return;
-        }
-        boolean studentFound = false;
-        for (Student student : studentStore) {
-            if (student.getStatus() == status) {
-                System.out.println(student.getStudentName());
-                studentFound = true;
-            }
-        }
-        if (!studentFound) {
-            System.out.println("해당 상태의 학생이 없습니다.");
-        }
-
-    }
 }}
