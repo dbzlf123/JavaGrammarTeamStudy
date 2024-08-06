@@ -1090,11 +1090,12 @@ public class CampManagementApplication {
         return selectScore;
     }
 
+
     // 상태별 수강생 목록 조회
     public static void inquireStudentStatus() {
-        System.out.println("찾으실 수강생들의 상태를 입력하세요 (Green, Yellow, Red 중 입력)");
-        String inputStatus = sc.next();
-        Status status;
+            System.out.println("찾으실 수강생들의 상태를 입력하세요 (Green, Yellow, Red 중 입력)");
+            String inputStatus = sc.next();
+            Status status;
 
         switch (inputStatus) {
             case "Green":
