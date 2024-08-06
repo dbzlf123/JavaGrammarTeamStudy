@@ -545,7 +545,7 @@ public class CampManagementApplication {
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() {
         // scoredetail 리스트 선언.
-        List<ScoreDatail> scoreList = new ArrayList<>();
+        List<ScoreDetail> scoreList = new ArrayList<>();
         String studentId = getStudentId();
         // 학생이름 출력
         boolean studentFound = false; // 미등록학생 확인용 선언.
@@ -753,7 +753,7 @@ public class CampManagementApplication {
         int updatedScore = sc.nextInt();
         for (int i = 0; i < scoreStore.size(); i++) {
             if (SI.getStudentId().equals(scoreStore.get(i).getStudentId()) && SJ.getSubjectId().equals(scoreStore.get(i).getSubjectId())) { //
-                List<ScoreDatail> Sl = scoreStore.get(i).getScoreList(); //scoreStore에서 해당 학생아이디 과목아이디 를 가진 ScoreDetail 리스트를 가져온다.
+                List<ScoreDetail> Sl = scoreStore.get(i).getScoreList(); //scoreStore에서 해당 학생아이디 과목아이디 를 가진 ScoreDetail 리스트를 가져온다.
                 int r = 0;
                 for (int j = 0; j < Sl.size(); j++) { // 해당 라운드가 값이 있는지 확인 하는 for 문
                     if (Sl.get(j).getRound() == inputRound) {
@@ -761,7 +761,7 @@ public class CampManagementApplication {
                     }
                 }
                 if (r == 0) { // 해당 라운드 값이 없으면 r = 0 그대로 내려오므로 바로 값 추가하는것.
-                    ScoreDatail updatedRound = new ScoreDatail(inputRound, updatedScore, SJ.getSubjectType()); //새로운 다타일 생성
+                    ScoreDetail updatedRound = new ScoreDetail(inputRound, updatedScore, SJ.getSubjectType()); //새로운 다타일 생성
                     scoreStore.get(i).addScore(updatedRound);
                 } else { //r ==inputRound 가 됐으면 해당 스코어값을 수정하는 코드
                     for (int k = 0; k < Sl.size(); k++) { //Sl의 k위치의 라운드 값과 r의 입력된 라운드 값이 매치되는 위치를 찾고 그위치의 값을 setScore해준다.
@@ -849,6 +849,19 @@ public class CampManagementApplication {
         //있으면 해당 과목의 아이디 출력
         if (selectSubject.isPresent()) return selectSubject.get().getSubjectId();
             //없으면 NoName 출력
+        else return "NoName";
+    }
+
+    private static String getStudentNameById(String studentId) {
+        //해당 id을 가진 수강생
+        Optional<Student> selectStudent = studentStore.stream()
+                .filter((Student student) -> student.getStudentId().equals(studentId))
+                .findFirst();
+        //만약 해당 id를 가진 수강생이 존재한다면
+        if (selectStudent.isPresent()) {
+            return selectStudent.get().getStudentName();
+        }
+        //존재하지 않는다면
         else return "NoName";
     }
 
