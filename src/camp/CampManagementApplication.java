@@ -1064,4 +1064,5 @@ public class CampManagementApplication {
             System.out.println("해당 상태의 학생이 없습니다.");
         }
     }
+    //git이 안됨
 }
