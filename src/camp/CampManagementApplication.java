@@ -319,7 +319,7 @@ public class CampManagementApplication {
         //실제 자료 넣기 -> 일단 점수 데이터는 빈 ArrayList 가 들어간다.
         for(int i = 0; i < tempSubjectStore.size(); i++){
             //IndexScore 를 제외하고 학생 ID 는 이미 sequence 를 이용해서 올라갔을테니 따로 안올려주고 조합해서 보내준다.
-            scoreStore.add(new Score(sequence(INDEX_TYPE_SCORE), INDEX_TYPE_STUDENT + studentIndex, subjectStore.get(i).getSubjectId()));
+            scoreStore.add(new Score(sequence(INDEX_TYPE_SCORE), INDEX_TYPE_STUDENT + studentIndex, tempSubjectStore.get(i).getSubjectId()));
         }
 
         System.out.println("수강생 등록 성공!\n");
