@@ -546,8 +546,6 @@ public class CampManagementApplication {
 
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() {
-        // scoredetail 리스트 선언.
-        List<ScoreDetail> scoreList = new ArrayList<>();
         String studentId = getStudentId();
         // 학생이름 출력
         boolean studentFound = false; // 미등록학생 확인용 선언.
@@ -1048,7 +1046,7 @@ public class CampManagementApplication {
         }
     }
 
-    // 상태별 수강ㄹ생 목록 조회
+    // 상태별 수강생 목록 조회
     public static void inquireStudentStatus() {
         System.out.println("찾으실 수강생들의 상태를 입력하세요 (Green, Yellow, Red 중 입력)");
         String inputStatus = sc.next();
