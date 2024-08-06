@@ -297,6 +297,7 @@ public class CampManagementApplication {
             System.out.println("1. 수강생 등록");
             System.out.println("2. 수강생 목록 조회");
             System.out.println("5. 수강생 정보 수정");
+            System.out.println("6. 상태별 수강생 목록 조회");
             System.out.println("7. 수강생 삭제");
             System.out.println("8. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
@@ -312,6 +313,7 @@ public class CampManagementApplication {
                 case 1 -> createStudent(); // 수강생 등록
                 case 2 -> inquireStudent(); // 수강생 목록 조회
                 case 5 -> updateStudent(); // 수강생 정보 수정
+                case 6 -> inquireStudentStatus(); // 상태별 수강생목록 조회
                 case 7 -> removeStudent(); // 수강생 삭제
                 case 8 -> flag = false; // 메인 화면 이동
                 default -> {
@@ -991,4 +993,32 @@ public class CampManagementApplication {
         }
     }
 
+    public static void inquireStudentStatus() {
+        System.out.println("찾으실 수강생들의 상태를 입력하세요 (Green, Yello, Red 중 입력)");
+        String inputStatus = sc.next();
+        Status status;
+
+        switch (inputStatus) {
+            case "Green":
+                status = Status.Green;
+                break;
+            case "Yellow":
+                status = Status.Yellow;
+                break;
+            case "Red":
+                status = Status.Red;
+                break;
+            default:
+                System.out.println("해당하는 상태값은 없습니다.");
+                return;
+        }
+
+        for (Student student : studentStore) {
+            if (student.getStatus() == status) {
+                for (int i = 0; i < studentStore.size(); i++) {
+                    System.out.println(studentStore.get(i).getStudentName());
+                }
+            } break;
+        }
+    }
 }
