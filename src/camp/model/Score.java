@@ -7,7 +7,7 @@ public class Score {
     private String scoreId;
     private String studentId;
     private String subjectId;
-    private List<ScoreDatail> scoreList;
+    private List<ScoreDetail> scoreList;
 
 
     public Score(String seq, String studentId, String subjectId) {
@@ -16,7 +16,7 @@ public class Score {
         this.subjectId = subjectId;
         this.scoreList = new ArrayList<>();
     }
-    public Score(String seq, String studentId, String subjectId, List<ScoreDatail> scoreList) {
+    public Score(String seq, String studentId, String subjectId, List<ScoreDetail> scoreList) {
         this.scoreId = seq;
         this.studentId = studentId;
         this.subjectId = subjectId;
@@ -36,11 +36,11 @@ public class Score {
         return subjectId;
     }
 
-    public void addScore(ScoreDatail score) {
+    public void addScore(ScoreDetail score) {
         this.scoreList.add(score);
     }
 
-    public List<ScoreDatail> getScoreList() {
+    public List<ScoreDetail> getScoreList() {
         return scoreList;
     }
 }
