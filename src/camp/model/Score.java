@@ -10,7 +10,6 @@ public class Score {
     private String subjectId;
     private List<ScoreDetail> scoreList;
 
-
     public Score(String seq, String studentId, String subjectId) {
         this.scoreId = seq;
         this.studentId = studentId;
