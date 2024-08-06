@@ -266,7 +266,7 @@ public class CampManagementApplication {
                 case 1 -> Create.createStudent(); // 수강생 등록
                 case 2 -> Inquire.inquireStudent(studentStore); // 수강생 목록 조회
                 case 3 -> Inquire.inquireStudentInfo(studentStore); //수강생 정보 조회
-                case 4 -> updateStudent(); // 수강생 정보 수정
+                case 4 -> Edit.updateStudent(); // 수강생 정보 수정
                 case 5 -> Inquire.inquireStudentStatus(studentStore); // 상태별 수강생목록 조회
                 case 6 -> Edit.removeStudent(); // 수강생 삭제
                 case 7 -> flag = false; // 메인 화면 이동
