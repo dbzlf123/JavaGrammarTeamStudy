@@ -2,7 +2,6 @@ package camp;
 
 import camp.model.*;
 
-import javax.swing.*;
 import java.util.*;
 
 /**
@@ -120,66 +119,127 @@ public class CampManagementApplication {
                         sequence(INDEX_TYPE_SCORE),
                         "ST1",
                         "SU1",
-                        new ArrayList<ScoreDatail>(Arrays.asList(
-                                new ScoreDatail(1, 78, getSubjectTypeByName("Java")),
-                                new ScoreDatail(2, 98, getSubjectTypeByName("Java")),
-                                new ScoreDatail(3, 86, getSubjectTypeByName("Java"))
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("Java")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("Java")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("Java"))
                         ))
                 ),
                 new Score(
                         sequence(INDEX_TYPE_SCORE),
                         "ST1",
                         "SU2",
-                        new ArrayList<ScoreDatail>(Arrays.asList(
-                                new ScoreDatail(1, 96, getSubjectTypeByName("객체지향")),
-                                new ScoreDatail(2, 98, getSubjectTypeByName("객체지향")),
-                                new ScoreDatail(3, 92, getSubjectTypeByName("객체지향"))
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 96, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(3, 92, getSubjectTypeByName("객체지향"))
                         ))
                 ),
                 new Score(
                         sequence(INDEX_TYPE_SCORE),
                         "ST2",
                         "SU1",
-                        new ArrayList<ScoreDatail>(Arrays.asList(
-                                new ScoreDatail(1, 78, getSubjectTypeByName("Java")),
-                                new ScoreDatail(2, 68, getSubjectTypeByName("Java")),
-                                new ScoreDatail(3, 86, getSubjectTypeByName("Java"))
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("Java")),
+                                new ScoreDetail(2, 68, getSubjectTypeByName("Java")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("Java"))
                         ))
                 ),
                 new Score(
                         sequence(INDEX_TYPE_SCORE),
                         "ST2",
                         "SU2",
-                        new ArrayList<ScoreDatail>(Arrays.asList(
-                                new ScoreDatail(1, 78, getSubjectTypeByName("객체지향")),
-                                new ScoreDatail(2, 98, getSubjectTypeByName("객체지향")),
-                                new ScoreDatail(3, 86, getSubjectTypeByName("객체지향"))
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("객체지향"))
                         )
-                )
+
+                        )
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST2",
+                        "SU2",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("객체지향"))
+                        ))
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST4",
+                        "SU2",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("객체지향"))
+                        ))
+                ),
+            new Score(
+                sequence(INDEX_TYPE_SCORE),
+                "ST1",
+                "SU1",
+                new ArrayList<ScoreDetail>(Arrays.asList(
+                        new ScoreDetail(1, 78, getSubjectTypeByName("Java")),
+                        new ScoreDetail(2, 98, getSubjectTypeByName("Java")),
+                        new ScoreDetail(3, 86, getSubjectTypeByName("Java"))
+                ))
+            ),
+            new Score(
+                sequence(INDEX_TYPE_SCORE),
+                "ST1",
+                "SU2",
+                new ArrayList<ScoreDetail>(Arrays.asList(
+                        new ScoreDetail(1, 96, getSubjectTypeByName("객체지향")),
+                        new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                        new ScoreDetail(3, 92, getSubjectTypeByName("객체지향"))
+                ))
+            ),
+            new Score(
+                sequence(INDEX_TYPE_SCORE),
+                "ST2",
+                "SU1",
+                new ArrayList<ScoreDetail>(Arrays.asList(
+                        new ScoreDetail(1, 78, getSubjectTypeByName("Java")),
+                        new ScoreDetail(2, 68, getSubjectTypeByName("Java")),
+                        new ScoreDetail(3, 86, getSubjectTypeByName("Java"))
+                ))
+
             ),
             new Score(
                 sequence(INDEX_TYPE_SCORE),
                 "ST2",
                 "SU2",
-                new ArrayList<ScoreDatail>(Arrays.asList(
-                    new ScoreDatail(1,78, getSubjectTypeByName("객체지향")),
-                    new ScoreDatail(2,98, getSubjectTypeByName("객체지향")),
-                    new ScoreDatail(3,86, getSubjectTypeByName("객체지향"))
+                new ArrayList<ScoreDetail>(Arrays.asList(
+                        new ScoreDetail(1, 78, getSubjectTypeByName("객체지향")),
+                        new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                        new ScoreDetail(3, 86, getSubjectTypeByName("객체지향"))
+                )
+            )),
+            new Score(
+                sequence(INDEX_TYPE_SCORE),
+                "ST3",
+                "SU1",
+                new ArrayList<ScoreDetail>(Arrays.asList(
+                    new ScoreDetail(1,98, getSubjectTypeByName("Java")),
+                    new ScoreDetail(2,99, getSubjectTypeByName("Java")),
+                    new ScoreDetail(3,97, getSubjectTypeByName("Java"))
                 ))
             ),
-                new Score(
-                        sequence(INDEX_TYPE_SCORE),
-                        "ST4",
-                        "SU2",
-                        new ArrayList<ScoreDatail>(Arrays.asList(
-                                new ScoreDatail(1,78, getSubjectTypeByName("객체지향")),
-                                new ScoreDatail(2,98, getSubjectTypeByName("객체지향")),
-                                new ScoreDatail(3,86, getSubjectTypeByName("객체지향"))
-                        ))
-                )
-
-        ));
-
+            new Score(
+                sequence(INDEX_TYPE_SCORE),
+                "ST3",
+                "SU2",
+                new ArrayList<ScoreDetail>(Arrays.asList(
+                        new ScoreDetail(1,76, getSubjectTypeByName("객체지향")),
+                        new ScoreDetail(2,82, getSubjectTypeByName("객체지향")),
+                        new ScoreDetail(3,85, getSubjectTypeByName("객체지향"))
+                ))
+            )
+        )
+        );
     }
 
     // index 자동 증가
@@ -209,7 +269,14 @@ public class CampManagementApplication {
             System.out.println("2. 점수 관리");
             System.out.println("3. 프로그램 종료");
             System.out.print("관리 항목을 선택하세요...");
-            int input = sc.nextInt();
+
+            int input = 0;
+            try{    //nextInt에 문자열이 입력됬을때를 대비
+                input = sc.nextInt();
+            }catch (Exception e) {
+                System.out.println("숫자로 입력해주세요");
+                sc.nextLine();
+            }
 
             switch (input) {
                 case 1 -> displayStudentView(); // 수강생 관리
@@ -235,7 +302,15 @@ public class CampManagementApplication {
             System.out.println("7. 수강생 삭제");
             System.out.println("8. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
-            int input = sc.nextInt();
+
+            int input = 0;
+            try{   //nextInt에 문자열이 입력됬을때를 대비
+                input = sc.nextInt();
+            }catch (Exception e) {
+                System.out.println("숫자로 입력해주세요");
+                sc.nextLine();
+            }
+
 
             switch (input) {
                 case 1 -> createStudent(); // 수강생 등록
@@ -432,7 +507,15 @@ public class CampManagementApplication {
             System.out.println("7. 특정 상태 수강생들의 필수 과목 평균 등급 조회");
             System.out.println("8. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
-            int input = sc.nextInt();
+
+            int input = 0;
+            try{    //nextInt에 문자열이 입력됬을때를 대비
+                input = sc.nextInt();
+            }catch (Exception e) {
+                System.out.println("숫자로 입력해주세요");
+                sc.nextLine();
+            }
+
 
             switch (input) {
                 case 1 -> createScore(); // 수강생의 과목별 시험 회차 및 점수 등록
@@ -505,16 +588,41 @@ public class CampManagementApplication {
                         System.out.println("점수를 등록할 시험의 회차를 선택하세요...(1~10 입력)");
                         int round = sc.nextInt();
                         sc.nextLine(); // 값 넘어가는 부분 수정
-                        if (round > 0 && round < 11) {
-                            System.out.println("과목점수를 입력하세요.");
-                            int scoreInput = sc.nextInt();
-                            sc.nextLine(); // 값 넘어가는 부분 수정
-                            // char grade = ScoreDatail.changeGrade(SUBJECT_TYPE_MANDATORY, scoreInput);
-                            scoreList.add(new ScoreDatail(round, scoreInput, SUBJECT_TYPE_MANDATORY));
-                            Score score = new Score(sequence(INDEX_TYPE_SCORE), studentId, subjectId, scoreList);
-                            scoreStore.add(score);
+
+
+                        boolean roundFound = false;
+                        for (int j = 0; j < scoreStore.size(); j++) {
+                            Score score = scoreStore.get(j);
+                            if (score.getStudentId().equals(studentId) && score.getSubjectId().equals(subjectId)) {
+                                for (ScoreDetail scoreDetail : score.getScoreList()) {
+                                    if (scoreDetail.getRound() == round) {
+                                        roundFound = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (roundFound) break;
+                        }
+                        if (roundFound) {
+                            System.out.println("이미 등록된 회차입니다. 다른 회차를 선택해주세요.");
                         } else {
-                            System.out.println("잘못된 입력값입니다.(1~10까지의 회차만 입력가능)");
+                            if (round > 0 && round < 11) {
+                                System.out.println("과목점수를 입력하세요.");
+                                int scoreInput = sc.nextInt();
+                                sc.nextLine(); // 값 넘어가는 부분 수정
+                                if (scoreInput >= 0 && scoreInput < 101) {
+                                    for (Score score : scoreStore) {
+                                        if (score.getStudentId().equals(studentId) && score.getSubjectId().equals(subjectId)) {
+                                            score.addScore(new ScoreDetail(round, scoreInput, getSubjectTypeByName(subjectName)));
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    System.out.println("잘못된 입력값입니다. (1~100까지의 점수만 입력가능)");
+                                }
+                            } else {
+                                System.out.println("잘못된 입력값입니다.(1~10까지의 회차만 입력가능)");
+                            }
                         }
                         break;
                     }
@@ -543,16 +651,40 @@ public class CampManagementApplication {
                         System.out.println("점수를 등록할 시험의 회차를 선택하세요...(1~10 입력)");
                         int round = sc.nextInt();
                         sc.nextLine(); // 값 넘어가는 부분 수정
-                        if (round > 0 && round < 11) {
-                            System.out.println("과목점수를 입력하세요.");
-                            int scoreInput = sc.nextInt();
-                            sc.nextLine(); // 값 넘어가는 부분 수정
-                            // char grade = ScoreDatail.changeGrade(SUBJECT_TYPE_CHOICE, scoreInput);
-                            scoreList.add(new ScoreDatail(round, scoreInput, SUBJECT_TYPE_CHOICE));
-                            Score score = new Score(sequence(INDEX_TYPE_SCORE), studentId, subjectId, scoreList);
-                            scoreStore.add(score);
+
+                        boolean roundFound = false;
+                        for (int j = 0; j < scoreStore.size(); j++) {
+                            Score score = scoreStore.get(j);
+                            if (score.getStudentId().equals(studentId) && score.getSubjectId().equals(subjectId)) {
+                                for (ScoreDetail scoreDetail : score.getScoreList()) {
+                                    if (scoreDetail.getRound() == round) {
+                                        roundFound = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (roundFound) break;
+                        }
+                        if (roundFound) {
+                            System.out.println("이미 등록된 회차입니다. 다른 회차를 선택해주세요.");
                         } else {
-                            System.out.println("잘못된 입력값입니다.(1~10까지의 회차만 입력가능)");
+                            if (round > 0 && round < 11) {
+                                System.out.println("과목점수를 입력하세요.");
+                                int scoreInput = sc.nextInt();
+                                sc.nextLine(); // 값 넘어가는 부분 수정
+                                if (scoreInput >= 0 && scoreInput < 101) {
+                                    for (Score score : scoreStore) {
+                                        if (score.getStudentId().equals(studentId) && score.getSubjectId().equals(subjectId)) {
+                                            score.addScore(new ScoreDetail(round, scoreInput, getSubjectTypeByName(subjectName)));
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    System.out.println("잘못된 입력값입니다. (1~100까지의 점수만 입력가능)");
+                                }
+                            } else {
+                                System.out.println("잘못된 입력값입니다.(1~10까지의 회차만 입력가능)");
+                            }
                         }
                         break;
                     }
@@ -661,11 +793,12 @@ public class CampManagementApplication {
                 .findFirst();
         //만약 있다면
         if (selectScore.isPresent()) {
-            List<ScoreDatail> scoreList = selectScore.get().getScoreList();
+            List<ScoreDetail> scoreList = selectScore.get().getScoreList();
 
             //점수가 등록된 경우 점수 출력
-            if(!scoreList.isEmpty()){
-                for (ScoreDatail score : scoreList) System.out.println(score.getRound()+"회차 : "+score.getGrade());
+            if (!scoreList.isEmpty()) {
+                for (ScoreDetail score : scoreList) System.out.println(score.getRound() + "회차 : " + score.getGrade());
+
                 System.out.println("\n등급 조회 성공!");
             }
             //점수가 등록되지 않는 경우
@@ -742,14 +875,14 @@ public class CampManagementApplication {
                     .filter((Subject subject) -> subject.getSubjectId().equals(subjectId))
                     .findFirst().get().getSubjectType();
                 //점수의 평균값 얻기
-                List<ScoreDatail> scoreList = score.getScoreList();
+                List<ScoreDetail> scoreList = score.getScoreList();
                 int sum = 0;
-                for (ScoreDatail scoreDetail : scoreList) {
+                for (ScoreDetail scoreDetail : scoreList) {
                     sum += scoreDetail.getScore();
                 }
                 double avgScore = sum / scoreList.size();
                 // 평균 점수를 등급으로 바꿔줌
-                System.out.println("이 과목의 평균등급은 " + ScoreDatail.changeGrade(subjectType, avgScore) + "입니다.");
+                System.out.println("이 과목의 평균등급은 " + ScoreDetail.changeGrade(subjectType, avgScore) + "입니다.");
 
                 System.out.println("\n등급 조회 성공!");
                 //점수가 등록되지 않은 경우
@@ -811,16 +944,18 @@ public class CampManagementApplication {
             if(student.getStatus() == status){ //등록받은 상태값이 같다면
                 int tempScore = 0;
                 int totalScoreNums = 0;
-                for(Score score : scoreStore){ //점수 저장공간도 탐색해준다.
-                    if(!score.getStudentId().equals(student.getStudentId())) continue; //만약 학생 ID 가 일치하지 않으면 탐색할필요없으니 넘어가주고..
-                    for(Subject subject : subjectStore){ // 일치한다면 이제 과제 저장 목록들하고 비교하면서 필수과목인지, 등록된 과목하고 같은지 비교해준다.
-                        if(subject.getSubjectType().equals(SUBJECT_TYPE_MANDATORY) &&
-                                subject.getSubjectId().equals(score.getSubjectId())){
-                            if(score.getScoreList().isEmpty()) break; //처음 만들었을 때 생성되는 회차, 점수 없는 학생 예외처리
 
-                            for(ScoreDatail scoreDatail : score.getScoreList()){ //회차 있으니 탐색해준다.
+                for (Score score : scoreStore) { //점수 저장공간도 탐색해준다.
+                    if (!score.getStudentId().equals(student.getStudentId()))
+                        continue; //만약 학생 ID 가 일치하지 않으면 탐색할필요없으니 넘어가주고..
+                    for (Subject subject : subjectStore) { // 일치한다면 이제 과제 저장 목록들하고 비교하면서 필수과목인지, 등록된 과목하고 같은지 비교해준다.
+                        if (subject.getSubjectType().equals(SUBJECT_TYPE_MANDATORY) &&
+                                subject.getSubjectId().equals(score.getSubjectId())) {
+                            if (score.getScoreList().isEmpty()) break; //처음 만들었을 때 생성되는 회차, 점수 없는 학생 예외처리
+
+                            for (ScoreDetail scoreDetail : score.getScoreList()) { //회차 있으니 탐색해준다.
                                 found = true;
-                                tempScore += scoreDatail.getScore();
+                                tempScore += scoreDetail.getScore();
                                 totalScoreNums++;
                             }
                         }
@@ -828,7 +963,8 @@ public class CampManagementApplication {
                 }
                 if(found && totalScoreNums != 0) { //회차 돌았는데 0점 맞은 학생도 있을수있으니 나누기 연산 터지는거 대비해서 미리 0 체크
                     tempScore /= totalScoreNums;
-                    System.out.println(student.getStudentName() + " 의 필수과목 평균 등급은 " + ScoreDatail.changeGrade("MANDATORY", tempScore)  + " 입니다.");
+                    System.out.println(student.getStudentName() + " 의 필수과목 평균 등급은 " + ScoreDetail.changeGrade("MANDATORY", tempScore) + " 입니다.");
+
                 }
             }
         }
@@ -863,5 +999,45 @@ public class CampManagementApplication {
         if(successRemove) System.out.println("성공적으로 삭제 되었습니다.");
         else System.out.println("그런 수강생 없습니다");
     }
+
+    //특정 과목 특정 회차 점수 순위
+    public static void roundScoreList() {
+        String subjectId = getSubjectIdByName();
+        List<Score> selectScore = scoreStore.stream()
+            .filter((Score score) -> score.getSubjectId().equals(subjectId))
+            .toList();
+        //만약 해당값이 있다면
+        if(!selectScore.isEmpty()) {
+            System.out.println("조회할 회차를 입력하세요");
+            int round = sc.nextInt();
+            HashMap<String,Integer> map= new HashMap<>();
+            for(Score score:selectScore) {
+                String studentId = score.getStudentId();
+                List<ScoreDetail> scorelist = score.getScoreList();
+                for(ScoreDetail scoreDetail :scorelist) {
+                    if(scoreDetail.getRound()==round) {
+                        map.put(studentId, scoreDetail.getScore());
+                    }
+                }
+            }
+            List<Map.Entry<String, Integer>> entryList = new LinkedList<>(map.entrySet());
+            if (!entryList.isEmpty()){
+                entryList.sort(new Comparator<Map.Entry<String, Integer>>() {
+                    @Override
+                    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                        return o2.getValue() - o1.getValue();
+                    }
+                });
+                for(Map.Entry<String, Integer> entry : entryList){
+                    System.out.println("이름 : " + getStudentNameById(entry.getKey()) + ", 점수 : " + entry.getValue());
+                }
+            }else{
+                System.out.println("등록된 점수가 없습니다.");
+            }
+        }else {
+            System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
+        }
+    }
+
 
 }

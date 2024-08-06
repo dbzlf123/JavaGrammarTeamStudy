@@ -1,11 +1,11 @@
 package camp.model;
 
-public class ScoreDatail {
+public class ScoreDetail {
   private int round;
   private int score;
   private char grade;
 
-  public ScoreDatail(int round, int score, String subjectType) {
+  public ScoreDetail(int round, int score, String subjectType) {
     this.round = round;
     this.score = score;
     this.grade = changeGrade(subjectType, score);
