@@ -4,7 +4,37 @@ import camp.model.*;
 
 import java.util.*;
 
-public class Inquire {
+import camp.CampManagementApplication;
+import camp.model.Student;
+
+public class Inquire extends CampManagementApplication {
+
+    // studentStore 리스트에서 학생 정보 받아서 목록 출력 + 순서대로 번호 부여
+    public static void getStudentInfo() {
+        String studentId = Helper.getStudentId(); // 학생 id 입력
+        Student studentInfo = null;
+        for(
+                int i = 0; i<studentStore.size(); i++) {
+        if (studentId.equals(studentStore.get(i).getStudentId())) { //입력받은 id가 스튜던트 스토어에 같은값이 있다면 진행
+            studentInfo = studentStore.get(i); //진행 오류 확인용
+            System.out.println("고유번호: "); //과목 이름 받아오는 메서드가 세로로 나열해서
+            //비슷하게 맞추기 위한 세로 정렬
+            System.out.println(" " + studentStore.get(i).getStudentId());
+            System.out.println("이름: ");
+            System.out.println(" " + studentStore.get(i).getStudentName());
+            System.out.println("상태: ");
+            System.out.println(" " + studentStore.get(i).getStatus());
+            System.out.println("과목: ");
+            getSubjectNameListByStudentId(studentId); //해당학생이 선택한 과목 리스트 불러오기
+            break;
+        }
+    }
+        if(studentInfo ==null)
+    {
+        System.out.println("해당 학생을 찾을 수 없습니다.");
+        return; //오류시 끝내기
+    }
+}
 
     // 과목 타입
     private static String SUBJECT_TYPE_MANDATORY = "MANDATORY";
