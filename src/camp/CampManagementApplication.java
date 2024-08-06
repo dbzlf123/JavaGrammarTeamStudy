@@ -115,77 +115,131 @@ public class CampManagementApplication {
 
         //조회를 위해 점수리스트를 임의로 생성
         scoreStore = new ArrayList<>(Arrays.asList(
-            new Score(
-                sequence(INDEX_TYPE_SCORE),
-                "ST1",
-                "SU1",
-                new ArrayList<ScoreDetail>(Arrays.asList(
-                    new ScoreDetail(1, 78, getSubjectTypeByName("Java")),
-                    new ScoreDetail(2, 98, getSubjectTypeByName("Java")),
-                    new ScoreDetail(3, 86, getSubjectTypeByName("Java"))
-                ))
-            ),
-            new Score(
-                sequence(INDEX_TYPE_SCORE),
-                "ST1",
-                "SU2",
-                new ArrayList<ScoreDetail>(Arrays.asList(
-                    new ScoreDetail(1, 96, getSubjectTypeByName("객체지향")),
-                    new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
-                    new ScoreDetail(3, 92, getSubjectTypeByName("객체지향"))
-                ))
-            ),
-            new Score(
-                sequence(INDEX_TYPE_SCORE),
-                "ST2",
-                "SU1",
-                new ArrayList<ScoreDetail>(Arrays.asList(
-                    new ScoreDetail(1, 78, getSubjectTypeByName("Java")),
-                    new ScoreDetail(2, 68, getSubjectTypeByName("Java")),
-                    new ScoreDetail(3, 86, getSubjectTypeByName("Java"))
-                ))
-            ),
-            new Score(
-                sequence(INDEX_TYPE_SCORE),
-                "ST2",
-                "SU2",
-                new ArrayList<ScoreDetail>(Arrays.asList(
-                    new ScoreDetail(1, 78, getSubjectTypeByName("객체지향")),
-                    new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
-                    new ScoreDetail(3, 86, getSubjectTypeByName("객체지향"))
-                ))
-            ),
-            new Score(
-                sequence(INDEX_TYPE_SCORE),
-                "ST4",
-                "SU2",
-                new ArrayList<ScoreDetail>(Arrays.asList(
-                    new ScoreDetail(1, 78, getSubjectTypeByName("객체지향")),
-                    new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
-                    new ScoreDetail(3, 86, getSubjectTypeByName("객체지향"))
-                ))
-            ),
-            new Score(
-                sequence(INDEX_TYPE_SCORE),
-                "ST3",
-                "SU1",
-                new ArrayList<ScoreDetail>(Arrays.asList(
-                    new ScoreDetail(1,98, getSubjectTypeByName("Java")),
-                    new ScoreDetail(2,99, getSubjectTypeByName("Java")),
-                    new ScoreDetail(3,97, getSubjectTypeByName("Java"))
-                ))
-            ),
-            new Score(
-                sequence(INDEX_TYPE_SCORE),
-                "ST3",
-                "SU2",
-                new ArrayList<ScoreDetail>(Arrays.asList(
-                        new ScoreDetail(1,76, getSubjectTypeByName("객체지향")),
-                        new ScoreDetail(2,82, getSubjectTypeByName("객체지향")),
-                        new ScoreDetail(3,85, getSubjectTypeByName("객체지향"))
-                ))
-            )
-        ));
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST1",
+                        "SU1",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("Java")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("Java")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("Java"))
+                        ))
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST1",
+                        "SU2",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 96, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(3, 92, getSubjectTypeByName("객체지향"))
+                        ))
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST2",
+                        "SU1",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("Java")),
+                                new ScoreDetail(2, 68, getSubjectTypeByName("Java")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("Java"))
+                        ))
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST2",
+                        "SU2",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("객체지향"))
+                        )
+
+                        )
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST2",
+                        "SU2",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("객체지향"))
+                        ))
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST4",
+                        "SU2",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("객체지향"))
+                        ))
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST1",
+                        "SU1",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("Java")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("Java")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("Java"))
+                        ))
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST1",
+                        "SU2",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 96, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(3, 92, getSubjectTypeByName("객체지향"))
+                        ))
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST2",
+                        "SU1",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("Java")),
+                                new ScoreDetail(2, 68, getSubjectTypeByName("Java")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("Java"))
+                        ))
+
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST2",
+                        "SU2",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 78, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(2, 98, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(3, 86, getSubjectTypeByName("객체지향"))
+                        )
+                        )),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST3",
+                        "SU1",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 98, getSubjectTypeByName("Java")),
+                                new ScoreDetail(2, 99, getSubjectTypeByName("Java")),
+                                new ScoreDetail(3, 97, getSubjectTypeByName("Java"))
+                        ))
+                ),
+                new Score(
+                        sequence(INDEX_TYPE_SCORE),
+                        "ST3",
+                        "SU2",
+                        new ArrayList<ScoreDetail>(Arrays.asList(
+                                new ScoreDetail(1, 76, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(2, 82, getSubjectTypeByName("객체지향")),
+                                new ScoreDetail(3, 85, getSubjectTypeByName("객체지향"))
+                        ))
+                )
+        )
+        );
     }
 
     // index 자동 증가
@@ -215,7 +269,6 @@ public class CampManagementApplication {
             System.out.println("2. 점수 관리");
             System.out.println("3. 프로그램 종료");
             System.out.print("관리 항목을 선택하세요...");
-
             int input = 0;
             try {    //nextInt에 문자열이 입력됬을때를 대비
                 input = sc.nextInt();
@@ -223,7 +276,6 @@ public class CampManagementApplication {
                 System.out.println("숫자로 입력해주세요");
                 sc.nextLine();
             }
-
             switch (input) {
                 case 1 -> displayStudentView(); // 수강생 관리
                 case 2 -> displayScoreView(); // 점수 관리
@@ -258,12 +310,11 @@ public class CampManagementApplication {
                 sc.nextLine();
             }
 
-
             switch (input) {
                 case 1 -> createStudent(); // 수강생 등록
                 case 2 -> inquireStudent(); // 수강생 목록 조회
                 case 5 -> updateStudent(); // 수강생 정보 수정
-                case 6 -> inquireStudentStatus(); // 상태별 수강생목록 조회
+//                case 6 -> inquireStudentStatus(); // 상태별 수강생목록 조회
                 case 7 -> removeStudent(); // 수강생 삭제
                 case 8 -> flag = false; // 메인 화면 이동
                 default -> {
@@ -386,8 +437,13 @@ public class CampManagementApplication {
             }
             System.out.println("무엇을 변경하시겠습니까?");
             System.out.print("번호를 입력해주세요 1.이름 2.상태 : ");
-            int updateNumber = sc.nextInt();
-
+            int updateNumber = 0;
+            try {
+                updateNumber = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("숫자로 입력해주세요");
+                sc.nextLine();
+            }
             // 1. 이름 변경 선택
             if (updateNumber == 1) {
                 System.out.print("무엇으로 이름을 변경하시겠습니까? : ");
@@ -415,7 +471,11 @@ public class CampManagementApplication {
             } else if (updateNumber == 2) {
                 System.out.print("무엇으로 상태를 변경하시겠습니까? (Green/Yellow/Red) : ");
                 String updateStatus = sc.next();
-
+                //updateStatus 이 Green/Yellow/Red 이외의 것을 입력했을 때
+                if (! (updateStatus.equals("Green")|| updateStatus.equals("Yellow") || updateStatus.equals("Red"))) {
+                    System.out.println("입력하신 상태값은 없습니다. \n되돌아갑니다!");
+                    break;
+                }
                 //입력한 고유번호(insertNumber)의 수강생의 상태를 setStatus 메서드 이용해 updateStatus 으로 바꿔줘!
                 for (int i = 0; i < studentStore.size(); i++) {
                     if (insertNumber.equals(studentStore.get(i).getStudentId())) {
@@ -434,7 +494,7 @@ public class CampManagementApplication {
                 }
                 break;
 
-            // 1 이름, 2 상태 이외 선택 시
+                // 1 이름, 2 상태 이외 선택 시
             } else {
                 System.out.println("잘못된 입력입니다.\n되돌아갑니다!");
                 break;
@@ -456,7 +516,6 @@ public class CampManagementApplication {
             System.out.println("7. 특정 상태 수강생들의 필수 과목 평균 등급 조회");
             System.out.println("8. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
-
             int input = 0;
             try {    //nextInt에 문자열이 입력됬을때를 대비
                 input = sc.nextInt();
@@ -465,13 +524,12 @@ public class CampManagementApplication {
                 sc.nextLine();
             }
 
-
             switch (input) {
                 case 1 -> createScore(); // 수강생의 과목별 시험 회차 및 점수 등록
                 case 2 -> updateRoundScoreBySubject(); // 수강생의 과목별 회차 점수 수정
                 case 3 -> inquireRoundGradeBySubject(); // 수강생의 특정 과목 회차별 등급 조회
                 case 4 -> inquireAverageGrade(); // 수강생의 특정 과목 평균등급 조회
-                case 5 -> roundScoreList();  //특정 과목 특정 회차 점수 순위
+                case 5 ->roundScoreList();  //특정 과목 특정 회차 점수 순위
                 case 7 -> inquireAverageGradeByStatus(); // 수강생의 특정 과목 평균등급 조회
                 case 8 -> flag = false; // 메인 화면 이동
                 default -> {
@@ -494,6 +552,7 @@ public class CampManagementApplication {
 
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() {
+
         // scoredetail 리스트 선언.
         List<ScoreDetail> scoreList = new ArrayList<>();
         String studentId = getStudentId();
@@ -538,7 +597,6 @@ public class CampManagementApplication {
                         System.out.println("점수를 등록할 시험의 회차를 선택하세요...(1~10 입력)");
                         int round = sc.nextInt();
                         sc.nextLine(); // 값 넘어가는 부분 수정
-
 
                         boolean roundFound = false;
                         for (int j = 0; j < scoreStore.size(); j++) {
@@ -653,6 +711,11 @@ public class CampManagementApplication {
         System.out.println("\n점수 등록 성공!");
     }
 
+
+    // 수강생의 과목별 회차 점수 수정//1. 해당학생 조회하고 없는 번호면 오류 텍스트 출력하기
+    //        //2. 해당학생의 수정할 과목 입력하고 조회 후 없으면 오류 텍스트 출력하기
+    //        //3. 수정할 회차 입력하고 조회 후 없으면 오류 텍스트 출력하기
+    //        //4. 점수 수정하는 기능 구현 점수가 없으면 바로 추가해주는것도 넣기
     private static void updateRoundScoreBySubject() {
         String studentId = getStudentId(); // 관리할 수강생 고유 번호
         Student SI = null;
@@ -729,12 +792,11 @@ public class CampManagementApplication {
 //        String subjectId = getSubjectId(); // 관리할 과목 고유 번호
         String subjectId = getSubjectIdByName();  //이름으로 과목 고유번호 입력
         // 기능 구현
+        getSubjectNameListByStudentId(studentId);
         System.out.println("회차별 등급을 조회합니다...");
         //해당 학생아이디와 과목아이디를 가진 점수를 찾아라
-        Optional<Score> selectScore = scoreStore.stream()
-                .filter((Score score) -> score.getStudentId().equals(studentId))
-                .filter((Score score) -> score.getSubjectId().equals(subjectId))
-                .findFirst();
+        Optional<Score> selectScore=GetScoreByStudentIdAndSubjectId(studentId,subjectId);
+
         //만약 있다면
         if (selectScore.isPresent()) {
             List<ScoreDetail> scoreList = selectScore.get().getScoreList();
@@ -749,8 +811,7 @@ public class CampManagementApplication {
             else {
                 System.out.println("\n 해당과목에 등록된 점수가 없습니다");
             }
-        } else {
-
+        }else {
             System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
         }
     }
@@ -1004,6 +1065,7 @@ public class CampManagementApplication {
             System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
         }
     }
+
     //해당 수강생의 수업과목 이름 목록  출력
     public static void getSubjectNameListByStudentId(String studentId){
         List<String> selectScore = scoreStore.stream()
@@ -1031,7 +1093,7 @@ public class CampManagementApplication {
             .filter((Score score) -> score.getSubjectId().equals(subjectId))
             .findFirst();
         return selectScore;
-    }
+
 
     // 상태별 수강ㄹ생 목록 조회
     public static void inquireStudentStatus() {
@@ -1063,6 +1125,6 @@ public class CampManagementApplication {
         if (!studentFound) {
             System.out.println("해당 상태의 학생이 없습니다.");
         }
+
     }
-    //git이 안됨
-}
+}}
