@@ -1,12 +1,16 @@
 package camp.model;
 
+import java.util.List;
+
 public class Student {
     private String studentId;
     private String studentName;
+    private Status status;
 
-    public Student(String seq, String studentName) {
-        this.studentId = seq;
+    public Student(String studentId, String studentName, Status status) {
+        this.studentId = studentId;
         this.studentName = studentName;
+        this.status = status;
     }
 
     // Getter
@@ -18,4 +22,14 @@ public class Student {
         return studentName;
     }
 
+    public Status getStatus() { return status; }
+
+    public void setStatus(Status status) { this.status = status; }
+
+    // Setter
+    public void setStudentName(String updateName) {
+        studentName = updateName;
+    }
+
 }
+
