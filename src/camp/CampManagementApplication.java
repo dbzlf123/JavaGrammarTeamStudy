@@ -296,10 +296,11 @@ public class CampManagementApplication {
             System.out.println("수강생 관리 실행 중...");
             System.out.println("1. 수강생 등록");
             System.out.println("2. 수강생 목록 조회");
-            System.out.println("5. 수강생 정보 수정");
-            System.out.println("6. 상태별 수강생 목록 조회");
-            System.out.println("7. 수강생 삭제");
-            System.out.println("8. 메인 화면 이동");
+            System.out.println("3. 수강생 정보 조회");
+            System.out.println("4. 수강생 정보 수정");
+            System.out.println("5. 상태별 수강생 목록 조회");
+            System.out.println("6. 수강생 삭제");
+            System.out.println("7. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
 
             int input = 0;
@@ -313,10 +314,11 @@ public class CampManagementApplication {
             switch (input) {
                 case 1 -> createStudent(); // 수강생 등록
                 case 2 -> inquireStudent(); // 수강생 목록 조회
-                case 5 -> updateStudent(); // 수강생 정보 수정
-                case 6 -> inquireStudentStatus(); // 상태별 수강생목록 조회
-                case 7 -> removeStudent(); // 수강생 삭제
-                case 8 -> flag = false; // 메인 화면 이동
+                case 3 -> inquireStudentInfo(); //수강생 정보 조회
+                case 4 -> updateStudent(); // 수강생 정보 수정
+                case 5 -> inquireStudentStatus(); // 상태별 수강생목록 조회
+                case 6 -> removeStudent(); // 수강생 삭제
+                case 7 -> flag = false; // 메인 화면 이동
                 default -> {
                     System.out.println("잘못된 입력입니다.\n메인 화면 이동...");
                     flag = false;
@@ -749,30 +751,33 @@ public class CampManagementApplication {
                 System.out.println("잘못된 회차 입니다. (1 ~ 10)회차 까지 있습니다.");
             }
         }
-        System.out.println(inputRound);
-        System.out.println("새로운 점수를 입력해 주세요 "); // 점수입력 - 범위벗어나는 숫자 입력시 오류 문자 내는 기능 넣기
-        int updatedScore = sc.nextInt();
-        for (int i = 0; i < scoreStore.size(); i++) {
-            if (SI.getStudentId().equals(scoreStore.get(i).getStudentId()) && SJ.getSubjectId().equals(scoreStore.get(i).getSubjectId())) { //
-                List<ScoreDetail> Sl = scoreStore.get(i).getScoreList(); //scoreStore에서 해당 학생아이디 과목아이디 를 가진 ScoreDetail 리스트를 가져온다.
-                int r = 0;
-                for (int j = 0; j < Sl.size(); j++) { // 해당 라운드가 값이 있는지 확인 하는 for 문
-                    if (Sl.get(j).getRound() == inputRound) {
-                        r = inputRound;
-                    }
-                }
-                if (r == 0) { // 해당 라운드 값이 없으면 r = 0 그대로 내려오므로 바로 값 추가하는것.
-                    ScoreDetail updatedRound = new ScoreDetail(inputRound, updatedScore, SJ.getSubjectType()); //새로운 다타일 생성
-                    scoreStore.get(i).addScore(updatedRound);
-                } else { //r ==inputRound 가 됐으면 해당 스코어값을 수정하는 코드
-                    for (int k = 0; k < Sl.size(); k++) { //Sl의 k위치의 라운드 값과 r의 입력된 라운드 값이 매치되는 위치를 찾고 그위치의 값을 setScore해준다.
-                        if (r == Sl.get(k).getRound()) {
-                            Sl.get(k).setScore(SJ.getSubjectType(), updatedScore);
+        while(true){
+            System.out.println(inputRound);
+            System.out.println("새로운 점수를 입력해 주세요 "); // 점수입력 - 범위벗어나는 숫자 입력시 오류 문자 내는 기능 넣기
+            int updatedScore = sc.nextInt();
+            if(updatedScore>= 0 && updatedScore<= 100){
+                for (int i = 0; i < scoreStore.size(); i++) {
+                    if (SI.getStudentId().equals(scoreStore.get(i).getStudentId()) && SJ.getSubjectId().equals(scoreStore.get(i).getSubjectId())) { //
+                        List<ScoreDetail> Sl = scoreStore.get(i).getScoreList(); //scoreStore에서 해당 학생아이디 과목아이디 를 가진 ScoreDetail 리스트를 가져온다.
+                        int r = 0;
+                        for (int j = 0; j < Sl.size(); j++) { // 해당 라운드가 값이 있는지 확인 하는 for 문
+                            if (Sl.get(j).getRound() == inputRound) {
+                                r = inputRound;
+                            }
+                        }
+                        if (r == 0) { // 해당 라운드 값이 없으면 r = 0 그대로 내려오므로 바로 값 추가하는것.
+                            ScoreDetail updatedRound = new ScoreDetail(inputRound, updatedScore, SJ.getSubjectType()); //새로운 다타일 생성
+                            scoreStore.get(i).addScore(updatedRound);
+                        } else { //r ==inputRound 가 됐으면 해당 스코어값을 수정하는 코드
+                            for (int k = 0; k < Sl.size(); k++) { //Sl의 k위치의 라운드 값과 r의 입력된 라운드 값이 매치되는 위치를 찾고 그위치의 값을 setScore해준다.
+                                if (r == Sl.get(k).getRound()) {
+                                    Sl.get(k).setScore(SJ.getSubjectType(), updatedScore);
+                                }
+                            }
                         }
                     }
-                }
-            }
-        }
+                }break;}
+            else { System.out.println("잘못된 입력값입니다. (1~100까지의 점수만 입력가능)");}}
         System.out.println("시험 점수를 수정합니다...");
         System.out.println("\n점수 수정 성공!");
     }
@@ -1120,4 +1125,30 @@ public class CampManagementApplication {
                 System.out.println("해당 상태의 학생이 없습니다.");
             }
         }
+    public static void inquireStudentInfo() {
+        System.out.println("\n수강생 목록을 조회합니다...");
+        String studentId = getStudentId(); // 학생 id 입력
+        System.out.println();
+        Student studentInfo = null;
+        // studentStore 리스트에서 학생 정보 받아서 목록 출력 + 순서대로 번호 부여
+        for (int i = 0; i < studentStore.size(); i++) {
+            if(studentId.equals(studentStore.get(i).getStudentId())) { //입력받은 id가 스튜던트 스토어에 같은값이 있다면 진행
+                System.out.println("고유번호: "); //과목 이름 받아오는 메서드가 세로로 나열해서
+                //비슷하게 맞추기 위한 세로 정렬
+                System.out.println(" "+ studentStore.get(i).getStudentId());
+                System.out.println("이름: ");
+                System.out.println(" "+ studentStore.get(i).getStudentName());
+                System.out.println("상태: ");
+                System.out.println(" " +studentStore.get(i).getStatus());
+                System.out.println("과목: ");
+                getSubjectNameListByStudentId(studentId); //해당학생이 선택한 과목 리스트 불러오기
+                break;
+            }
+        }
+        if(studentInfo == null){
+            System.out.println("해당 학생을 찾을 수 없습니다.");
+            return; //오류시 끝내기
+        }
+        System.out.println("\n수강생 목록 조회 성공!");
+    }
 }
