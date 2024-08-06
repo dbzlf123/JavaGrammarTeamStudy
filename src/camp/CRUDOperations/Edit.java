@@ -1,4 +1,4 @@
 package camp.CRUDOperations;
 
-public class UpdateDelete {
+public class Edit {
 }
