@@ -3,6 +3,7 @@ package camp;
 import camp.CRUDOperations.Helper;
 import camp.CRUDOperations.Inquire;
 import camp.model.*;
+import camp.CRUDOperations.Edit;
 
 import java.util.*;
 
@@ -264,9 +265,9 @@ public class CampManagementApplication {
                 case 1 -> createStudent(); // 수강생 등록
                 case 2 -> Inquire.inquireStudent(studentStore); // 수강생 목록 조회
                 case 3 -> Inquire.inquireStudentInfo(studentStore); //수강생 정보 조회
-                case 4 -> updateStudent(); // 수강생 정보 수정
+                case 4 -> Edit.updateStudent(); // 수강생 정보 수정
                 case 5 -> Inquire.inquireStudentStatus(studentStore); // 상태별 수강생목록 조회
-                case 6 -> removeStudent(); // 수강생 삭제
+                case 6 -> Edit.removeStudent(); // 수강생 삭제
                 case 7 -> flag = false; // 메인 화면 이동
                 default -> {
                     System.out.println("잘못된 입력입니다.\n메인 화면 이동...");
@@ -349,8 +350,6 @@ public class CampManagementApplication {
 
         System.out.println("수강생 등록 성공!\n");
     }
-
-
 
     // 수강생 정보 수정
     private static void updateStudent() {
@@ -441,7 +440,6 @@ public class CampManagementApplication {
         }
     }
 
-
     private static void displayScoreView() {
         boolean flag = true;
         while (flag) {
@@ -465,10 +463,10 @@ public class CampManagementApplication {
 
             switch (input) {
                 case 1 -> createScore(); // 수강생의 과목별 시험 회차 및 점수 등록
-                case 2 -> updateRoundScoreBySubject(); // 수강생의 과목별 회차 점수 수정
+                case 2 -> Edit.updateRoundScoreBySubject(); // 수강생의 과목별 회차 점수 수정
                 case 3 -> Inquire.inquireRoundGradeBySubject(); // 수강생의 특정 과목 회차별 등급 조회
                 case 4 -> Inquire.inquireAverageGrade(subjectStore); // 수강생의 특정 과목 평균등급 조회
-                case 5 -> roundScoreList();  //특정 과목 특정 회차 점수 순위
+                case 5 -> Edit.roundScoreList();  //특정 과목 특정 회차 점수 순위
                 case 7 -> Inquire.inquireAverageGradeByStatus(studentStore, subjectStore, scoreStore); // 수강생의 특정 과목 평균등급 조회
                 case 8 -> flag = false; // 메인 화면 이동
                 default -> {
@@ -636,180 +634,5 @@ public class CampManagementApplication {
         }
         System.out.println("\n점수 등록 성공!");
     }
-
-    private static void updateRoundScoreBySubject() {
-        String studentId = Helper.getStudentId(); // 관리할 수강생 고유 번호
-        Student SI = null;
-        for (int i = 0; i < studentStore.size(); i++) {
-            if (studentId.equals(studentStore.get(i).getStudentId())) { //학생 아이디값 같으면 진행
-                SI = studentStore.get(i); //나중에 scoreDetail에 넣을 si 값을 찾은 id값을 대입
-                break;
-            }
-        }
-        if (SI == null) {
-            System.out.println("해당 학생을 찾을 수 없습니다.");
-            return; //오류시 끝내기
-        }
-
-        String inputSubjectId = Helper.getSubjectId(); //해당 과목 id 입력
-        Subject SJ = null;
-        for (int i = 0; i < subjectStore.size(); i++) {
-            if (inputSubjectId.equals(subjectStore.get(i).getSubjectId())) {
-                //입력된 과목과 불러온 과목 이름 같은지 대조
-                SJ = subjectStore.get(i);
-                //맞으면 해당 과목의 값을 넣고 다음으로 넘어감
-                break;
-            }
-        }
-        if (SJ == null) {
-            System.out.println("해당 과목을 찾을 수 없습니다.");
-            return; //오류
-        }
-        int inputRound;
-        while (true) {
-            System.out.println("수정할 회차를 입력해 주세요 ");
-            inputRound = sc.nextInt();
-            if (inputRound > 0 && inputRound < 11) {
-                System.out.println("선택한 회차 : " + inputRound + "회차 입니다");
-                break;
-            } else {
-                System.out.println("잘못된 회차 입니다. (1 ~ 10)회차 까지 있습니다.");
-            }
-        }
-        while (true) {
-            System.out.println(inputRound);
-            System.out.println("새로운 점수를 입력해 주세요 "); // 점수입력 - 범위벗어나는 숫자 입력시 오류 문자 내는 기능 넣기
-            int updatedScore = sc.nextInt();
-            if (updatedScore >= 0 && updatedScore <= 100) {
-                for (int i = 0; i < scoreStore.size(); i++) {
-                    if (SI.getStudentId().equals(scoreStore.get(i).getStudentId()) && SJ.getSubjectId().equals(scoreStore.get(i).getSubjectId())) { //
-                        List<ScoreDetail> Sl = scoreStore.get(i).getScoreList(); //scoreStore에서 해당 학생아이디 과목아이디 를 가진 ScoreDetail 리스트를 가져온다.
-                        int r = 0;
-                        for (int j = 0; j < Sl.size(); j++) { // 해당 라운드가 값이 있는지 확인 하는 for 문
-                            if (Sl.get(j).getRound() == inputRound) {
-                                r = inputRound;
-                            }
-                        }
-                        if (r == 0) { // 해당 라운드 값이 없으면 r = 0 그대로 내려오므로 바로 값 추가하는것.
-                            ScoreDetail updatedRound = new ScoreDetail(inputRound, updatedScore, SJ.getSubjectType()); //새로운 다타일 생성
-                            scoreStore.get(i).addScore(updatedRound);
-                        } else { //r ==inputRound 가 됐으면 해당 스코어값을 수정하는 코드
-                            for (int k = 0; k < Sl.size(); k++) { //Sl의 k위치의 라운드 값과 r의 입력된 라운드 값이 매치되는 위치를 찾고 그위치의 값을 setScore해준다.
-                                if (r == Sl.get(k).getRound()) {
-                                    Sl.get(k).setScore(SJ.getSubjectType(), updatedScore);
-                                }
-                            }
-                        }
-                    }
-                }
-                break;
-            } else {
-                System.out.println("잘못된 입력값입니다. (1~100까지의 점수만 입력가능)");
-            }
-        }
-        System.out.println("시험 점수를 수정합니다...");
-        System.out.println("\n점수 수정 성공!");
-    }
-
-    //수강생 지우기
-    public static void removeStudent() {
-        System.out.println("삭제할 수강생의 고유 번호를 입력하세요");
-        String studentId = sc.next();
-
-        //지운게 성공한적 체크를 위해 boolean 형 지역변수 선언
-        boolean successRemove = false;
-        for (Student student : studentStore) {
-            if (student.getStudentId().equals(studentId)) {
-                studentStore.remove(student);
-                //지우기 성공, 어차피 학생 ID 는 유일하니 바로 Break;
-                successRemove = true;
-                break;
-            }
-        }
-
-        //점수 저장 공간에서도 삭제
-        //그냥 Index 0 으로 하고 지워주면 삭제하면서 ArrayList 배열 땡겨져서 안됨, 뒤에서부터 지워야 배열 안변함
-        for (int i = scoreStore.size() - 1; i >= 0; i--) {
-            if (scoreStore.get(i).getStudentId().equals(studentId)) {
-                scoreStore.remove(i);
-            }
-        }
-
-        if (successRemove) System.out.println("성공적으로 삭제 되었습니다.");
-        else System.out.println("그런 수강생 없습니다");
-    }
-
-    //특정 과목 특정 회차 점수 순위
-    public static void roundScoreList() {
-        String subjectId = Helper.getSubjectIdByName();
-        List<Score> selectScore = scoreStore.stream()
-                .filter((Score score) -> score.getSubjectId().equals(subjectId))
-                .toList();
-        //만약 해당값이 있다면
-        if (!selectScore.isEmpty()) {
-            System.out.println("조회할 회차를 입력하세요");
-            int round = sc.nextInt();
-            HashMap<String, Integer> map = new HashMap<>();
-            for (Score score : selectScore) {
-                String studentId = score.getStudentId();
-                List<ScoreDetail> scorelist = score.getScoreList();
-                for (ScoreDetail scoreDetail : scorelist) {
-                    if (scoreDetail.getRound() == round) {
-                        map.put(studentId, scoreDetail.getScore());
-                    }
-                }
-            }
-            List<Map.Entry<String, Integer>> entryList = new LinkedList<>(map.entrySet());
-            if (!entryList.isEmpty()) {
-                entryList.sort(new Comparator<Map.Entry<String, Integer>>() {
-                    @Override
-                    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                        return o2.getValue() - o1.getValue();
-                    }
-                });
-                for (Map.Entry<String, Integer> entry : entryList) {
-                    System.out.println("이름 : " + Helper.getStudentNameById(entry.getKey()) + ", 점수 : " + entry.getValue());
-                }
-            } else {
-                System.out.println("등록된 점수가 없습니다.");
-            }
-        } else {
-            System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
-        }
-    }
-
-
-    // 상태별 수강생 목록 조회
-    //해당 수강생의 수업과목 이름 목록  출력
-    public static void getSubjectNameListByStudentId(String studentId) {
-        List<String> selectScore = scoreStore.stream()
-                .filter((Score score) -> score.getStudentId().equals(studentId))
-                .map(it -> it.getSubjectId()).toList();
-        if (selectScore.isEmpty()) {
-            System.out.println("해당 학생이 없습니다");
-        } else {
-            for (String subjectId : selectScore) {
-                System.out.println(Helper.getSubjectNameById(subjectId));
-            }
-        }
-    }
-
-    //해당 수강생의 수업점수목록
-    public static List<Score> getSubjectListByStudentId(String studentId) {
-        List<Score> selectScore = scoreStore.stream()
-                .filter((Score score) -> score.getStudentId().equals(studentId))
-                .toList();
-        return selectScore;
-    }
-
-    //수강생아이디& 과목 아이디로 해당 score 찾기
-    public static Optional<Score> GetScoreByStudentIdAndSubjectId(String studentId, String subjectId) {
-        Optional<Score> selectScore = scoreStore.stream()
-                .filter((Score score) -> score.getStudentId().equals(studentId))
-                .filter((Score score) -> score.getSubjectId().equals(subjectId))
-                .findFirst();
-        return selectScore;
-    }
-
 
 }
