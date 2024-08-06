@@ -703,11 +703,6 @@ public class CampManagementApplication {
         System.out.println("\n점수 등록 성공!");
     }
 
-
-    // 수강생의 과목별 회차 점수 수정//1. 해당학생 조회하고 없는 번호면 오류 텍스트 출력하기
-    //        //2. 해당학생의 수정할 과목 입력하고 조회 후 없으면 오류 텍스트 출력하기
-    //        //3. 수정할 회차 입력하고 조회 후 없으면 오류 텍스트 출력하기
-    //        //4. 점수 수정하는 기능 구현 점수가 없으면 바로 추가해주는것도 넣기
     private static void updateRoundScoreBySubject() {
         String studentId = getStudentId(); // 관리할 수강생 고유 번호
         Student SI = null;
@@ -722,8 +717,7 @@ public class CampManagementApplication {
             return; //오류시 끝내기
         }
 
-        System.out.println("수정할 과목 이름을 입력하세요.");
-        String inputSubjectId = sc.next(); //해당 과목 입력
+        String inputSubjectId = getSubjectId(); //해당 과목 id 입력
         Subject SJ = null;
         for (int i = 0; i < subjectStore.size(); i++) {
             if (inputSubjectId.equals(subjectStore.get(i).getSubjectId())) {
