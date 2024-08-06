@@ -3,8 +3,7 @@ package camp.CRUDOperations;
 import camp.CampManagementApplication;
 import camp.model.*;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Edit {
 
@@ -193,5 +192,44 @@ public class Edit {
 
         if (successRemove) System.out.println("성공적으로 삭제 되었습니다.");
         else System.out.println("그런 수강생 없습니다");
+    }
+
+    //특정 과목 특정 회차 점수 순위
+    public static void roundScoreList() {
+        String subjectId = Helper.getSubjectIdByName();
+        List<Score> selectScore = CampManagementApplication.scoreStore.stream()
+                .filter((Score score) -> score.getSubjectId().equals(subjectId))
+                .toList();
+        //만약 해당값이 있다면
+        if (!selectScore.isEmpty()) {
+            System.out.println("조회할 회차를 입력하세요");
+            int round = sc.nextInt();
+            HashMap<String, Integer> map = new HashMap<>();
+            for (Score score : selectScore) {
+                String studentId = score.getStudentId();
+                List<ScoreDetail> scorelist = score.getScoreList();
+                for (ScoreDetail scoreDetail : scorelist) {
+                    if (scoreDetail.getRound() == round) {
+                        map.put(studentId, scoreDetail.getScore());
+                    }
+                }
+            }
+            List<Map.Entry<String, Integer>> entryList = new LinkedList<>(map.entrySet());
+            if (!entryList.isEmpty()) {
+                entryList.sort(new Comparator<Map.Entry<String, Integer>>() {
+                    @Override
+                    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                        return o2.getValue() - o1.getValue();
+                    }
+                });
+                for (Map.Entry<String, Integer> entry : entryList) {
+                    System.out.println("이름 : " + Helper.getStudentNameById(entry.getKey()) + ", 점수 : " + entry.getValue());
+                }
+            } else {
+                System.out.println("등록된 점수가 없습니다.");
+            }
+        } else {
+            System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
+        }
     }
 }
