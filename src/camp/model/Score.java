@@ -1,6 +1,7 @@
 package camp.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Score {
@@ -38,6 +39,8 @@ public class Score {
 
     public void addScore(ScoreDetail score) {
         this.scoreList.add(score);
+        //새로운 회차가 들어오면 회차순으로 정렬
+        this.scoreList.sort(Comparator.comparingInt(scoreDetail -> scoreDetail.getRound()));
     }
 
     public List<ScoreDetail> getScoreList() {
