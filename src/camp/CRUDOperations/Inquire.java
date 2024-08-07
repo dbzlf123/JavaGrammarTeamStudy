@@ -54,11 +54,9 @@ public class Inquire {
     // 수강생의 특정 과목 회차별 등급 조회
     public static void inquireRoundGradeBySubject() {
         // 조회할 특정 수강생 입력
-        // String studentId = getStudentId(); // 관리할 수강생 고유 번호
         String studentId = Helper.getStudentIdByName();  //이름으로 수강생 고유번호 입력
         Helper.getSubjectNameListByStudentId(studentId);  //해당 이름의 수강과목
         // 조회할 특정 과목 입력
-        // String subjectId = getSubjectId(); // 관리할 과목 고유 번호
         String subjectId = Helper.getSubjectIdByName();  //이름으로 과목 고유번호 입력
         // 기능 구현
         System.out.println("회차별 등급을 조회합니다...");

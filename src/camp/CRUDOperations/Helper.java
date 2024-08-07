@@ -160,7 +160,7 @@ public class Helper {
         Optional<ScoreDetail> selectDetail = score.getScoreList().stream()
             .filter((ScoreDetail e) -> e.getRound()==round)
             .findFirst();
-        return selectDetail.orElseGet(() -> new ScoreDetail(round, 0, Helper.getSubjectTypeById(score.getStudentId())));
+        return selectDetail.orElseGet(() -> new ScoreDetail(round, 0, Helper.getSubjectTypeById(score.getSubjectId())));
     }
 
     private static int getRound() {
