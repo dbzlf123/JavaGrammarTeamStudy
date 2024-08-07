@@ -31,12 +31,12 @@ public class Inquire {
         for (int i = 0; i < studentStore.size(); i++) {
             if (studentId.equals(studentStore.get(i).getStudentId())) { //입력받은 id가 스튜던트 스토어에 같은값이 있다면 진행
                 studentInfo = studentStore.get(i); //진행 오류 확인용
-                System.out.println("고유번호: "); //과목 이름 받아오는 메서드가 세로로 나열해서
+                System.out.print("고유번호: "); //과목 이름 받아오는 메서드가 세로로 나열해서
                 //비슷하게 맞추기 위한 세로 정렬
                 System.out.println(" " + studentStore.get(i).getStudentId());
-                System.out.println("이름: ");
+                System.out.print("이름: ");
                 System.out.println(" " + studentStore.get(i).getStudentName());
-                System.out.println("상태: ");
+                System.out.print("상태: ");
                 System.out.println(" " + studentStore.get(i).getStatus());
                 System.out.println("과목: ");
                 Helper.getSubjectNameListByStudentId(studentId); //해당학생이 선택한 과목 리스트 불러오기
@@ -110,6 +110,7 @@ public class Inquire {
     public static void inquireAverageGrade(List<Subject> subjectStore) {
         // 조회할 특정 수강생 입력
         String studentId = Helper.getStudentIdByName(); //이름으로 수강생 고유번호 입력
+
         if(!studentId.equals("NoName")){
             System.out.println("해당 학생이 수강하는 과목입니다");
             Helper.getSubjectNameListByStudentId(studentId);
@@ -151,7 +152,7 @@ public class Inquire {
 
     //특정 상태 수강생들의 필수 과목 평균 등급 조회
     public static void inquireAverageGradeByStatus(List<Student> studentStore ,List<Subject> subjectStore, List<Score> scoreStore) {
-        System.out.println("찾으실 수강생들의 상태를 입력하세요");
+        System.out.println("찾으실 수강생들의 상태를 입력하세요. (Green, Yellow, Red 중 입력)");
         String inputStatus = sc.next();
         Status status = Status.checkType(inputStatus);
 
