@@ -133,12 +133,12 @@ public class Edit {
                 }
             }
             if (r == 0) { // 해당 라운드 값이 없으면 r = 0 그대로 내려오므로 바로 값 추가하는것.
-                ScoreDetail updatedRound = new ScoreDetail(inputRound, updatedScore,Helper.getSubjectTypeByName(Helper.getSubjectNameById(inputSubjectId))); //새로운 디테일 생성
+                ScoreDetail updatedRound = new ScoreDetail(inputRound, updatedScore,Helper.getSubjectTypeById(inputSubjectId)); //새로운 디테일 생성
                 score.addScore(updatedRound);
             } else { //r ==inputRound 가 됐으면 해당 스코어값을 수정하는 코드
                 for (int k = 0; k < Sl.size(); k++) { //Sl의 k위치의 라운드 값과 r의 입력된 라운드 값이 매치되는 위치를 찾고 그위치의 값을 setScore해준다.
                     if (r == Sl.get(k).getRound()) {
-                        Sl.get(k).setScore(Helper.getSubjectTypeByName(Helper.getSubjectNameById(inputSubjectId)), updatedScore);
+                        Sl.get(k).setScore(Helper.getSubjectTypeById(inputSubjectId), updatedScore);
                     }
                 }
             }

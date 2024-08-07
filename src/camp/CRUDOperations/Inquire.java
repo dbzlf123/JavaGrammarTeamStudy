@@ -24,7 +24,7 @@ public class Inquire {
 
     public static void inquireStudentInfo(List<Student> studentStore) {
         System.out.println("\n수강생 목록을 조회합니다...");
-        String studentId = Helper.getStudentIdByName(); // 학생 id 입력
+        String studentId = Helper.getStudentIdByName(); // 학생 이름 입력을 id로 변환
         System.out.println();
         Student studentInfo = null;
         // studentStore 리스트에서 학생 정보 받아서 목록 출력 + 순서대로 번호 부여
