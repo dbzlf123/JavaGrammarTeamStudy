@@ -89,22 +89,13 @@ public class Inquire {
     public static void inquireStudentStatus(List<Student> studentStore) {
         System.out.println("찾으실 수강생들의 상태를 입력하세요 (Green, Yellow, Red 중 입력)");
         String inputStatus = sc.next();
-        Status status;
+        Status status = Status.checkType(inputStatus);
 
-        switch (inputStatus) {
-            case "Green":
-                status = Status.Green;
-                break;
-            case "Yellow":
-                status = Status.Yellow;
-                break;
-            case "Red":
-                status = Status.Red;
-                break;
-            default:
-                System.out.println("해당하는 상태 값은 없습니다.");
-                return;
+        if(status == null){
+            System.out.println("해당하는 상태 값은 없습니다.");
+            return;
         }
+
         boolean studentFound = false;
         for (Student student : studentStore) {
             if (student.getStatus() == status) {
@@ -162,21 +153,11 @@ public class Inquire {
     public static void inquireAverageGradeByStatus(List<Student> studentStore ,List<Subject> subjectStore, List<Score> scoreStore) {
         System.out.println("찾으실 수강생들의 상태를 입력하세요");
         String inputStatus = sc.next();
-        Status status = Status.Green;
+        Status status = Status.checkType(inputStatus);
 
-        switch (inputStatus) {
-            case "Green":
-                status = Status.Green;
-                break;
-            case "Yellow":
-                status = Status.Yellow;
-                break;
-            case "Red":
-                status = Status.Red;
-                break;
-            default:
-                System.out.println("해당하는 상태값은 없습니다.");
-                return;
+        if(status == null){
+            System.out.println("해당하는 상태 값은 없습니다.");
+            return;
         }
 
         //클래스화 시킬때 Stream 화 시키기
