@@ -110,8 +110,9 @@ public class Inquire {
     public static void inquireAverageGrade(List<Subject> subjectStore) {
         // 조회할 특정 수강생 입력
         String studentId = Helper.getStudentIdByName(); //이름으로 수강생 고유번호 입력
+        System.out.println("해당 학생이 수강하는 과목입니다");
+        Helper.getSubjectNameListByStudentId(studentId);
 
-        Helper.getSubjectNameListByStudentId(studentId);  //해당 이름의 수강과목
         // 조회할 특정 과목 입력
         String subjectId = Helper.getSubjectIdByName();  //이름으로 과목 고유번호 입력
         //기능 규현
@@ -149,7 +150,7 @@ public class Inquire {
 
     //특정 상태 수강생들의 필수 과목 평균 등급 조회
     public static void inquireAverageGradeByStatus(List<Student> studentStore ,List<Subject> subjectStore, List<Score> scoreStore) {
-        System.out.println("찾으실 수강생들의 상태를 입력하세요");
+        System.out.println("찾으실 수강생들의 상태를 입력하세요. (Green, Yellow, Red 중 입력)");
         String inputStatus = sc.next();
         Status status = Status.checkType(inputStatus);
 
