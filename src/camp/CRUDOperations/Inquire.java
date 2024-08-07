@@ -209,21 +209,4 @@ public class Inquire {
         }
         if (!found) System.out.println("해당 상태의 학생이 존재하지 않습니다.");
     }
-
-
-
-
-
-
-
-    private static String getStudentId() {
-        System.out.print("\n관리할 수강생의 번호를 입력하시오...");
-        return sc.next();
-    }
-
-    private static String getSubjectId() {
-        System.out.print("\n관리할 과목의 번호를 입력하시오...");
-        return sc.next();
-    }
-
 }

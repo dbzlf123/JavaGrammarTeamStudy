@@ -2,6 +2,7 @@ package camp.CRUDOperations;
 
 import camp.CampManagementApplication;
 import camp.model.Score;
+import camp.model.ScoreDetail;
 import camp.model.Student;
 import camp.model.Subject;
 
@@ -153,5 +154,25 @@ public class Helper {
         //아래와 같음
 //        if(selectScore.isPresent()) return selectScore.get();
 //        else return new Score("SC0","ST0","SU0");
+    }
+    public static ScoreDetail GetScoreDetailByRound(Score score) {
+        int round = getRound();
+        Optional<ScoreDetail> selectDetail = score.getScoreList().stream()
+            .filter((ScoreDetail e) -> e.getRound()==round)
+            .findFirst();
+        return selectDetail.orElseGet(() -> new ScoreDetail(round, 0, Helper.getSubjectTypeById(score.getStudentId())));
+    }
+
+    private static int getRound() {
+        while (true) {
+            System.out.println("수정할 회차를 입력해 주세요 ");
+            int inputRound = sc.nextInt();
+            if (inputRound > 0 && inputRound < 11) {
+                System.out.println("선택한 회차 : " + inputRound + "회차 입니다");
+                return inputRound;
+            } else {
+                System.out.println("잘못된 회차 입니다. (1 ~ 10)회차 까지 있습니다.");
+            }
+        }
     }
 }
