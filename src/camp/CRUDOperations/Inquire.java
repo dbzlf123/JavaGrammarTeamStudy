@@ -24,7 +24,7 @@ public class Inquire {
 
     public static void inquireStudentInfo(List<Student> studentStore) {
         System.out.println("\n수강생 목록을 조회합니다...");
-        String studentId = getStudentId(); // 학생 id 입력
+        String studentId = Helper.getStudentIdByName(); // 학생 id 입력
         System.out.println();
         Student studentInfo = null;
         // studentStore 리스트에서 학생 정보 받아서 목록 출력 + 순서대로 번호 부여
@@ -56,18 +56,18 @@ public class Inquire {
         // 조회할 특정 수강생 입력
         // String studentId = getStudentId(); // 관리할 수강생 고유 번호
         String studentId = Helper.getStudentIdByName();  //이름으로 수강생 고유번호 입력
+        Helper.getSubjectNameListByStudentId(studentId);  //해당 이름의 수강과목
         // 조회할 특정 과목 입력
         // String subjectId = getSubjectId(); // 관리할 과목 고유 번호
         String subjectId = Helper.getSubjectIdByName();  //이름으로 과목 고유번호 입력
         // 기능 구현
-        Helper.getSubjectNameListByStudentId(studentId);
         System.out.println("회차별 등급을 조회합니다...");
         //해당 학생아이디와 과목아이디를 가진 점수를 찾아라
-        Optional<Score> selectScore = Helper.GetScoreByStudentIdAndSubjectId(studentId, subjectId);
+        Score selectScore = Helper.GetScoreByStudentIdAndSubjectId(studentId, subjectId);
 
         //만약 있다면
-        if (selectScore.isPresent()) {
-            List<ScoreDetail> scoreList = selectScore.get().getScoreList();
+        if (!selectScore.getSubjectId().equals("SU0")) {
+            List<ScoreDetail> scoreList = selectScore.getScoreList();
 
             //점수가 등록된 경우 점수 출력
             if (!scoreList.isEmpty()) {
@@ -89,22 +89,13 @@ public class Inquire {
     public static void inquireStudentStatus(List<Student> studentStore) {
         System.out.println("찾으실 수강생들의 상태를 입력하세요 (Green, Yellow, Red 중 입력)");
         String inputStatus = sc.next();
-        Status status;
+        Status status = Status.checkType(inputStatus);
 
-        switch (inputStatus) {
-            case "Green":
-                status = Status.Green;
-                break;
-            case "Yellow":
-                status = Status.Yellow;
-                break;
-            case "Red":
-                status = Status.Red;
-                break;
-            default:
-                System.out.println("해당하는 상태 값은 없습니다.");
-                return;
+        if(status == null){
+            System.out.println("해당하는 상태 값은 없습니다.");
+            return;
         }
+
         boolean studentFound = false;
         for (Student student : studentStore) {
             if (student.getStatus() == status) {
@@ -126,23 +117,21 @@ public class Inquire {
         //기능 규현
         System.out.println("평균 등급을 조회합니다...");
         //해당 학생과 과목이 일치하는 점수 얻기
-        Optional<Score> selectScore = Helper.GetScoreByStudentIdAndSubjectId(studentId, subjectId);
-        if (selectScore.isPresent()) {
-            Score score = selectScore.get();
+        Score selectScore = Helper.GetScoreByStudentIdAndSubjectId(studentId, subjectId);
+        if (!selectScore.getSubjectId().equals("SU0")) {
+            Score score = selectScore;
 
             //점수가 등록된 경우
             if (!score.getScoreList().isEmpty()) {
                 //해당하는 과목의 subjectType 구하기("필수 or 선택)
-                String subjectType = subjectStore.stream()
-                        .filter((Subject subject) -> subject.getSubjectId().equals(subjectId))
-                        .findFirst().get().getSubjectType();
+                String subjectType = Helper.getSubjectTypeById(subjectId);
                 //점수의 평균값 얻기
                 List<ScoreDetail> scoreList = score.getScoreList();
                 int sum = 0;
                 for (ScoreDetail scoreDetail : scoreList) {
                     sum += scoreDetail.getScore();
                 }
-                double avgScore = sum / scoreList.size();
+                double avgScore = (double) sum / scoreList.size();
                 // 평균 점수를 등급으로 바꿔줌
                 System.out.println("이 과목의 평균등급은 " + ScoreDetail.changeGrade(subjectType, avgScore) + "입니다.");
 
@@ -162,21 +151,11 @@ public class Inquire {
     public static void inquireAverageGradeByStatus(List<Student> studentStore ,List<Subject> subjectStore, List<Score> scoreStore) {
         System.out.println("찾으실 수강생들의 상태를 입력하세요");
         String inputStatus = sc.next();
-        Status status = Status.Green;
+        Status status = Status.checkType(inputStatus);
 
-        switch (inputStatus) {
-            case "Green":
-                status = Status.Green;
-                break;
-            case "Yellow":
-                status = Status.Yellow;
-                break;
-            case "Red":
-                status = Status.Red;
-                break;
-            default:
-                System.out.println("해당하는 상태값은 없습니다.");
-                return;
+        if(status == null){
+            System.out.println("해당하는 상태 값은 없습니다.");
+            return;
         }
 
         //클래스화 시킬때 Stream 화 시키기
@@ -211,21 +190,4 @@ public class Inquire {
         }
         if (!found) System.out.println("해당 상태의 학생이 존재하지 않습니다.");
     }
-
-
-
-
-
-
-
-    private static String getStudentId() {
-        System.out.print("\n관리할 수강생의 번호를 입력하시오...");
-        return sc.next();
-    }
-
-    private static String getSubjectId() {
-        System.out.print("\n관리할 과목의 번호를 입력하시오...");
-        return sc.next();
-    }
-
 }
