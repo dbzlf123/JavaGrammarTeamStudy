@@ -14,8 +14,7 @@ public class Edit {
         System.out.println("\n수강생 정보를 수정합니다...");
         // 수강생의 고유번호를 받아 이름, 상태를 수정
         while (true) {
-            System.out.print("수강생의 고유번호 입력 : ");
-            String insertNumber = sc.next();
+            String insertNumber = Helper.getStudentIdByName();
             boolean bFindName = false;
             // studentStore 에 입력한 고유번호이랑 같은 고유번호가 있다면 고유번호, 이름, 상태를 출력
             for (int i = 0; i < CampManagementApplication.studentStore.size(); i++) {
@@ -110,22 +109,15 @@ public class Edit {
         }
         String inputSubjectId = Helper.getSubjectIdByName(); //해당 과목 id 입력
         Score score = Helper.GetScoreByStudentIdAndSubjectId(studentId, inputSubjectId);
-
         if (!score.getSubjectId().equals("SU0")) {
             ScoreDetail scoreDetail = Helper.GetScoreDetailByRound(score);
-            while(true){//점수 범위를 벗어난 숫자입력시 오류내고 다시 돌아오게하기위해 넣음
-            System.out.println("새로운 점수를 입력해 주세요 "); // 회차 다음에 점수 입력을 넣기위해 안에 넣음
-            int updatedScore = sc.nextInt();
-            if (updatedScore >= 0 && updatedScore < 101) {
-                if(scoreDetail.getScore() != 0){ // 라운드에 값이 있으면 해당 scoreDetail에 셋스코어 해서 입력받은 점수 수정
-                    scoreDetail.setScore(Helper.getSubjectTypeById(inputSubjectId), updatedScore);
-                }else{// 라운드에 값이 없으면 새로운 scoreDetail 만들어주고 입력받은 값을 넣는다.
-                    scoreDetail.setScore(Helper.getSubjectTypeById(inputSubjectId), updatedScore);
-                    score.addScore(scoreDetail);
-                } break;
-            } else {
-                System.out.println("잘못된 입력값입니다. (1~100까지의 점수만 입력가능)");
-            }}
+            int updatedScore = Helper.getScore(); //점수 입력 받고 해당 점수 범위에 맞는 지 확인
+            if (scoreDetail.getScore() != 0) { // 라운드에 값이 있으면 해당 scoreDetail에 셋스코어 해서 입력받은 점수 수정
+                scoreDetail.setScore(Helper.getSubjectTypeById(inputSubjectId), updatedScore);
+            } else {// 라운드에 값이 없으면 새로운 scoreDetail 만들어주고 입력받은 값을 넣는다.
+                scoreDetail.setScore(Helper.getSubjectTypeById(inputSubjectId), updatedScore);
+                score.addScore(scoreDetail);
+            }
         } else {
             System.out.println("해당 과목을 찾을 수 없습니다.");
             return; //오류
