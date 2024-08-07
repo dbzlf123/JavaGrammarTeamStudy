@@ -94,17 +94,6 @@ public class Helper {
         else return "NoName";
     }
 
-    //초기값 생성에서 수강생의 과목 리스트를 쉽게 만들기 위한 함수 -> 나중에 지울 예정이라 신경안써도 됨
-    public static Subject getSubjectByName(String subjectName) {
-        Optional<Subject> selectSubject = CampManagementApplication.subjectStore.stream()
-            .filter((Subject subejct) -> subejct.getSubjectName().equals(subjectName))
-            .findFirst();
-        if (selectSubject.isPresent()) {
-            Subject subject = selectSubject.get();
-            return subject;
-        } else return new Subject("SU0", "NoSubject", "MANDATORY");
-    }
-
     //초기값 생성에서 과목 이름으로 과목타입을 구하는 함수
     public static String getSubjectTypeByName(String subjectName) {
         Optional<Subject> selectSubject = CampManagementApplication.subjectStore.stream()
@@ -135,13 +124,6 @@ public class Helper {
                 System.out.println(getSubjectNameById(subjectId));
             }
         }
-    }
-
-    //해당 수강생의 수업점수목록
-    public static List<Score> getSubjectListByStudentId(String studentId) {
-        return CampManagementApplication.scoreStore.stream()
-            .filter((Score score) -> score.getStudentId().equals(studentId))
-            .toList();
     }
 
     //수강생아이디& 과목 아이디로 해당 score 찾기
