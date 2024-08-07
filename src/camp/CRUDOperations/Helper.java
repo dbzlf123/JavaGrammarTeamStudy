@@ -165,7 +165,7 @@ public class Helper {
 
     private static int getRound() {
         while (true) {
-            System.out.println("수정할 회차를 입력해 주세요 ");
+            System.out.println("회차를 입력해 주세요 ");
             int inputRound = sc.nextInt();
             if (inputRound > 0 && inputRound < 11) {
                 System.out.println("선택한 회차 : " + inputRound + "회차 입니다");
