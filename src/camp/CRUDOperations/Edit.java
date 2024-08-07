@@ -26,8 +26,8 @@ public class Edit {
                     break;
                 }
             }
-            if (!bFindName) { //존재하지 않는 고유번호라면
-                System.out.println("입력한 고유번호의 수강생은 없습니다.\n되돌아갑니다!");
+            if (!bFindName) { //존재하지 않는 이름이라면
+                System.out.println("입력한 이름의 수강생은 없습니다.\n되돌아갑니다!");
                 break;
             }
             System.out.println("무엇을 변경하시겠습니까?");
