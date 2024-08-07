@@ -56,18 +56,18 @@ public class Inquire {
         // 조회할 특정 수강생 입력
         // String studentId = getStudentId(); // 관리할 수강생 고유 번호
         String studentId = Helper.getStudentIdByName();  //이름으로 수강생 고유번호 입력
+        Helper.getSubjectNameListByStudentId(studentId);  //해당 이름의 수강과목
         // 조회할 특정 과목 입력
         // String subjectId = getSubjectId(); // 관리할 과목 고유 번호
         String subjectId = Helper.getSubjectIdByName();  //이름으로 과목 고유번호 입력
         // 기능 구현
-        Helper.getSubjectNameListByStudentId(studentId);
         System.out.println("회차별 등급을 조회합니다...");
         //해당 학생아이디와 과목아이디를 가진 점수를 찾아라
-        Optional<Score> selectScore = Helper.GetScoreByStudentIdAndSubjectId(studentId, subjectId);
+        Score selectScore = Helper.GetScoreByStudentIdAndSubjectId(studentId, subjectId);
 
         //만약 있다면
-        if (selectScore.isPresent()) {
-            List<ScoreDetail> scoreList = selectScore.get().getScoreList();
+        if (!selectScore.getSubjectId().equals("SU0")) {
+            List<ScoreDetail> scoreList = selectScore.getScoreList();
 
             //점수가 등록된 경우 점수 출력
             if (!scoreList.isEmpty()) {
@@ -126,9 +126,9 @@ public class Inquire {
         //기능 규현
         System.out.println("평균 등급을 조회합니다...");
         //해당 학생과 과목이 일치하는 점수 얻기
-        Optional<Score> selectScore = Helper.GetScoreByStudentIdAndSubjectId(studentId, subjectId);
-        if (selectScore.isPresent()) {
-            Score score = selectScore.get();
+        Score selectScore = Helper.GetScoreByStudentIdAndSubjectId(studentId, subjectId);
+        if (!selectScore.getSubjectId().equals("SU0")) {
+            Score score = selectScore;
 
             //점수가 등록된 경우
             if (!score.getScoreList().isEmpty()) {
