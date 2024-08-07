@@ -113,6 +113,15 @@ public class Helper {
         else return "NoSubject";
     }
 
+    //초기값 생성에서 과목 아이디로 과목타입을 구하는 함수
+    public static String getSubjectTypeById(String subjectId) {
+        Optional<Subject> selectSubject = CampManagementApplication.subjectStore.stream()
+            .filter((Subject subejct) -> subejct.getSubjectId().equals(subjectId))
+            .findFirst();
+        if (selectSubject.isPresent()) return selectSubject.get().getSubjectType();
+        else return "NoSubject";
+    }
+
     //해당 수강생의 수업과목 이름 목록  출력
     public static void getSubjectNameListByStudentId(String studentId) {
         List<String> selectScore = CampManagementApplication.scoreStore.stream()
