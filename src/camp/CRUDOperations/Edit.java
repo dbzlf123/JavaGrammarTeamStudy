@@ -110,38 +110,22 @@ public class Edit {
         }
         String inputSubjectId = Helper.getSubjectIdByName(); //해당 과목 id 입력
         Score score = Helper.GetScoreByStudentIdAndSubjectId(studentId, inputSubjectId);
+
         if (!score.getSubjectId().equals("SU0")) {
-            int inputRound;
-            while (true) {
-                System.out.println("수정할 회차를 입력해 주세요 ");
-                inputRound = sc.nextInt();
-                if (inputRound > 0 && inputRound < 11) {
-                    System.out.println("선택한 회차 : " + inputRound + "회차 입니다");
-                    break;
-                } else {
-                    System.out.println("잘못된 회차 입니다. (1 ~ 10)회차 까지 있습니다.");
-                }
-            }
-            System.out.println(inputRound);
-            System.out.println("새로운 점수를 입력해 주세요 "); // 점수입력 - 범위벗어나는 숫자 입력시 오류 문자 내는 기능 넣기
+            ScoreDetail scoreDetail = Helper.GetScoreDetailByRound(score);
+            while(true){//점수 범위를 벗어난 숫자입력시 오류내고 다시 돌아오게하기위해 넣음
+            System.out.println("새로운 점수를 입력해 주세요 "); // 회차 다음에 점수 입력을 넣기위해 안에 넣음
             int updatedScore = sc.nextInt();
-            List<ScoreDetail> Sl = score.getScoreList(); //scoreStore에서 해당 학생아이디 과목아이디 를 가진 ScoreDetail 리스트를 가져온다.
-            int r = 0;
-            for (int j = 0; j < Sl.size(); j++) { // 해당 라운드가 값이 있는지 확인 하는 for 문
-                if (Sl.get(j).getRound() == inputRound) {
-                    r = inputRound;
-                }
-            }
-            if (r == 0) { // 해당 라운드 값이 없으면 r = 0 그대로 내려오므로 바로 값 추가하는것.
-                ScoreDetail updatedRound = new ScoreDetail(inputRound, updatedScore,Helper.getSubjectTypeById(inputSubjectId)); //새로운 디테일 생성
-                score.addScore(updatedRound);
-            } else { //r ==inputRound 가 됐으면 해당 스코어값을 수정하는 코드
-                for (int k = 0; k < Sl.size(); k++) { //Sl의 k위치의 라운드 값과 r의 입력된 라운드 값이 매치되는 위치를 찾고 그위치의 값을 setScore해준다.
-                    if (r == Sl.get(k).getRound()) {
-                        Sl.get(k).setScore(Helper.getSubjectTypeById(inputSubjectId), updatedScore);
-                    }
-                }
-            }
+            if (updatedScore >= 0 && updatedScore < 101) {
+                if(scoreDetail.getScore() != 0){ // 라운드에 값이 있으면 해당 scoreDetail에 셋스코어 해서 입력받은 점수 수정
+                    scoreDetail.setScore(Helper.getSubjectTypeById(inputSubjectId), updatedScore);
+                }else{// 라운드에 값이 없으면 새로운 scoreDetail 만들어주고 입력받은 값을 넣는다.
+                    scoreDetail.setScore(Helper.getSubjectTypeById(inputSubjectId), updatedScore);
+                    score.addScore(scoreDetail);
+                } break;
+            } else {
+                System.out.println("잘못된 입력값입니다. (1~100까지의 점수만 입력가능)");
+            }}
         } else {
             System.out.println("해당 과목을 찾을 수 없습니다.");
             return; //오류
