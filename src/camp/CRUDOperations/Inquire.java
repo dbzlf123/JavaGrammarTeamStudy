@@ -149,7 +149,7 @@ public class Inquire {
 
     //특정 상태 수강생들의 필수 과목 평균 등급 조회
     public static void inquireAverageGradeByStatus(List<Student> studentStore ,List<Subject> subjectStore, List<Score> scoreStore) {
-        System.out.println("찾으실 수강생들의 상태를 입력하세요");
+        System.out.println("찾으실 수강생들의 상태를 입력하세요. (Green, Yellow, Red 중 입력)");
         String inputStatus = sc.next();
         Status status = Status.checkType(inputStatus);
 

@@ -128,6 +128,7 @@ public class Edit {
 
     //수강생 지우기
     public static void removeStudent() {
+        Inquire.inquireStudent(CampManagementApplication.studentStore);
         System.out.println("삭제할 수강생의 고유 번호를 입력하세요");
         String studentId = sc.next();
 
