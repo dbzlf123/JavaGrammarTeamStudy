@@ -133,16 +133,14 @@ public class Inquire {
             //점수가 등록된 경우
             if (!score.getScoreList().isEmpty()) {
                 //해당하는 과목의 subjectType 구하기("필수 or 선택)
-                String subjectType = subjectStore.stream()
-                        .filter((Subject subject) -> subject.getSubjectId().equals(subjectId))
-                        .findFirst().get().getSubjectType();
+                String subjectType = Helper.getSubjectTypeById(subjectId);
                 //점수의 평균값 얻기
                 List<ScoreDetail> scoreList = score.getScoreList();
                 int sum = 0;
                 for (ScoreDetail scoreDetail : scoreList) {
                     sum += scoreDetail.getScore();
                 }
-                double avgScore = sum / scoreList.size();
+                double avgScore = (double) sum / scoreList.size();
                 // 평균 점수를 등급으로 바꿔줌
                 System.out.println("이 과목의 평균등급은 " + ScoreDetail.changeGrade(subjectType, avgScore) + "입니다.");
 
