@@ -136,11 +136,20 @@ public class Helper {
     }
 
     //수강생아이디& 과목 아이디로 해당 score 찾기
-    public static Optional<Score> GetScoreByStudentIdAndSubjectId(String studentId, String subjectId) {
+//    public static Optional<Score> GetScoreByStudentIdAndSubjectId(String studentId, String subjectId) {
+//        Optional<Score> selectScore = CampManagementApplication.scoreStore.stream()
+//            .filter((Score score) -> score.getStudentId().equals(studentId))
+//            .filter((Score score) -> score.getSubjectId().equals(subjectId))
+//            .findFirst();
+//        return selectScore;
+//    }
+    //수강생아이디& 과목 아이디로 해당 score 찾기
+    public static Score GetScoreByStudentIdAndSubjectId(String studentId, String subjectId) {
         Optional<Score> selectScore = CampManagementApplication.scoreStore.stream()
             .filter((Score score) -> score.getStudentId().equals(studentId))
             .filter((Score score) -> score.getSubjectId().equals(subjectId))
             .findFirst();
-        return selectScore;
+        if(selectScore.isPresent()) return selectScore.get();
+        else return new Score("SC0","ST0","SU0");
     }
 }
