@@ -177,7 +177,7 @@ public class Helper {
     }
     public static int getScore() {
         while (true) {
-            System.out.println("새로운 점수를 입력해 주세요 ");
+            System.out.println("점수를 입력해 주세요 ");
             int updatedScore = sc.nextInt();
             if (updatedScore >= 0 && updatedScore < 101) {
                 return updatedScore;

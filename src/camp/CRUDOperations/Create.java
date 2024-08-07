@@ -102,15 +102,10 @@ public class Create {
                 if (roundFound.getScore() != 0) { // 해당 라운드가 있을 때
                     System.out.println("이미 등록된 회차입니다. 다른 회차를 선택해주세요.");
                 } else { // 해당 라운드가 없을 때
-                    System.out.println("과목점수를 입력하세요.");
-                    int scoreInput = sc.nextInt();
-                    sc.nextLine(); // 값 넘어가는 부분 수정
-                    if (scoreInput >= 0 && scoreInput < 101) {
-                        roundFound.setScore(Helper.getSubjectTypeById(subjectId), scoreInput);
-                        score.addScore(roundFound);
-                    } else {
-                        System.out.println("잘못된 입력값입니다. (1~100까지의 점수만 입력가능)");
-                    }
+                    int scoreInput = Helper.getScore();
+                    roundFound.setScore(Helper.getSubjectTypeById(subjectId), scoreInput);
+                    score.addScore(roundFound);
+                    System.out.println("점수 등록이 완료되었습니다.");
                 }
             } else {
                 System.out.println("선택하지 않은 과목입니다.");

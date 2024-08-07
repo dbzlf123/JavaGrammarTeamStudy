@@ -278,8 +278,8 @@ public class CampManagementApplication {
             System.out.println("3. 수강생의 특정 과목 회차별 등급 조회");
             System.out.println("4. 수강생의 특정 과목 평균등급 조회");
             System.out.println("5. 특정 과목 회차 점수 순위");
-            System.out.println("7. 특정 상태 수강생들의 필수 과목 평균 등급 조회");
-            System.out.println("8. 메인 화면 이동");
+            System.out.println("6. 특정 상태 수강생들의 필수 과목 평균 등급 조회");
+            System.out.println("7. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
             int input = 0;
             try {    //nextInt에 문자열이 입력됬을때를 대비
@@ -296,8 +296,8 @@ public class CampManagementApplication {
                 case 3 -> Inquire.inquireRoundGradeBySubject(); // 수강생의 특정 과목 회차별 등급 조회
                 case 4 -> Inquire.inquireAverageGrade(subjectStore); // 수강생의 특정 과목 평균등급 조회
                 case 5 -> Edit.roundScoreList();  //특정 과목 특정 회차 점수 순위
-                case 7 -> Inquire.inquireAverageGradeByStatus(studentStore, subjectStore, scoreStore); // 수강생의 특정 과목 평균등급 조회
-                case 8 -> flag = false; // 메인 화면 이동
+                case 6 -> Inquire.inquireAverageGradeByStatus(studentStore, subjectStore, scoreStore); // 특정 상태 수강생들의 필수과목 평균등급 조회
+                case 7 -> flag = false; // 메인 화면 이동
                 default -> {
                     System.out.println("잘못된 입력입니다.\n메인 화면 이동...");
                     flag = false;
