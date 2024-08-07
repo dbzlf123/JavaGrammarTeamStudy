@@ -110,41 +110,43 @@ public class Inquire {
     public static void inquireAverageGrade(List<Subject> subjectStore) {
         // 조회할 특정 수강생 입력
         String studentId = Helper.getStudentIdByName(); //이름으로 수강생 고유번호 입력
-        System.out.println("해당 학생이 수강하는 과목입니다");
-        Helper.getSubjectNameListByStudentId(studentId);
-        // 조회할 특정 과목 입력
-        String subjectId = Helper.getSubjectIdByName();  //이름으로 과목 고유번호 입력
-        //기능 규현
-        System.out.println("평균 등급을 조회합니다...");
-        //해당 학생과 과목이 일치하는 점수 얻기
-        Score selectScore = Helper.GetScoreByStudentIdAndSubjectId(studentId, subjectId);
-        if (!selectScore.getSubjectId().equals("SU0")) {
-            Score score = selectScore;
+        if(!studentId.equals("NoName")){
+            System.out.println("해당 학생이 수강하는 과목입니다");
+            Helper.getSubjectNameListByStudentId(studentId);
+            // 조회할 특정 과목 입력
+            String subjectId = Helper.getSubjectIdByName();  //이름으로 과목 고유번호 입력
+            //기능 규현
+            System.out.println("평균 등급을 조회합니다...");
+            //해당 학생과 과목이 일치하는 점수 얻기
+            Score score = Helper.GetScoreByStudentIdAndSubjectId(studentId, subjectId);
+            if (!score.getSubjectId().equals("SU0")) {
+                //점수가 등록된 경우
+                if (!score.getScoreList().isEmpty()) {
+                    //해당하는 과목의 subjectType 구하기("필수 or 선택)
+                    String subjectType = Helper.getSubjectTypeById(subjectId);
+                    //점수의 평균값 얻기
+                    List<ScoreDetail> scoreList = score.getScoreList();
+                    int sum = 0;
+                    for (ScoreDetail scoreDetail : scoreList) {
+                        sum += scoreDetail.getScore();
+                    }
+                    double avgScore = (double) sum / scoreList.size();
+                    // 평균 점수를 등급으로 바꿔줌
+                    System.out.println("이 과목의 평균등급은 " + ScoreDetail.changeGrade(subjectType, avgScore) + "입니다.");
 
-            //점수가 등록된 경우
-            if (!score.getScoreList().isEmpty()) {
-                //해당하는 과목의 subjectType 구하기("필수 or 선택)
-                String subjectType = Helper.getSubjectTypeById(subjectId);
-                //점수의 평균값 얻기
-                List<ScoreDetail> scoreList = score.getScoreList();
-                int sum = 0;
-                for (ScoreDetail scoreDetail : scoreList) {
-                    sum += scoreDetail.getScore();
+                    System.out.println("\n등급 조회 성공!");
+                    //점수가 등록되지 않은 경우
+                } else {
+                    System.out.println("\n 해당과목에 등록된 점수가 없습니다");
                 }
-                double avgScore = (double) sum / scoreList.size();
-                // 평균 점수를 등급으로 바꿔줌
-                System.out.println("이 과목의 평균등급은 " + ScoreDetail.changeGrade(subjectType, avgScore) + "입니다.");
-
-                System.out.println("\n등급 조회 성공!");
-                //점수가 등록되지 않은 경우
+                //아얘 score값이 없는 경우
             } else {
-                System.out.println("\n 해당과목에 등록된 점수가 없습니다");
+                System.out.println("\n해당하는 과목이 없습니다. 다시 시도해주세요.");
             }
-            //아얘 score값이 없는 경우
-        } else {
-
-            System.out.println("\n등급 조회 실패! 다시 시도해주세요.");
+        }else {
+            System.out.println("해당하는 학생이 존재하지 않습니다");
         }
+
     }
 
     //특정 상태 수강생들의 필수 과목 평균 등급 조회
