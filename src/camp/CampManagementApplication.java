@@ -161,16 +161,6 @@ public class CampManagementApplication {
                 ),
                 new Score(
                         sequence(INDEX_TYPE_SCORE),
-                        "ST4",
-                        "SU2",
-                        new ArrayList<ScoreDetail>(Arrays.asList(
-                                new ScoreDetail(1, 78, Helper.getSubjectTypeByName("객체지향")),
-                                new ScoreDetail(2, 98, Helper.getSubjectTypeByName("객체지향")),
-                                new ScoreDetail(3, 86, Helper.getSubjectTypeByName("객체지향"))
-                        ))
-                ),
-                new Score(
-                        sequence(INDEX_TYPE_SCORE),
                         "ST3",
                         "SU1",
                         new ArrayList<ScoreDetail>(Arrays.asList(
