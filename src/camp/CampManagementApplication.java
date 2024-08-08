@@ -87,6 +87,7 @@ public class CampManagementApplication {
                         SUBJECT_TYPE_CHOICE
                 )
         );
+//        studentStore = new ArrayList<>();
         //조회를 위해 학생리스트를 임의로 생성
         studentStore = new ArrayList<>(Arrays.asList(
                 new Student(
@@ -106,6 +107,8 @@ public class CampManagementApplication {
                         Status.valueOf("Red")
                 ))
         );
+//        scoreStore = new ArrayList<>();
+
         //조회를 위해 점수리스트를 임의로 생성
         scoreStore = new ArrayList<>(Arrays.asList(
                 new Score(

@@ -49,8 +49,6 @@ public class Inquire {
         }
         System.out.println("\n수강생 목록 조회 성공!");
     }
-
-
     // 수강생의 특정 과목 회차별 등급 조회
     public static void inquireRoundGradeBySubject() {
         // 조회할 특정 수강생 입력
